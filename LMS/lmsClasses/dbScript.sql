@@ -20,12 +20,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
--- user_role = 2 = Trainer
 INSERT INTO `users` (`user_id`, `user_name`, `user_role`, `login_id`, `login_password`) VALUES
 (1, 'Jonathan','engineer', 'test@hotmail.com', '0000'),
 (2, 'Roger','trainer', 'test@yahoo.com', '0000'),
-(3, 'Betty','administrator', 'test@gmail.com', '0000');
-(4, 'Kelly','engineer', 'test2@gmail.com', '0000');
+(3, 'Betty','administrator', 'test@gmail.com', '0000'),
+(4, 'Kelly','engineer', 'test2@gmail.com', '0000'),
 (5, 'Aaron','trainer', 'test3@gmail.com', '0000');
 
 COMMIT;
