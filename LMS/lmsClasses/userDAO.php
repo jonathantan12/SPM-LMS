@@ -19,7 +19,7 @@ class userDAO {
             
             $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-            $stmt->bindParam(':userRole', $userRole, PDO::PARAM_INT);
+            $stmt->bindParam(':userRole', $userRole, PDO::PARAM_STR);
             $stmt->bindParam(':loginID', $loginID, PDO::PARAM_STR);
             $stmt->bindParam(':loginPwd', $loginPwd, PDO::PARAM_STR);
             
@@ -43,8 +43,8 @@ class userDAO {
         $conn = $connMgr->getConnection();
 
         $sql = "SELECT
-                    userID,
                     username, 
+                    userRole
                 FROM users
                 WHERE userRole = :userRole"; 
         $stmt = $conn->prepare($sql);
@@ -56,8 +56,8 @@ class userDAO {
 
         $user = [];
         while( $row = $stmt->fetch() ) {
-            $user = [$row['userID'],
-                     $row['username']];
+            $user = [$row['username'],
+                     $row['userRole']];
         }
 
         $stmt = null;

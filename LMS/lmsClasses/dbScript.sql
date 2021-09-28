@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
     `user_id` int(64) NOT NULL AUTO_INCREMENT,
     `user_name` varchar(64) NOT NULL,
-    `user_role` int(64) NOT NULL,
+    `user_role` varchar(64) NOT NULL,
     `login_id` varchar(64) NOT NULL,
     `login_password` varchar(64) NOT NULL,
     PRIMARY KEY (`user_id`)
@@ -22,9 +22,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- user_role = 2 = Trainer
 INSERT INTO `users` (`user_id`, `user_name`, `user_role`, `login_id`, `login_password`) VALUES
-(1, 'Jonathan','1', 'test@hotmail.com', '0000'),
-(2, 'Roger','2', 'test@yahoo.com', '0000'),
-(3, 'Betty','1', 'test@gmail.com', '0000');
+(1, 'Jonathan','engineer', 'test@hotmail.com', '0000'),
+(2, 'Roger','trainer', 'test@yahoo.com', '0000'),
+(3, 'Betty','administrator', 'test@gmail.com', '0000');
+(4, 'Kelly','engineer', 'test2@gmail.com', '0000');
+(5, 'Aaron','trainer', 'test3@gmail.com', '0000');
+
 COMMIT;
 
 
