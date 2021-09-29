@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS `completed_courses` (
     `user_id` int(64) NOT NULL,
     `user_name` varchar(64) NOT NULL,
     `course_id` int(64) NOT NULL,
+    `course_name` varchar(64) NOT NULL,
     PRIMARY KEY (`completed_course_id`),
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
@@ -106,10 +107,10 @@ CREATE TABLE IF NOT EXISTS `completed_courses` (
 -- Dumping data for table `completed_courses`
 --
 
-INSERT INTO `completed_courses` (`completed_course_id`, `user_id`, `user_name`,`course_id`) VALUES
-(1, 1, 'Jonathan', 2),
-(2, 1, 'Jonathan', 3),
-(3, 4, 'Kelly', 1);
+INSERT INTO `completed_courses` (`completed_course_id`, `user_id`, `user_name`,`course_id`, `course_name`) VALUES
+(1, 1, 'Jonathan', 1, 'Electrical Engineering'),
+(2, 1, 'Jonathan', 3, 'Introduction to Scrum Methodology'),
+(3, 4, 'Kelly', 1, 'Electrical Engineering');
 COMMIT;
 
 --
