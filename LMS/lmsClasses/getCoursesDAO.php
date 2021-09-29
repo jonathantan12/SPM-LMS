@@ -35,7 +35,7 @@ foreach ( $coursePrerequisites as $aCoursePrerequisites ) {
     $item["start_date"] = $aCoursePrerequisites->getStartDate();
     $item["end_date"] = $aCoursePrerequisites->getEndDate();
     $item["slots_available"] = $aCoursePrerequisites->getSlotsAvailable();
-    $item["image"] = $aCoursePrerequisites->getSlotsAvailable();
+    $item["image"] = $aCoursePrerequisites->getImage();
     $items[] = $item;
 }
 
