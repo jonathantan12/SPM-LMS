@@ -5,6 +5,9 @@ CREATE DATABASE IF NOT EXISTS `LMS` DEFAULT CHARACTER SET utf8 COLLATE utf8_gene
 
 USE `LMS`;
 
+--
+-- USERS table
+--
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
@@ -24,12 +27,15 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`user_id`, `user_name`, `user_role`, `login_id`, `login_password`) VALUES
 (1, 'Jonathan','engineer', 'test@hotmail.com', '0000'),
 (2, 'Roger','trainer', 'test@yahoo.com', '0000'),
-(3, 'Betty','administrator', 'test@gmail.com', '0000');
-(4, 'Kelly','engineer', 'test2@gmail.com', '0000');
+(3, 'Betty','administrator', 'test@gmail.com', '0000'),
+(4, 'Kelly','engineer', 'test2@gmail.com', '0000'),
 (5, 'Aaron','trainer', 'test3@gmail.com', '0000');
 
 COMMIT;
 
+--
+-- COURSES table
+--
 
 DROP TABLE IF EXISTS `courses`;
 CREATE TABLE IF NOT EXISTS `courses` (
@@ -53,6 +59,9 @@ INSERT INTO `courses` (`course_id`, `course_name`, `course_desc`, `class_name`,`
 (3, 'Introduction to Scrum Methodology','course description', 'Beta','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100);
 COMMIT;
 
+--
+-- SECTIONS table
+--
 
 DROP TABLE IF EXISTS `sections`;
 CREATE TABLE IF NOT EXISTS `sections` (
@@ -75,6 +84,9 @@ INSERT INTO `sections` (`section_id`, `course_id`, `course_section_number`, `sec
 (3, 3, 3, 'Scrum Board', 'url');
 COMMIT;
 
+--
+-- COMPLETED_COURSES table
+--
 
 DROP TABLE IF EXISTS `completed_courses`;
 CREATE TABLE IF NOT EXISTS `completed_courses` (
@@ -96,6 +108,9 @@ INSERT INTO `completed_courses` (`completed_course_id`, `user_id`, `course_id`) 
 (3, 2, 1);
 COMMIT;
 
+--
+-- COURSE_PREREQUISITES table
+--
 
 DROP TABLE IF EXISTS `course_prerequisites`;
 CREATE TABLE IF NOT EXISTS `course_prerequisites` (
@@ -116,6 +131,9 @@ INSERT INTO `course_prerequisites` (`id`, `course_id`, `prerequisite_course_id`)
 (3, 2, 1);
 COMMIT;
 
+--
+-- COURSE_TRAINERS table
+--
 
 DROP TABLE IF EXISTS `course_trainers`;
 CREATE TABLE IF NOT EXISTS `course_trainers` (
@@ -137,6 +155,9 @@ INSERT INTO `course_trainers` (`course_trainer_id`, `course_id`, `user_id`) VALU
 (3, 3, 2);
 COMMIT;
 
+--
+-- TRAINER_QUALIFICATION table
+--
 
 DROP TABLE IF EXISTS `trainer_qualifications`;
 CREATE TABLE IF NOT EXISTS `trainer_qualifications` (
@@ -158,6 +179,9 @@ INSERT INTO `trainer_qualifications` (`trainer_qualification_id`, `course_id`, `
 (3, 2, 3);
 COMMIT;
 
+--
+-- ENROLLED_COURSES table
+--
 
 DROP TABLE IF EXISTS `enrolled_courses`;
 CREATE TABLE IF NOT EXISTS `enrolled_courses` (
@@ -179,13 +203,19 @@ INSERT INTO `enrolled_courses` (`enrolled_course_id`, `user_id`, `course_id`) VA
 (3, 2, 1);
 COMMIT;
 
+--
+-- QUIZZES table
+--
 
-DROP TABLE IF EXISTS `quiz_answers`;
-CREATE TABLE IF NOT EXISTS `quiz_answers` (
-    `quiz_answer_id` int(64) NOT NULL AUTO_INCREMENT, 
+DROP TABLE IF EXISTS `quizzes`;
+CREATE TABLE IF NOT EXISTS `quizzes` (
+    `quiz_id` int(64) NOT NULL AUTO_INCREMENT, 
     `section_id` int(64) NOT NULL,
-    `answer` varchar(64) NOT NULL,
-    PRIMARY KEY (`quiz_answer_id`),
+    `question` int(64) NOT NULL,
+    `question_type` varchar(64) NOT NULL,
+    `number_of_options` int(64) NOT NULL,
+    `correct_answer` varchar(64) NOT NULL,
+    PRIMARY KEY (`quiz_id`),
     FOREIGN KEY (section_id) REFERENCES sections(section_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
@@ -193,8 +223,63 @@ CREATE TABLE IF NOT EXISTS `quiz_answers` (
 -- Dumping data for table `quiz_answers`
 --
 
-INSERT INTO `quiz_answers` (`quiz_answer_id`, `section_id`, `answer`) VALUES
-(1, 1, 'true'),
-(2, 1, 'false'),
-(3, 1, '4');
+INSERT INTO `quizzes` (`quiz_id`, `section_id`, `question`, `question_type`, `number_of_options`, `correct_answer`) VALUES
+(1, 1, 'Is it true that it is like this?', 'truefalse', 2, 'true'),
+(2, 1, 'Is it true that it is like this?', 'truefalse', 2, 'false'),
+(3, 1, 'Which option is correct?', 'mcq', 4, '4');
 COMMIT;
+
+--
+-- SECTON_PROGRESS table
+--
+
+DROP TABLE IF EXISTS `section_progress`;
+CREATE TABLE IF NOT EXISTS `section_progress` (
+    `section_progress_id` int(64) NOT NULL AUTO_INCREMENT, 
+    `user_id` int(64) NOT NULL,
+    `course_id` int(64) NOT NULL,
+    `section_id` int(64) NOT NULL,
+    `section_completion_status` varchar(64) NOT NULL,
+    `quiz_completion_status` varchar(64) NOT NULL,
+    PRIMARY KEY (`section_progress_id`),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id),
+    FOREIGN KEY (section_id) REFERENCES sections(section_id)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `section_progress`
+--
+
+INSERT INTO `section_progress` (`section_progress_id`, `user_id`, `course_id`, `section_id`, `section_completion_status`, `quiz_completion_status`) VALUES
+(1, 1, 2, 1, 'Completed', 'Completed'),
+(2, 1, 2, 2, 'Not Completed', 'Not Completed'),
+(3, 1, 2, 3, 'Not Completed', 'Not Completed');
+COMMIT;
+
+--
+-- QUIZ_PROGRESS table
+--
+
+-- DROP TABLE IF EXISTS `quiz_progress`;
+-- CREATE TABLE IF NOT EXISTS `quiz_progress` (
+--     `quiz_progress_id` int(64) NOT NULL AUTO_INCREMENT, 
+--     `user_id` int(64) NOT NULL,
+--     `course_id` int(64) NOT NULL,
+--     `section_id` int(64) NOT NULL,
+--     `completion_status` varchar(64) NOT NULL,
+--     PRIMARY KEY (`quiz_progress_id`),
+--     FOREIGN KEY (user_id) REFERENCES users(user_id),
+--     FOREIGN KEY (course_id) REFERENCES courses(course_id),
+--     FOREIGN KEY (section_id) REFERENCES sections(section_id)
+-- ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `quiz_progress`
+--
+
+-- INSERT INTO `quiz_progress` (`quiz_progress_id`, `user_id`, `course_id`, `section_id`, `completion_status`) VALUES
+-- (1, 1, 2, 1, 'Completed'),
+-- (2, 1, 2, 2, 'Not Completed'),
+-- (3, 1, 2, 3, 'Not Completed');
+-- COMMIT;
