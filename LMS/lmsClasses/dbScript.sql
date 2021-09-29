@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
     `start_date` DATETIME NOT NULL,
     `end_date` DATETIME NOT NULL,
     `slots_available` int(64) NOT NULL,
+    `image_url` varchar(64),
     PRIMARY KEY (`course_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
@@ -53,10 +54,10 @@ CREATE TABLE IF NOT EXISTS `courses` (
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`course_id`, `course_name`, `course_desc`, `class_name`,`start_date`, `end_date`, `slots_available`) VALUES
-(1, 'Electrical Engineering','course description', 'Alpha','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100),
-(2, 'Introduction to Mechanical Engineering','course description', 'Alpha', '2021-01-01 00:00:00', '2021-02-01 00:00:00', 100),
-(3, 'Introduction to Scrum Methodology','course description', 'Beta','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100);
+INSERT INTO `courses` (`course_id`, `course_name`, `course_desc`, `class_name`,`start_date`, `end_date`, `slots_available`, `image`) VALUES
+(1, 'Electrical Engineering','course description', 'Alpha','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 'image'),
+(2, 'Introduction to Mechanical Engineering','course description', 'Alpha', '2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 'image'),
+(3, 'Introduction to Scrum Methodology','course description', 'Beta','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 'image');
 COMMIT;
 
 --
