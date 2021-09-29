@@ -24,18 +24,18 @@ class coursesDAO {
 }
 
 $dao = new coursesDAO();
-$coursePrerequisites = $dao->getCourses();
+$courses = $dao->getCourses();
 
 $items = [];
-foreach ( $coursePrerequisites as $aCoursePrerequisites ) {
-    $item["course_id"] = $aCoursePrerequisites->getCourseId();
-    $item["course_name"] = $aCoursePrerequisites->getCourseName();
-    $item["course_desc"] = $aCoursePrerequisites->getCourseDesc();
-    $item["class_name"] = $aCoursePrerequisites->getClassName();
-    $item["start_date"] = $aCoursePrerequisites->getStartDate();
-    $item["end_date"] = $aCoursePrerequisites->getEndDate();
-    $item["slots_available"] = $aCoursePrerequisites->getSlotsAvailable();
-    $item["image"] = $aCoursePrerequisites->getImage();
+foreach ( $courses as $aCourse ) {
+    $item["course_id"] = $aCourse->getCourseId();
+    $item["course_name"] = $aCourse->getCourseName();
+    $item["course_desc"] = $aCourse->getCourseDesc();
+    $item["class_name"] = $aCourse->getClassName();
+    $item["start_date"] = $aCourse->getStartDate();
+    $item["end_date"] = $aCourse->getEndDate();
+    $item["slots_available"] = $aCourse->getSlotsAvailable();
+    $item["image"] = $aCourse->getImage();
     $items[] = $item;
 }
 

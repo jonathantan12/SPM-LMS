@@ -13,7 +13,7 @@ class coursePrerequisitesDAO {
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
         while($row = $stmt->fetch()) {
-            $result[] = new coursePrerequisites($row['id'], $row['course_id'], $row['prerequisites_course_id']);
+            $result[] = new coursePrerequisites($row['id'], $row['course_id'], $row['course_name'], $row['prerequisite_course_id'], $row['prerequisite_course_name']);
         }
         $stmt = null;
         $pdo = null;
@@ -26,12 +26,13 @@ class coursePrerequisitesDAO {
 $dao = new coursePrerequisitesDAO();
 $coursePrerequisites = $dao->getCoursePrerequisites();
 
-
 $items = [];
-foreach ( $coursePrerequisites as $aCoursePrerequisites ) {
-    $item["product_id"] = $aCoursePrerequisites->getId();
-    $item["product_name"] = $aCoursePrerequisites->getCourseId();
-    $item["product_desc"] = $aCoursePrerequisites->getPrerequisitesCourseId();
+foreach ($coursePrerequisites as $aCoursePrerequisites) {
+    $item["id"] = $aCoursePrerequisites->getId();
+    $item["course_id"] = $aCoursePrerequisites->getCourseId();
+    $item["course_name"] = $aCoursePrerequisites->getCourseName();
+    $item["prerequisite_course_id"] = $aCoursePrerequisites->getPrerequisiteCourseId();
+    $item["prerequisite_course_name"] = $aCoursePrerequisites->getPrerequisiteCourseName();
     $items[] = $item;
 }
 
