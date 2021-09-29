@@ -4,7 +4,6 @@
     private $course_id;
     private $prerequisites_course_id;
 
-    // constructor
     public function __construct($id, $course_id, $prerequisites_course_id) {
         $this->id = $id;
         $this->course_id = $course_id;
