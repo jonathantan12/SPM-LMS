@@ -249,7 +249,10 @@ DROP TABLE IF EXISTS `section_progress`;
 CREATE TABLE IF NOT EXISTS `section_progress` (
     `section_progress_id` int(64) NOT NULL AUTO_INCREMENT, 
     `user_id` int(64) NOT NULL,
+    `user_name` varchar(64) NOT NULL,
     `course_id` int(64) NOT NULL,
+    `course_name` varchar(64) NOT NULL,
+    `class_name` varchar(64) NOT NULL,
     `section_id` int(64) NOT NULL,
     `section_completion_status` varchar(64) NOT NULL,
     `quiz_completion_status` varchar(64) NOT NULL,
@@ -263,10 +266,10 @@ CREATE TABLE IF NOT EXISTS `section_progress` (
 -- Dumping data for table `section_progress`
 --
 
-INSERT INTO `section_progress` (`section_progress_id`, `user_id`, `course_id`, `section_id`, `section_completion_status`, `quiz_completion_status`) VALUES
-(1, 1, 2, 1, 'Completed', 'Completed'),
-(2, 1, 2, 2, 'Not Completed', 'Not Completed'),
-(3, 1, 2, 3, 'Not Completed', 'Not Completed');
+INSERT INTO `section_progress` (`section_progress_id`, `user_id`, `user_name`,`course_id`, `course_name`, `class_name`,`section_id`, `section_completion_status`, `quiz_completion_status`) VALUES
+(1, 1, 'Jonathan', 2, 'Introduction to Mechanical Engineering', 'Alpha', 1, 'Completed', 'Completed'),
+(2, 1, 'Jonathan', 2, 'Introduction to Mechanical Engineering', 'Alpha', 2, 'Not Completed', 'Not Completed'),
+(3, 1, 'Jonathan', 2, 'Introduction to Mechanical Engineering', 'Alpha', 3, 'Not Completed', 'Not Completed');
 COMMIT;
 
 --
