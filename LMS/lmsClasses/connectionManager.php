@@ -7,18 +7,20 @@ class ConnectionManager {
       //LocalHost
       $servername = 'localhost';
       $username = 'root';
-      $password = ''; 
-      //$password = 'root';
+      // $password = ''; 
+      $password = 'root';
       $dbname = 'LMS'; 
 
         
-        // Create connection
-        //$conn = new PDO("mysql:host=$servername;dbname=$dbname;port=$port", $username, $password);     
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);     
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // if fail, exception will be thrown
+      // Create connection
+      //$conn = new PDO("mysql:host=$servername;dbname=$dbname;port=$port", $username, $password);     
+      $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);     
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // if fail, exception will be thrown
 
-        // Return connection object
-        return $conn;
+      // Return connection object
+      return $conn;
     }
 
 }
+
+?>
