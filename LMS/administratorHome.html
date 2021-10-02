@@ -25,8 +25,8 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Switch user</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="blog-home.html">Learner</a></li>
-                                    <li><a class="dropdown-item" href="blog-post.html">Trainer</a></li>
+                                    <li><a class="dropdown-item" href="engineerHome.html">Learner</a></li>
+                                    <li><a class="dropdown-item" href="trainerHome.html">Trainer</a></li>
                                     <li><a class="dropdown-item" href="administratorHome.html">Administrator</a></li>
                                 </ul>
                             </li>
@@ -39,11 +39,10 @@
                 <div class="container px-5 my-5">
                     <div class="row gx-5">
                         <div>
-                            <!-- View all engineers-->
-                            <div class="accordion mb-5" id="viewAllEngineers">
+                            <div class="accordion mb-5" id="viewAllEngineersTest">
                                 <div class="accordion-item">
-                                    <h3 class="accordion-header" id="headingOne"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">View All Engineers</button></h3>
-                                    <div class="accordion-collapse collapse" id="collapseOne" aria-labelledby="headingOne" data-bs-parent="#viewAllEngineers">
+                                    <h3 class="accordion-header" id="headingOne"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneTest" aria-expanded="true" aria-controls="collapseOne">View All Engineers</button></h3>
+                                    <div class="accordion-collapse collapse" id="collapseOneTest" aria-labelledby="headingOne" data-bs-parent="#viewAllEngineersTest">
                                         <div class="accordion-body">
                                             <table class="table table-striped">
                                                 <thead>
@@ -52,118 +51,8 @@
                                                     <th scope="col">Required Courses</th>
                                                   </tr>
                                                 </thead>
-                                                <tbody>
-                                                  <tr>
-                                                    <td>Mark Lee </td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                              Dropdown button
-                                                            </button>
-                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                                <form class="m-2">
-                                                                    <li>
-                                                                        <button type="button" class="btn btn-primary btn-sm" onclick="selectAll()" id="e1Select">Select All</button>
-                                                                    </li>
-                                                                    &nbsp;
-                                                                    <li>
-                                                                      <input class="form-check-input" type="checkbox" name="e1RequiredCourses[]" value="" id="e1c1">
-                                                                      <label class="form-check-label" for="e1c1">
-                                                                        Introduction to Mechanical Engineering
-                                                                    </li>
-                                                                    <li>
-                                                                        <input class="form-check-input" type="checkbox" name="e1RequiredCourses[]" value="" id="e1c2">
-                                                                        <label class="form-check-label" for="e1c2">
-                                                                          Introduction to Physics
-                                                                      </li>
-                                                                      <li>
-                                                                        <input class="form-check-input" type="checkbox" name="e1RequiredCourses[]" value="" id="e1c3">
-                                                                        <label class="form-check-label" for="e1c3">
-                                                                          Intermediate Physics
-                                                                      </li>
-                                                                      &nbsp;
-                                                                      <li>
-                                                                        <button type="button" class="btn btn-success btn-sm" onclick="enrol()" id="e2Enrol">Enrol</button>
-                                                                    </li>
-                                                                </form>
-                                                            </ul>
-                                                        </div>
-                                                    </td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>Jacob Teo</td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                              Dropdown button
-                                                            </button>
-                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                                <form class="m-2">
-                                                                    <li>
-                                                                        <button type="button" class="btn btn-primary btn-sm" onclick="selectAll()" id="e2Select">Select All</button>
-                                                                    </li>
-                                                                    &nbsp;
-                                                                    <li>
-                                                                      <input class="form-check-input" type="checkbox" name="e2RequiredCourses[]" value="" id="e2c1">
-                                                                      <label class="form-check-label" for="e2c1">
-                                                                        Introduction to Mechanical Engineering
-                                                                    </li>
-                                                                    <li>
-                                                                        <input class="form-check-input" type="checkbox" name="e2RequiredCourses[]" value="" id="e2c2">
-                                                                        <label class="form-check-label" for="e2c2">
-                                                                          Introduction to Physics
-                                                                      </li>
-                                                                      <li>
-                                                                        <input class="form-check-input" type="checkbox" name="e2RequiredCourses[]" value="" id="e2c3">
-                                                                        <label class="form-check-label" for="e2c3">
-                                                                          Intermediate Physics
-                                                                      </li>
-                                                                      &nbsp;
-                                                                      <li>
-                                                                        <button type="button" class="btn btn-success btn-sm" onclick="enrol()" id="e2Enrol">Enrol</button>
-                                                                    </li>
-                                                                </form>
-                                                            </ul>
-                                                        </div>
-                                                    </td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>Teow Wen Jun</td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                              Dropdown button
-                                                            </button>
-                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                                <div class="form-group m-2">
-                                                                    <li>
-                                                                        <button type="button" class="btn btn-primary btn-sm" onclick="selectAll()" id="e3Select">Select All</button>
-                                                                    </li>
-                                                                    &nbsp;
-                                                                    <li>
-                                                                      <input class="form-check-input" type="checkbox" name="e3RequiredCourses[]" value="" id="e3c1">
-                                                                      <label class="form-check-label" for="e3c1">
-                                                                        Introduction to Mechanical Engineering
-                                                                    </li>
-                                                                    <li>
-                                                                        <input class="form-check-input" type="checkbox" name="e3RequiredCourses[]" value="" id="e3c2">
-                                                                        <label class="form-check-label" for="e3c2">
-                                                                          Introduction to Physics
-                                                                      </li>
-                                                                      <li>
-                                                                        <input class="form-check-input" type="checkbox" name="e3RequiredCourses[]" value="" id="e3c3">
-                                                                        <label class="form-check-label" for="e3c3">
-                                                                          Intermediate Physics
-                                                                      </li>
-                                                                      &nbsp;
-                                                                      <li>
-                                                                        <button type="button" class="btn btn-success btn-sm" onclick="enrol()" id="e3Enrol">Enrol</button>
-                                                                    </li>
-                                                                </div>
-                                                            </ul>
-                                                        </div>
-                                                    </td>
-                                                  </tr>
+                                                <tbody id="viewAllEngineersTable">
+                                                  
                                                 </tbody>
                                               </table>
                                         </div>
