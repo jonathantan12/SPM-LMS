@@ -20,5 +20,6 @@
         $items[$user->getUserName()] = $item;
     }
     
-    echo $items;
+    $postJSON = json_encode($items);
+    echo $postJSON;
 ?>
