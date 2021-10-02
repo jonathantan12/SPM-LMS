@@ -1,20 +1,20 @@
 <?php
 require_once 'autoload.php';
 
-class usersDAO {
-    public function getUsers($user_role) {
+class requiredCoursesDAO {
+    public function getRequiredCourses($user_id) {
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
 
-        $sql = 'SELECT * FROM users WHERE user_role = :user_role';
+        $sql = 'SELECT * FROM required_courses WHERE user_id = :user_id';
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':user_role', $user_role, PDO::PARAM_STR);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
         $result = [];
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
         while($row = $stmt->fetch()) {
-            $result[] = new users($row['user_id'], $row['user_name'], $row['user_role'], $row['login_id'], $row['login_password']);
+            $result[] = new requiredCourses($row['required_course_id'], $row['user_id'], $row['user_n ame'], $row['course_id'], $row['course_name']);
         }
         $stmt = null;
         $pdo = null;
