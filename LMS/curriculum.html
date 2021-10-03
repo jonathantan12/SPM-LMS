@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -37,8 +38,7 @@
         </div>
     </nav>
 
-    <body>
-                
+    <body>  
         
         <!-- Create Section Modal -->
         <div class="modal fade" id="createSection" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -64,11 +64,111 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="createSection()">Save changes</button>
+                <button type="button" class="btn btn-primary" onclick="createSection()" >Save changes</button>
                 </div>
             </div>
             </div>
         </div>
+
+         <!-- Create Lesson Material Modal -->
+         <div class="modal fade" id="createLessonMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="addSection">Add New Lesson</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        Select Lesson Type:
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="lessonType" id="youtubeVideo" value="1">
+                            <label class="form-check-label" for="youtubeVideo">
+                              Youtube Video
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="lessonType" id="document" value="2">
+                            <label class="form-check-label" for="document">
+                              Document
+                            </label>
+                          </div>
+                          <div class="form-check disabled">
+                            <input class="form-check-input" type="radio" name="lessonType" id="iframeEmbed" value="3" >
+                            <label class="form-check-label" for="iframeEmbed">
+                              Iframe embed
+                            </label>
+                          </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="createLessonMaterial()">Next</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Create Quiz Modal -->
+        <div class="modal fade" id="createQuiz" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="addSection">Add New Quiz</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                          <label for="quizTitle" class="col-sm-2 col-form-label">Title</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="quizTitle" placeholder="Quiz Title">
+                          </div>
+                        </div>
+                        <fieldset class="form-group">
+                          <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0">Type</legend>
+                            <div class="col-sm-10">
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="quizType" id="graded" value="option1">
+                                <label class="form-check-label" for="gridRadios1">
+                                  Graded
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="quizType" id="ungraded" value="option2">
+                                <label class="form-check-label" for="gridRadios2">
+                                    Ungraded
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                        <div class="form-group row">
+                            <label for="quizInstruction" class="col-sm-2 col-form-label">Instruction</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="quizInstruction" placeholder="Quiz Instruction">
+                            </div>
+                        </div>
+                        <div id="questionCard"></div>
+                        <button type="button" id="card" class="btn btn-primary btn-small" style="float: left; margin: 5px;" onclick="createQuestionCard()"> + Add New Question</button>
+
+                      </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="createQuiz()">Save</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+
 
         <div class="container">
             <div class="row" style="margin-top:5px">
@@ -94,6 +194,21 @@
         <div class="container">
             <button type="button" id="createSection" class="btn btn-primary" data-toggle="modal" data-target="#createSection"> + Add Section</button>
         </div>
+        <div class="container">
+            <div class="card" style="width: full; margin-top: 10px;">
+                <div class="card-body">
+                  <h5 class="card-title">Course 1 Section 1</h5>
+                  <div class="card" style="width:full; padding-left: 5px;" > 
+                    <div><b> Section 1 Lesson 1</b>
+                        <button type="button" class="btn btn-danger btn-small" style="float: right;">Delete</button>
+                        <button type="button" class="btn btn-primary btn-small" style="float: right;">Edit</button>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-small" style="float: left; margin: 5px;" data-toggle="modal" data-target="#createLessonMaterial">+ Add Lesson</button>
+                  <button type="button" class="btn btn-primary btn-small" style="float: left; margin: 5px;"data-toggle="modal" data-target="#createQuiz"> + Add Quiz</button>
+                </div>
+              </div>
+        </div>
 
   
 
@@ -113,7 +228,6 @@
         <script src="js/modal.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <script type="text/javascript" src="js/create_section.js"></script>
         <!-- JS here -->
-        <script src="js/createSection.js"></script>
+        <script src="js/curriculum.js"></script>
     </body>
