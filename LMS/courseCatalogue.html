@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineer - Home</title>
+    <style>
+      .nav_icon {
+        width: 40px;
+        height: 40px;
+        border-color: black;
+      }
+      .scrolling-wrapper{
+        overflow-y: auto;
+      }
+      .course_cards {
+        margin:10px;
+      }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/25a40ecb83.js" crossorigin="anonymous"></script>
+    <script src="courseCatalogue.js"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <nav class="row navbar sticky-top navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="engineerHome.html">
+          All-in-One LMS Portal
+          <img src="#" alt="logo placeholder">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-ellipsis-v"></i>
+        </button>
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="navbar-toggler-icon">
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Course 1</a></li>
+            <li><a class="dropdown-item" href="#">Course 2</a></li>
+            <li><a class="dropdown-item" href="#">Course 3</a></li>
+            <li><a class="dropdown-item" href="#">Course 4</a></li>
+          </ul>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#"><img src="images/icon.png" alt="user profile" class="nav_icon"><span>User Name</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> <img src="images/chat.png" alt="Chat icon" class="nav_icon"><p>Chat</p></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./courseCatalogue.html"><img src="images/catalogue.png" alt="catalogue icon" class="nav_icon"></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><img src="images/setting.png" alt="setting icon" class="nav_icon"></a>
+            </li>
+        </div>
+      </div>
+    </nav>
+    
+    <form class="row mb-3 search_field" margin="10px" action="course_catalogue.php" method="POST">
+      <label for="courseSearch" class="form-label">Course Name</label>
+      <input class="form-control" list="exampleCourses" id="courseSearch" placeholder="Type to search...">
+    </form>
+
+    <div class="row row-col-4" class="course_cards">
+      <h4 >Courses</h4>
+      <div class="scrolling-wrapper mt-4 pb-4 pt-2">
+        <div class="row" id="courses_available">
+          <div class="col-4">
+            <div class="card" style="width: 20rem;">
+              <a href="#"><img src="images/placeholder_img.png" class="card-img-top" alt="..."></a>
+              <div class="card-body">
+                <h5 class="card-title text-center" >Course name</h5>
+                <p class="card-text">Class size: <span>40/45</span></p>
+                <button type="button" class="btn btn-outline-success"><a href="enrol.html">Enrol</a></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+              <div class="card" style="width: 20rem;">
+                  <a href="#"><img src="images/placeholder_img.png" class="card-img-top" alt="..."></a>
+                  <div class="card-body">
+                  <h5 class="card-title text-center">Course name</h5>
+                  <p class="card-text">Class size: <span>40/45</span></p>
+                  <button type="button" class="btn btn-outline-success">Enrol</button>
+                  </div>
+              </div>
+          </div>
+          <div class="col-4">
+              <div class="card" style="width: 20rem;">
+                <a href="#"><img src="images/placeholder_img.png" class="card-img-top" alt="..."></a>
+                <div class="card-body">
+                  <h5 class="card-title text-center">Course name</h5>
+                  <p class="card-text">Class size: <span>40/45</span></p>
+                  <button type="button" class="btn btn-outline-success">Enrol</button>
+                </div>
+              </div>
+          </div>
+          <div class="col-4">
+            <div class="card" style="width: 20rem;">
+              <a href="#"><img src="images/placeholder_img.png" class="card-img-top" alt="..."></a>
+              <div class="card-body">
+                <h5 class="card-title text-center">Course name</h5>
+                <p class="card-text">Class size: <span>40/45</span></p>
+                <button type="button" class="btn btn-outline-success">Enrol</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+              <div class="card" style="width: 20rem;">
+                  <a href="#"><img src="images/placeholder_img.png" class="card-img-top" alt="..."></a>
+                  <div class="card-body">
+                  <h5 class="card-title text-center">Course name</h5>
+                  <p class="card-text">Class size: <span>40/45</span></p>
+                  <button type="button" class="btn btn-outline-success">Enrol</button>
+                  </div>
+              </div>
+          </div>
+          <div class="col-4">
+              <div class="card" style="width: 20rem;">
+                <a href="#"><img src="images/placeholder_img.png" class="card-img-top" alt="..."></a>
+                <div class="card-body">
+                  <h5 class="card-title text-center">Course name</h5>
+                  <p class="card-text">Class size: <span>40/45</span></p>
+                  <button type="button" class="btn btn-outline-success">Enrol</button>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+</body>
+</html>

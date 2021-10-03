@@ -160,6 +160,37 @@ INSERT INTO `course_prerequisites` (`id`, `course_id`, `course_name`,`prerequisi
 (3, 2, 'Introduction to Mechanical Engineering', 1, 'Electrical Engineering');
 COMMIT;
 
+
+--
+-- REQUIRED_COURSES table
+-- 
+
+DROP TABLE IF EXISTS `required_courses`;
+CREATE TABLE IF NOT EXISTS `required_courses` (
+    `required_course_id` int(64) NOT NULL AUTO_INCREMENT,
+    `user_id` int(64) NOT NULL,
+    `user_name` varchar(64) NOT NULL,
+    `course_id` int(64) NOT NULL,
+    `course_name` varchar(64) NOT NULL,
+    PRIMARY KEY (`required_course_id`),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `required_courses`
+--
+
+INSERT INTO `required_courses` (`required_course_id`, `user_id`, `user_name`,`course_id`, `course_name`) VALUES
+(1, 1, 'Jonathan', 1, 'Electrical Engineering'),
+(2, 1, 'Jonathan', 3, 'Introduction to Scrum Methodology'),
+(3, 4, 'Kelly', 1, 'Electrical Engineering'),
+(4, 4, 'Kelly', 2, 'Introduction to Mechanical Engineering'),
+(5, 4, 'Kelly', 3, 'Introduction to Scrum Methodology');
+
+
+COMMIT;
+
 --
 -- COURSE_TRAINERS table
 --
