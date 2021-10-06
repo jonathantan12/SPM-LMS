@@ -6,7 +6,7 @@
 
     $items = [];
 
-
+// this returns all users and their required courses to take
     foreach ( $users as $user ) {
         $item["user_id"] = $user->getUserId();
         $required_courses = $requiredCoursesDAO->getRequiredCourses($user->getUserId());

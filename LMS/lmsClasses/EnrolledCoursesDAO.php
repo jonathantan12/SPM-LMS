@@ -21,6 +21,10 @@ class enrolledCoursesDAO {
         
         return $result;
     }
+
+    public function addEnrolledCourses($user_id, $course_id) {
+        
+    }
 }
 
 // $dao = new enrolledCoursesDAO();

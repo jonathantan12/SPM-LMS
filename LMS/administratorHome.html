@@ -13,7 +13,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
-    <body class="d-flex flex-column h-100" onload="retrieveEngineers()">
+    <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
             <!-- Navigation-->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,10 +39,10 @@
                 <div class="container px-5 my-5">
                     <div class="row gx-5">
                         <div>
-                            <div class="accordion mb-5" id="viewAllEngineersTest">
+                            <div class="accordion mb-5" id="viewAllEngineers">
                                 <div class="accordion-item">
-                                    <h3 class="accordion-header" id="headingOne"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneTest" aria-expanded="true" aria-controls="collapseOne">View All Engineers</button></h3>
-                                    <div class="accordion-collapse collapse" id="collapseOneTest" aria-labelledby="headingOne" data-bs-parent="#viewAllEngineersTest">
+                                    <h3 class="accordion-header" id="headingOne"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="retrieveEngineers()">View All Engineers</button></h3>
+                                    <div class="accordion-collapse collapse" id="collapseOne" aria-labelledby="headingOne" data-bs-parent="#viewAllEngineers">
                                         <div class="accordion-body">
                                             <table class="table table-striped">
                                                 <thead>
@@ -61,13 +61,36 @@
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <div class="accordion mb-5" id="viewAllCourses">
+                            <div class="accordion-item">
+                                <h3 class="accordion-header" id="headingOne"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne" onclick="retrieveCourses()">View All Courses</button></h3>
+                                <div class="accordion-collapse collapse" id="collapseTwo" aria-labelledby="headingOne" data-bs-parent="#viewAllCourses">
+                                    <div class="accordion-body">
+                                        <table class="table table-striped">
+                                            <thead>
+                                              <tr>
+                                                <th scope="col">Course Name</th>
+                                                <th scope="col">Eligible Learners</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody id="viewAllCoursesTable">
+                                              
+                                            </tbody>
+                                          </table>
+                                    </div>
+                                </div>
+                            </div>                              
+                        </div>
+                    </div>
                 </div>
             </section>
+            
         </main>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/viewAllEngineers.js"></script>
+        <script src="js/viewAllEngineersAndCourses.js"></script>
     </body>
 </html>
 
