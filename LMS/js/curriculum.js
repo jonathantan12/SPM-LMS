@@ -36,7 +36,6 @@ function createQuestionCard(){
     var select= document.createElement("select")
     select.className="col-sm-2"
     select.id="options"+z
-    console.log(select)
     select.style="border:2px solid grey"
     div1.appendChild(select)
 
@@ -69,7 +68,7 @@ function addDiv(z){
     optionsCard.id=ele
     theId="questionCard"+z
     document.getElementById(theId).appendChild(optionsCard)
-    console.log(theId)
+    //console.log(theId)
     create(z)
 }
 
@@ -79,17 +78,17 @@ function create(z){
     var select = document.getElementById(selectedValue).value; //this is the number of options the user click
     var a= "optionCard"+z
     var co = document.getElementById(a)
-    console.log(a)
     var str = '';
     for(var i = 0; i < select; i++) {
+
         str += `
         <div class="input-group mb-3" style="margin-top :2px">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                    <input type="radio" name="answer[] aria-label="Checkbox for following text input">
+                    <input type="radio" name="answer`+z+`" aria-label="Radio for following text input">
                 </div>
             </div>
-            <input type="text" name="options[]" class="form-control" aria-label="Text input with checkbox">
+            <input type="text" name="options[]" class="form-control" aria-label="Text input with radio">
         </div>
         `
     }
@@ -98,15 +97,32 @@ function create(z){
 
 
 
+var questions=[];
 function quizArray(){
     var questionArray=[];
+    var optionsArray=[];
+    var answerArray=[];
     var inputQuestion = document.getElementsByName('questions[]');
     for (var i = 0; i < inputQuestion.length; i++) {
         var a = inputQuestion[i];
         questionArray.push(a.value);
     };
-
+    questions=questionArray;
+    //console.log(questions);
+    var inputOptions = document.getElementsByName('options[]');
+    for (var i = 0; i < inputOptions.length; i++) {
+        var b =inputOptions[i];
+        optionsArray.push(b.value);
+    }
+    var inputAnswer = document.getElementsByName('answer'+z);
+    for (var i = 0; i < inputAnswer.length; i++) {
+        var c =inputAnswer[i];
+        answerArray.push(c.value);
+    }
     console.log(questionArray);
-    
+    console.log(optionsArray);
+    console.log(answerArray);
+
+
 }
 
