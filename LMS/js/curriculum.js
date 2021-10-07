@@ -1,97 +1,101 @@
-function orderExist() {
-    var request = new XMLHttpRequest()
 
-    var order = document.getElementById("order").value
-    var course_id = document.getElementById("course_id").value
-    var ret=document.getElementById("orderExist")
-    var details =  "course_id=" + course_id + "&order=" + order 
-    var url = "backend/orderExist.php?" + details
-
-    request.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var result = this.responseText //string
-            if (result == 'false') {
-                ret.innerHTML = '*Order already exist!'
-            } else(
-                ret.innerHTML = ''
-            )
-        }
-    }
-
-    request.open("GET", url, true)
-    request.send()
-
-}
-
-function createSection(){
-    console.log("hello");
-    
-}
-
-
-function myFunction(){
-    var myId = 0;
-    var counter = 0;
-    var myDiv = document.getElementById("test")
-    for(var i = 0; i < 5; i++){
-        var textNode = document.createTextNode("sup! My current id is "+myId+" !")
-        var t = document.createElement("div");
-        t.setAttribute("id", counter++)
-        t.setAttribute("class", "cool_"+myId++)
-        t.appendChild(textNode)
-        myDiv.appendChild(t);
-    }
-}
 
 //try changing the attribute for id="createOptions"
-
+var z=0
 function createQuestionCard(){
-    var str=
-    `
-    <form>
-        <div class="form-group row">
-            <label for="quizTitle" class="col-sm-2 col-form-label">Question</label>
-                <div class="col-sm-8" style="padding-right:0px">
-                    <input type="text" name="questions[]" class="form-control" id="Question" placeholder="Question">
-                </div>
-                <select class="col-sm-2" id="options" style="border: 2px solid grey; " onchange="createOptions()">
-                    <option value=""></option>
-                    <option value="2">2</option>
-                    <option value="4">4</option>
-                </select>
-        </div>
-    </form>
-    <div id="createOptions"></div>
-    `;
-    questionCard.insertAdjacentHTML('beforebegin',str)
+    z++
+    var divTag=document.createElement('div');
+    var t = "questionCard"+z;
+    divTag.setAttribute("id",t);
+    var form= document.createElement('form')
+    divTag.appendChild(form)
+
+    var div1= document.createElement('div')
+    div1.className ="form-group row"
+    form.appendChild(div1)
+
+    var label= document.createElement('label')
+    label.className="col-sm-2 col-form-label"
+    var content1 =document.createTextNode("Question")
+    label.appendChild(content1)
+    div1.appendChild(label)
+
+    var div2=document.createElement("div")
+    div2.className="col-sm-8"
+    div2.style="padding-right:0px"
+    div1.appendChild(div2)
+
+    var input1= document.createElement("input")
+    input1.type="text"
+    input1.className="form-control"
+    input1.name="questions[]"
+    input1.id="question"+z
+    input1.placeholder="Question"
+    div2.appendChild(input1)
+
+    var select= document.createElement("select")
+    select.className="col-sm-2"
+    select.id="options"+z
+    console.log(select)
+    select.style="border:2px solid grey"
+    div1.appendChild(select)
+
+    var option =document.createElement("option")
+    option.value=""
+    var option1 =document.createElement("option")
+    option1.value="2"
+    var option1_2 =document.createTextNode("2")
+    option1.appendChild(option1_2)
+    var option2=document.createElement("option")
+    option2.value="4"
+    var option2_4 =document.createTextNode("4")
+    option2.appendChild(option2_4)
+    select.appendChild(option)
+    select.appendChild(option1)
+    select.appendChild(option2)
+
+    document.getElementById("questionCard").appendChild(divTag)
+
+    select.onchange = function(){addDiv(z);};
+    
+
+}
+//create a div under question to put options
+//put options under the created div
+function addDiv(z){
+    var z =z;
+    var optionsCard= document.createElement("div")
+    var ele="optionCard"+z
+    optionsCard.id=ele
+    theId="questionCard"+z
+    document.getElementById(theId).appendChild(optionsCard)
+    console.log(theId)
+    create(z)
 }
 
 
-
-function createOptions(){
-    var select = document.getElementById("options").value;
+function create(z){
+    var selectedValue="options"+z
+    var select = document.getElementById(selectedValue).value; //this is the number of options the user click
+    var a= "optionCard"+z
+    var co = document.getElementById(a)
+    console.log(a)
     var str = '';
     for(var i = 0; i < select; i++) {
-    str += `
-    <div class="input-group mb-3" style="margin-top :2px">
-        <div class="input-group-prepend">
-            <div class="input-group-text">
-                <input type="radio" name="answer[] aria-label="Checkbox for following text input">
+        str += `
+        <div class="input-group mb-3" style="margin-top :2px">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="radio" name="answer[] aria-label="Checkbox for following text input">
+                </div>
             </div>
+            <input type="text" name="options[]" class="form-control" aria-label="Text input with checkbox">
         </div>
-        <input type="text" name="options[]" class="form-control" aria-label="Text input with checkbox">
-    </div>
-
-    `
-    document.getElementById("createOptions").innerHTML=str;
-
- }
+        `
+    }
+    co.innerHTML=str;
 }
 
-function store(obj){
-    var courseId =obj.id;
-
-}
 
 
 function quizArray(){
@@ -102,17 +106,7 @@ function quizArray(){
         questionArray.push(a.value);
     };
 
-    var optionArray=[];
-    var inputOption=document.getElementsByName('options[]');
-    for (var x = 0; x < inputOption.length; x++) {
-        var y = inputOption[x];
-        optionArray.push(y.value);
-    };
     console.log(questionArray);
-    console.log(optionArray);
     
-
-
-
 }
 
