@@ -24,22 +24,35 @@ function orderExist() {
 }
 
 function createSection(){
-    var section_title = document.getElementById("section_title").value
-    var order = document.getElementById("order").value
+    console.log("hello");
     
 }
 
 
+function myFunction(){
+    var myId = 0;
+    var counter = 0;
+    var myDiv = document.getElementById("test")
+    for(var i = 0; i < 5; i++){
+        var textNode = document.createTextNode("sup! My current id is "+myId+" !")
+        var t = document.createElement("div");
+        t.setAttribute("id", counter++)
+        t.setAttribute("class", "cool_"+myId++)
+        t.appendChild(textNode)
+        myDiv.appendChild(t);
+    }
+}
+
+//try changing the attribute for id="createOptions"
 
 function createQuestionCard(){
-    var questionCard=document.getElementById("questionCard")
     var str=
     `
     <form>
         <div class="form-group row">
             <label for="quizTitle" class="col-sm-2 col-form-label">Question</label>
                 <div class="col-sm-8" style="padding-right:0px">
-                    <input type="text" class="form-control" id="Question" placeholder="Question">
+                    <input type="text" name="questions[]" class="form-control" id="Question" placeholder="Question">
                 </div>
                 <select class="col-sm-2" id="options" style="border: 2px solid grey; " onchange="createOptions()">
                     <option value=""></option>
@@ -50,9 +63,10 @@ function createQuestionCard(){
     </form>
     <div id="createOptions"></div>
     `;
-    questionCard.insertAdjacentHTML('afterbegin',str)
-
+    questionCard.insertAdjacentHTML('beforebegin',str)
 }
+
+
 
 function createOptions(){
     var select = document.getElementById("options").value;
@@ -62,19 +76,43 @@ function createOptions(){
     <div class="input-group mb-3" style="margin-top :2px">
         <div class="input-group-prepend">
             <div class="input-group-text">
-                <input type="radio" name=" aria-label="Checkbox for following text input">
+                <input type="radio" name="answer[] aria-label="Checkbox for following text input">
             </div>
         </div>
-        <input type="text" class="form-control" aria-label="Text input with checkbox">
+        <input type="text" name="options[]" class="form-control" aria-label="Text input with checkbox">
     </div>
 
     `
     document.getElementById("createOptions").innerHTML=str;
 
-}
+ }
 }
 
 function store(obj){
     var courseId =obj.id;
-    
+
 }
+
+
+function quizArray(){
+    var questionArray=[];
+    var inputQuestion = document.getElementsByName('questions[]');
+    for (var i = 0; i < inputQuestion.length; i++) {
+        var a = inputQuestion[i];
+        questionArray.push(a.value);
+    };
+
+    var optionArray=[];
+    var inputOption=document.getElementsByName('options[]');
+    for (var x = 0; x < inputOption.length; x++) {
+        var y = inputOption[x];
+        optionArray.push(y.value);
+    };
+    console.log(questionArray);
+    console.log(optionArray);
+    
+
+
+
+}
+
