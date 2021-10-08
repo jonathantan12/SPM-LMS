@@ -14,8 +14,53 @@ class requiredCoursesDAO {
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
         while($row = $stmt->fetch()) {
-            $result[] = new requiredCourses($row['required_course_id'], $row['user_id'], $row['user_n ame'], $row['course_id'], $row['course_name']);
+            $result[] = new requiredCourses($row['required_course_id'], $row['user_id'], $row['user_name'], $row['course_id'], $row['course_name']);
         }
+        $stmt = null;
+        $pdo = null;
+
+        return $result;
+    }
+
+    public function getEligibleLearners($course_id) {
+        $connMgr = new ConnectionManager();
+        $pdo = $connMgr->getConnection();
+
+        $sql = 'SELECT * FROM required_courses WHERE course_id = :course_id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':course_id', $course_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = [];
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+        while($row = $stmt->fetch()) {
+            $result[] = new requiredCourses($row['required_course_id'], $row['user_id'], $row['user_name'], $row['course_id'], $row['course_name']);
+        }
+        $stmt = null;
+        $pdo = null;
+
+        return $result;
+    }
+
+    public function deleteRequiredCourse($user_id, $course_id) {
+        $result = FALSE;
+        $connMgr = new ConnectionManager();
+        $pdo = $connMgr->getConnection();
+
+        $sql = 'DELETE FROM required_courses WHERE course_id = :course_id && user_id = :user_id';
+        
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':course_id', $course_id, PDO::PARAM_INT);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+
+            if($stmt->execute()) {
+                $result = TRUE;
+            }
+        } catch (Exception $e) {
+            return $result;    
+        }
+
         $stmt = null;
         $pdo = null;
 
