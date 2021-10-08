@@ -1,9 +1,12 @@
 
 
 //try changing the attribute for id="createOptions"
+var quizIdArray=[];
+
 var z=0
 function createQuestionCard(){
     z++
+    quizIdArray.push(z);
     var divTag=document.createElement('div');
     var t = "questionCard"+z;
     divTag.setAttribute("id",t);
@@ -122,7 +125,39 @@ function quizArray(){
     console.log(questionArray);
     console.log(optionsArray);
     console.log(answerArray);
-
+    addQuiz()
 
 }
 
+
+
+
+function addQuiz(){
+    var quiz_id="1";
+    var section_id="1";
+    var question ="this is for section 1 quiz 1 question 1";
+    var question_type="tf";
+    var number_of_options= "2";
+    var correct_answer="True";
+
+    var request = new XMLHttpRequest();
+
+    var details= "quiz_id=" +quiz_id + "&section_id=" + section_id + "&question=" +question+ "&question_type=" +question_type+ "&number_of_options=" + number_of_options + "&correct_answer=" + correct_answer;
+    var url= "backend/addQuiz.php?"+ details;
+
+    request.onreadystatechange= function(){
+        if (this.readyState == 4 && this.status == 200){
+            var result= this.responseText //string
+            console.log(result);
+            if(result=='true'){
+                console.log("added");
+            } else{
+                console.log("fail");
+            }
+
+        }
+    }
+    request.open("GET", url, true)
+    request.send()
+
+}
