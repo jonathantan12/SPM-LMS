@@ -38,8 +38,7 @@
         </div>
     </nav>
 
-    <body>  
-        
+    <body> 
         <!-- Create Section Modal -->
         <div class="modal fade" id="createSection" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -64,14 +63,14 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="createSection()" >Save changes</button>
+                <button type="button" class="btn btn-primary" onclick="createSection()" >Save</button>
                 </div>
             </div>
             </div>
         </div>
 
          <!-- Create Lesson Material Modal -->
-         <div class="modal fade" id="createLessonMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="createLessonMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -155,13 +154,13 @@
                             </div>
                         </div>
                         <div id="questionCard"></div>
+                        
                         <button type="button" id="card" class="btn btn-primary btn-small" style="float: left; margin: 5px;" onclick="createQuestionCard()"> + Add New Question</button>
-
-                      </form>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="createQuiz()">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+                    <button type="button" class="btn btn-primary" id="quizArray" onclick="quizArray()">Save</button>
                 </div>
             </div>
             </div>
@@ -194,20 +193,20 @@
         <div class="container">
             <button type="button" id="createSection" class="btn btn-primary" data-toggle="modal" data-target="#createSection"> + Add Section</button>
         </div>
-        <div class="container">
+        <div class="container" id="section1Container">
             <div class="card" style="width: full; margin-top: 10px;">
                 <div class="card-body">
-                  <h5 class="card-title">Course 1 Section 1</h5>
-                  <div class="card" style="width:full; padding-left: 5px;" > 
-                    <div><b> Section 1 Lesson 1</b>
-                        <button type="button" class="btn btn-danger btn-small" style="float: right;">Delete</button>
-                        <button type="button" class="btn btn-primary btn-small" style="float: right;">Edit</button>
+                    <h5 class="card-title">Course 1 Section 1</h5>
+                    <div class="card" style="width:full; padding-left: 5px;" > 
+                        <div><b> Section 1 Lesson 1</b>
+                            <button type="button" class="btn btn-danger btn-small" style="float: right;">Delete</button>
+                            <button type="button" class="btn btn-primary btn-small" style="float: right;">Edit</button>
+                        </div>
                     </div>
-                  </div>
-                  <button type="button" class="btn btn-primary btn-small" style="float: left; margin: 5px;" data-toggle="modal" data-target="#createLessonMaterial">+ Add Lesson</button>
-                  <button type="button" class="btn btn-primary btn-small" style="float: left; margin: 5px;"data-toggle="modal" data-target="#createQuiz"> + Add Quiz</button>
+                    <button type="button" class="btn btn-primary btn-small" style="float: left; margin: 5px;" data-toggle="modal" data-target="#createLessonMaterial">+ Add Lesson</button>
+                    <button type="button" class="btn btn-primary btn-small" style="float: left; margin: 5px;"data-toggle="modal" data-target="#createQuiz" > + Add Quiz</button>
                 </div>
-              </div>
+            </div>
         </div>
 
   
@@ -225,9 +224,7 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-        <script src="js/modal.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+    
         <!-- JS here -->
         <script src="js/curriculum.js"></script>
     </body>

@@ -1,7 +1,7 @@
 <?php
   $db_host = 'localhost';
   $db_user = 'root';
-  $db_password = 'root';
+  $db_password = '';
   $db_db = 'information_schema';
   $db_port = 3306;
 
@@ -10,7 +10,7 @@
     $db_user,
     $db_password,
     $db_db,
-	$db_port
+	  $db_port
   );
 	
   if ($mysqli->connect_error) {
