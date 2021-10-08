@@ -122,9 +122,9 @@ function quizArray(){
         var c =inputAnswer[i];
         answerArray.push(c.value);
     }
-    console.log(questionArray);
-    console.log(optionsArray);
-    console.log(answerArray);
+    // console.log(questionArray);
+    // console.log(optionsArray);
+    // console.log(answerArray);
     addQuiz()
 
 }
@@ -133,31 +133,42 @@ function quizArray(){
 
 
 function addQuiz(){
-    var quiz_id="1";
-    var section_id="1";
-    var question ="this is for section 1 quiz 1 question 1";
-    var question_type="tf";
-    var number_of_options= "2";
-    var correct_answer="True";
+    var arr=[];
+    var q={};
+    // var u={};
+    q.quiz_id="1";
+    q.section_id="1";
+    q.question ="this is for section 1 quiz 1 question 1";
+    q.question_type="tf";
+    q.number_of_options= "2";
+    q.correct_answer="True";
+    arr.push(q);
+    
 
-    var request = new XMLHttpRequest();
+    // u.quiz_id="question2,";
+    // u.section_id="2";
+    // u.question ="this is for section 2 quiz 2 question 1";
+    // u.question_type="tf";
+    // u.number_of_options= "2";
+    // u.correct_answer="True";
+    // arr.push(u);
 
-    var details= "quiz_id=" +quiz_id + "&section_id=" + section_id + "&question=" +question+ "&question_type=" +question_type+ "&number_of_options=" + number_of_options + "&correct_answer=" + correct_answer;
-    var url= "backend/addQuiz.php?"+ details;
+    //console.log(arr);
 
-    request.onreadystatechange= function(){
-        if (this.readyState == 4 && this.status == 200){
-            var result= this.responseText //string
-            console.log(result);
-            if(result=='true'){
-                console.log("added");
-            } else{
-                console.log("fail");
-            }
-
+    $.ajax({
+        url:"backend/addQuiz.php",
+        method:"post",
+        data: {arr:JSON.stringify(arr)},
+        success: function(res){
+            console.log(res);
         }
-    }
-    request.open("GET", url, true)
-    request.send()
 
+    })
+
+   
 }
+
+
+
+
+src="https://code.jquery.com/jquery-3.1.1.min.js"; 
