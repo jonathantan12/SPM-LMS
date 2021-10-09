@@ -13,7 +13,7 @@ class CoursesDAO {
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
         while($row = $stmt->fetch()) {
-            $result[] = new courses($row['course_id'], $row['course_name'], $row['course_desc'], $row['class_name'], $row['start_date'], $row['end_date'], $row['slots_available'], $row['image']);
+            $result[] = new courses($row['course_id'], $row['course_name'], $row['course_desc'], $row['class_name'], $row['start_date'], $row['end_date'], $row['slots_available'], $row['trainer_id'], $row['trainer_name'],$row['image']);
         }
         $stmt = null;
         $pdo = null;
