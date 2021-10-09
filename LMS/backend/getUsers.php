@@ -1,8 +1,8 @@
 <?php
     require_once('common.php');
 
-    // Use this to pass in the user_id variable into the class function currently it is hard coded.
-    // $user_id = $_GET["user_id"];
+    // Use this to pass in the user_role variable into the class function currently it is hard coded.
+    // $user_role = $_GET["user_role"];
     $user_role = 'trainer';
     $dao = new usersDAO();
     $users = $dao->getUsers($user_role);

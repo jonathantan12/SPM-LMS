@@ -21,6 +21,43 @@ class quizzesDAO {
         
         return $result;
     }
+
+
+
+    public function add($quiz) {
+        $connMgr = new ConnectionManager();
+        $pdo = $connMgr->getConnection();
+        $sql = 'insert into quizzes (quiz_id, section_id, question, question_type, number_of_options, correct_answer) values (:quiz_id, :section_id, :question, :question_type, :number_of_options, :correct_answer)';
+        $isAddOK = FALSE;
+        try { 
+            $stmt = $pdo->prepare($sql); 
+
+            $quiz_id = $quiz->getQuizId();
+            $section_id = $quiz->getSectionId();
+            $question = $quiz->getQuestion();
+            $question_type = $quiz->getQuestionType();
+            $number_of_options = $quiz->getNumberOfOptions();
+            $correct_answer = $quiz-> getCorrectAnswer();
+            
+            $stmt->bindParam(':quiz_id', $quiz_id, PDO::PARAM_STR);
+            $stmt->bindParam(':section_id', $section_id, PDO::PARAM_STR);
+            $stmt->bindParam(':question', $question, PDO::PARAM_STR);
+            $stmt->bindParam(':question_type', $question_type, PDO::PARAM_STR);
+            $stmt->bindParam(':number_of_options', $number_of_options, PDO::PARAM_STR);
+            $stmt->bindParam(':correct_answer', $correct_answer, PDO::PARAM_STR);
+        
+            if ($stmt->execute()) {
+                $isAddOK = TRUE;
+            }
+            
+            $stmt->closeCursor();
+            $pdo = null;
+        } catch (Exception $e) {
+            return $isAddOK;    
+        }
+
+        return $isAddOK;
+    }
 }
 
 // $dao = new questionsDAO();
@@ -44,5 +81,10 @@ class quizzesDAO {
 // // make posts into json and return json data
 // $postJSON = json_encode($items);
 // echo $postJSON;
+
+
+
+
+
 
 ?>
