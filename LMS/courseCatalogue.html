@@ -15,10 +15,20 @@
         overflow-y: auto;
       }
       .course_cards {
-        margin:5px;
+        margin:10px;
+      }
+      .filter {
+        -webkit-filter: brightness(0) invert(1);
+        filter: brightness(0) invert(1);
       }
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/25a40ecb83.js" crossorigin="anonymous"></script>
     <script src="js/courseCatalogue.js"></script>
 </head>
@@ -78,9 +88,9 @@
     </form>
 
     <div class="row" class="course_cards">
-      <h4>Courses</h4>
+      <h4>Required Courses</h4>
       <div class="scrolling-wrapper mt-4 pb-4 pt-2">
-        <div class="card-deck" id="courses_available">
+        <div class="card-deck" id="coursesAvailable">
           <!-- New courses here -->
         </div>
       </div>
