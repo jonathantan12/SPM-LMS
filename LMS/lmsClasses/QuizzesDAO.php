@@ -27,25 +27,33 @@ class quizzesDAO {
     public function add($quiz) {
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
-        $sql = 'INSERT INTO quizzes (course_id, section_id, quiz_id, question_no, question, number_of_options, correct_answer) values (:course_id, :section_id, :quiz_id, :question_no, :question, :number_of_options, :correct_answer)';
+        $sql = 'INSERT INTO quizzes (course_id, course_class_id, section_id, quiz_id, quiz_title, quiz_type, question_no, question, number_of_options, options_content, correct_answer) values (:course_id, :course_class_id, :section_id, :quiz_id, :quiz_title, :quiz_type, :question_no, :question, :number_of_options, :options_content, :correct_answer)';
         $isAddOK = "FALSE";
         try { 
             $stmt = $pdo->prepare($sql); 
 
             $course_id = $quiz->getCourseId();
+            $course_class_id = $quiz->getCourseClassId();
             $section_id = $quiz->getSectionId();
             $quiz_id = $quiz->getQuizId();
+            $quiz_title = $quiz->getQuizTitle();
+            $quiz_type = $quiz->getQuizType();
             $question_no = $quiz->getQuestionNo();
             $question = $quiz->getQuestion();
             $number_of_options = $quiz->getNumberOfOptions();
+            $options_content = $quiz->getOptionsContent();
             $correct_answer = $quiz-> getCorrectAnswer();
             
             $stmt->bindParam(':course_id',$course_id, PDO::PARAM_INT);
+            $stmt->bindParam(':course_class_id',$course_class_id, PDO::PARAM_INT);
             $stmt->bindParam(':section_id', $section_id, PDO::PARAM_INT);
             $stmt->bindParam(':quiz_id', $quiz_id, PDO::PARAM_INT);
+            $stmt->bindParam(':quiz_title', $quiz_title, PDO::PARAM_STR);
+            $stmt->bindParam(':quiz_type', $quiz_type, PDO::PARAM_STR);
             $stmt->bindParam(':question_no', $question_no, PDO::PARAM_INT);
             $stmt->bindParam(':question', $question, PDO::PARAM_STR);
             $stmt->bindParam(':number_of_options', $number_of_options, PDO::PARAM_STR);
+            $stmt->bindParam(':options_content', $options_content, PDO::PARAM_STR);
             $stmt->bindParam(':correct_answer', $correct_answer, PDO::PARAM_STR);
         
             if ($stmt->execute()) {

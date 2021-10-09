@@ -1,13 +1,36 @@
 
 
 //try changing the attribute for id="createOptions"
-var qa= {};
+    // q.course_id="1" (for now hard code)
+    // q.section_id="1"; (for now hard code)
+    // q.quiz_id="1";
+    // q.question_no ="4"
+    // q.question ="this is for section 1 quiz 1 question 4";
+    // q.number_of_options= "2";
+    // q.correct_answer="True";
+
+var quizTitle="";
+var quizType="";
+var cid="1"; //hard code, this is course id
+var ccid="1";// this is the class number for each course
+var sid="1"; //hard code
+var qid="1"; //quiz_id for now is always 1,hard code
+var qno=[];//question_no in arr
+var que={};// {1:"this i question 1", 2: "this is question 2"}
+var numOp={}; //{1:"2",2:"4"}
+var optionContent={} //{1:[a,b],2:[a,b,c,d]}
+var answerArray={}; // gives the position of the correct answer, so for example in question 1 there is 2 options, if second option is correct, it will return 1
+
+
+
+
 
 
 var z=0
 function createQuestionCard(){
     z++
-    quizIdArray.push(z);
+    qno.push(z);
+    // console.log(qno);
     var divTag=document.createElement('div');
     var t = "questionCard"+z;
     divTag.setAttribute("id",t);
@@ -72,7 +95,6 @@ function addDiv(z){
     optionsCard.id=ele
     theId="questionCard"+z
     document.getElementById(theId).appendChild(optionsCard)
-    //console.log(theId)
     create(z)
 }
 
@@ -80,16 +102,17 @@ function addDiv(z){
 function create(z){
     var selectedValue="options"+z
     var select = document.getElementById(selectedValue).value; //this is the number of options the user click
+    numOp[z]=select;
+    // console.log(numOp);
     var a= "optionCard"+z
     var co = document.getElementById(a)
     var str = '';
     for(var i = 0; i < select; i++) {
-
         str += `
         <div class="input-group mb-3" style="margin-top :2px">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                    <input type="radio" name="answer`+z+`" aria-label="Radio for following text input">
+                    <input type="radio" id="`+z+i+`" name="answer`+z+`" value ="` +i+ `"aria-label="Radio for following text input">
                 </div>
             </div>
             <input type="text" name="options[]" class="form-control" aria-label="Text input with radio">
@@ -100,52 +123,105 @@ function create(z){
 }
 
 
-
-var questions=[];
 function quizArray(){
-    var questionArray=[];
+    quizTitle=document.getElementById("quizTitle").value;
+    var type= document.getElementsByName("quizType");
+    for(i = 0; i < type.length; i++) {
+        if(type[i].checked){
+            quizType=type[i].value;
+        }
+    }
+    
     var optionsArray=[];
-    var answerArray=[];
-    var inputQuestion = document.getElementsByName('questions[]');
-    for (var i = 0; i < inputQuestion.length; i++) {
-        var a = inputQuestion[i];
-        questionArray.push(a.value);
-    };
-    questions=questionArray;
-    //console.log(questions);
     var inputOptions = document.getElementsByName('options[]');
     for (var i = 0; i < inputOptions.length; i++) {
         var b =inputOptions[i];
         optionsArray.push(b.value);
     }
-    var inputAnswer = document.getElementsByName('answer'+z);
-    for (var i = 0; i < inputAnswer.length; i++) {
-        var c =inputAnswer[i];
-        answerArray.push(c.value);
-    }
-    // console.log(questionArray);
     // console.log(optionsArray);
-    // console.log(answerArray);
-    addQuiz()
 
+
+    for (var i= 1; i< z+1; i++){ // go to each question
+        var questionContentId="question"+i;
+        que[i]=document.getElementById(questionContentId).value; //need create dict
+        var o =numOp[i]; //number of options for each question 
+        optionContent[i]=optionsArray.splice(0,o);
+        
+    }
+    
+    for (var i= 1; i< z+1; i++){
+        var a =i;
+        aStr=a.toString();
+        for (var x=0; x<numOp[i];x++){
+            var b =x;
+            var bStr= b.toString();
+            var zi= aStr+bStr;
+            // console.log(zi);
+            if (document.getElementById(zi).checked){
+                answerArray[i]=x;
+            }
+        }
+    }
+    
+        
+    
+    // console.log(answerArray);
+    // console.log(optionContent);
+    // console.log(que);
+    //console.log(qno.length);
+    
+
+    addQuiz();
 }
 
+// first u find how many question, then start from question 1, find how many options, pop first 2 options from array and push into dictionary. 
+
+// var quizTitle= document.getElementById("quizTitle").value;
+// var quizType="";
+// var cid="1"; //hard code, this is course id
+// var ccid="1";// this is the class number for each course
+// var sid="1"; //hard code
+// var qid="1"; //quiz_id for now is always 1,hard code
+// var qno=[];//question_no in arr
+// var que={};// {1:"this i question 1", 2: "this is question 2"}
+// var numOp={}; //{1:"2",2:"4"}
+// var optionContent={} //{1:[a,b],2:[a,b,c,d]}
+// var answerArray={}; // gives the position of the correct answer, so for example in question 1 there is 2 options, if second option is correct, it will return 1
 
 
 
 function addQuiz(){
-    var arr=[];
-    var q={};
-    // var u={};
-    q.course_id="1"
-    q.section_id="1";
-    q.quiz_id="1";
-    q.question_no ="4"
-    q.question ="this is for section 1 quiz 1 question 4";
-    q.number_of_options= "2";
-    q.correct_answer="True";
-    arr.push(q);
+    var arr =[];
+    for (i = 0; i < qno.length; i++){
+        var q ={};
+        q.course_id = cid;
+        q.course_class_id = ccid;
+        q.section_id = sid;
+        q.quiz_id = qid;
+        q.quiz_title = quizTitle;
+        q.quiz_type = quizType;
+        var question_number = qno[i];
+        q.question_no = question_number;
+        q.question = que[question_number];
+        q.number_of_options = numOp[question_number];
+        q.options_content = optionContent[question_number];
+        var posAns = answerArray[question_number];
+        q.correct_answer = optionContent[question_number][posAns];
+        arr.push(q);
+    }
     console.log(arr);
+    // var arr=[];
+    // var q={};
+    // // var u={};
+    // q.course_id="1"
+    // q.section_id="1";
+    // q.quiz_id="1";
+    // q.question_no ="4"
+    // q.question ="this is for section 1 quiz 1 question 4";
+    // q.number_of_options= "2";
+    // q.correct_answer="True";
+    // arr.push(q);
+    // console.log(arr);
 
     // u.quiz_id="question2,";
     // u.section_id="2";
