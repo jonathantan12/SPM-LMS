@@ -48,6 +48,7 @@ function retrieveCourses() {
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var result = JSON.parse(this.responseText)
+            console.log(result)
             if (result) {
                 //convert this into html code to display in table (assign to engineers)
                 toPrint = ""
