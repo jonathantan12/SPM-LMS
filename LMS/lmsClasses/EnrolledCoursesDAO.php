@@ -1,7 +1,7 @@
 <?php
 require_once 'autoload.php';
 
-class enrolledCoursesDAO {
+class EnrolledCoursesDAO {
     public function getEnrolledCourses($user_id) {
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
