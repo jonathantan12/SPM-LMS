@@ -22,47 +22,55 @@
     <script src="https://kit.fontawesome.com/25a40ecb83.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand" href="engineerHome.html">
+          All-in-One LMS Portal
+          <img src="assets/placeholder_img.png" class="nav_icon" alt="logo placeholder">
+        </a>
+        <div class="dropdown row">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="navbar-toggler-icon">
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Course 1</a></li>
+            <li><a class="dropdown-item" href="#">Course 2</a></li>
+            <li><a class="dropdown-item" href="#">Course 3</a></li>
+            <li><a class="dropdown-item" href="#">Course 4</a></li>
+          </ul>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-ellipsis-v"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#"><img src="assets/icon.png" alt="user profile" class="nav_icon filter"><span>User Name</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> <img src="assets/chat.png" alt="Chat icon" class="nav_icon filter"><p>Chat</p></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./courseCatalogue.html"><img src="assets/catalogue.png" alt="catalogue icon" class="nav_icon filter"></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><img src="assets/setting.png" alt="setting icon" class="nav_icon filter"></a>
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Switch user</a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                      <li><a class="dropdown-item" href="engineerHome.html">Learner</a></li>
+                      <li><a class="dropdown-item" href="trainerHome.html">Trainer</a></li>
+                      <li><a class="dropdown-item" href="administratorHome.html">Administrator</a></li>
+                  </ul>
+              </li>
+          </ul>
+        </div>
+    </nav>
     <div class="container-fluid">
-        <nav class="row navbar sticky-top navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="engineerHome.html">
-                All-in-One LMS Portal
-                    <img src="..." alt="logo placeholder">
-                </a>
-                <h1>Course Name</h1>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <div class="dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="navbar-toggler-icon">
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Course 1</a></li>
-                        <li><a class="dropdown-item" href="#">Course 2</a></li>
-                        <li><a class="dropdown-item" href="#">Course 3</a></li>
-                        <li><a class="dropdown-item" href="#">Course 4</a></li>
-                    </ul>
-                </div>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><img src="images/icon.png" alt="user profile" class="nav_icon"><span>User Name</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"> <img src="images/chat.png" alt="Chat icon" class="nav_icon"><p>Chat</p></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./courseCatalogue.html"><img src="images/catalogue.png" alt="catalogue icon" class="nav_icon"></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><img src="images/setting.png" alt="setting icon" class="nav_icon"></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        
         <div class="row justify-content-center">
             <div class="card">
                 <div class="row g-0">
