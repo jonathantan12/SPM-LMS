@@ -1,29 +1,52 @@
 var request = new XMLHttpRequest()
 
-var url = "../LMS/backend/courseCatalogue.php"
+var url = "../LMS/backend/getRequiredCourses.php"
 
 request.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         var responce = JSON.parse(this.responseText);
-        var courses = responce;
-        if (courses) {
-            var coursesAvailable = document.getElementById("courses_available");
-            var numCourses = courses.length;
-            for (var i=0; i< numCourses ;i++) {
-                var changeHTML =    `
-                <div class="col-sm-6 col-md-4">
-                    <div class="card" style="width: 20rem;">
-                    <a href="#"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
-                        <div class="card-body">
-                            <h5 class="card-title text-center" >${courses[i].course_name}</h5>
-                            <p class="card-text">Class size: <span>${courses[i].slots_available}</span></p>
-                            <a href="enrol.html" class="btn btn-outline-success">Enrol</a>
-                        </div>
-                    </div>
-                </div> `;
-                                    
-                coursesAvailable.innerHTML += changeHTML;
+        var requiredCourses = responce;
+        var requiredCoursesHtml = document.getElementById("coursesAvailable");
+        var numRequiredCourses = requiredCourses.length;
+        if (requiredCourses) {
+            var courseUrl = "../LMS/backend/courseCatalogue.php";
+            request.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var response = JSON.parse(this.responseText);
+                    var courses = {};
+                    var numCourses = response.length;
+                    for (var i=0; i< numCourses ;i++) {
+                        courses[response[i].course_name] = {
+                            "class_name": response[i].class_name,
+                            "course_desc": response[i].course_desc,
+                            "course_id": response[i].course_id,
+                            "end_date": response[i].end_date,
+                            "start_date": response[i].start_date,
+                            "slots_available": response[i].slots_available
+                        }
+                    }
+                    if(courses){
+                        for (var x=0; x< numRequiredCourses ;x++) {
+                            var changeHTML =    `
+                            <div class="col-sm-6 col-md-4">
+                                <div class="card" style="width: 20rem;">
+                                <a href="#"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">${requiredCourses[x].course_name} <br>(Required)</h5>
+                                        <p class="card-text">Class size: <span>${courses[requiredCourses[x].course_name].slots_available}</span></p>
+                                        <a href="enrol.html" class="btn btn-outline-success">Enrol</a>
+                                    </div>
+                                </div>
+                            </div> `;
+                                                
+                            requiredCoursesHtml.innerHTML += changeHTML;
+                        }
+                    }
+                    
+                }
             }
+            request.open("GET", courseUrl, true)
+            request.send()
         }
 
     }

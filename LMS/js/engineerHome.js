@@ -9,7 +9,7 @@ request.onreadystatechange = function () {
         if (enrolledCourses) {
             var enrolledCoursesHtml = document.getElementById("coursesEnrolled");
             var numEnrolledCourses = enrolledCourses.length;
-            new_url = "../LMS/backend/getCourses.php"
+            var new_url = "../LMS/backend/getCourses.php"
             request.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     var response = JSON.parse(this.responseText);

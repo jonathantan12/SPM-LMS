@@ -1,7 +1,7 @@
 <?php
 require_once 'autoload.php';
 
-class requiredCoursesDAO {
+class RequiredCoursesDAO {
     public function getRequiredCourses($user_id) {
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
@@ -14,7 +14,7 @@ class requiredCoursesDAO {
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
         while($row = $stmt->fetch()) {
-            $result[] = new requiredCourses($row['required_course_id'], $row['user_id'], $row['user_n ame'], $row['course_id'], $row['course_name']);
+            $result[] = new requiredCourses($row['required_course_id'], $row['user_id'], $row['user_name'], $row['course_id'], $row['course_name']);
         }
         $stmt = null;
         $pdo = null;
