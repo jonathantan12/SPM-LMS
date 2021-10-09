@@ -38,25 +38,29 @@ COMMIT;
 
 DROP TABLE IF EXISTS `courses`;
 CREATE TABLE IF NOT EXISTS `courses` (
-    `course_id` int(64) NOT NULL AUTO_INCREMENT,
+    `course_id` int(64) NOT NULL ,
     `course_name` varchar(64) NOT NULL,
     `course_desc` text NOT NULL,
     `class_name` varchar(64) NOT NULL,
     `start_date` DATETIME NOT NULL,
     `end_date` DATETIME NOT NULL,
     `slots_available` int(64) NOT NULL,
+    `trainer_id` int(64) NOT NULL,
+    `trainer_name` varchar(64) NOT NULL, 
     `image` varchar(64),
-    PRIMARY KEY (`course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+    PRIMARY KEY (`course_id`, `class_name`),
+    FOREIGN KEY (trainer_id) REFERENCES users(user_id)
+);
 
 --
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`course_id`, `course_name`, `course_desc`, `class_name`,`start_date`, `end_date`, `slots_available`, `image`) VALUES
-(1, 'Electrical Engineering','course description', 'Alpha','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 'image'),
-(2, 'Introduction to Mechanical Engineering','course description', 'Alpha', '2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 'image'),
-(3, 'Introduction to Scrum Methodology','course description', 'Beta','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 'image');
+INSERT INTO `courses` (`course_id`, `course_name`, `course_desc`, `class_name`,`start_date`, `end_date`, `slots_available`, `trainer_id`, `trainer_name`,`image`) VALUES
+(1, 'Electrical Engineering','course description', 'G1','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 2, 'Roger','image'),
+(2, 'Introduction to Mechanical Engineering','course description', 'G1', '2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 2, 'Roger', 'image'),
+(3, 'Introduction to Scrum Methodology','course description', 'G1','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 2, 'Roger','image'),
+(3, 'Introduction to Scrum Methodology','course description', 'G2','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 1, 'Ben','image');
 COMMIT;
 
 -- SECTION table (just section)
@@ -104,9 +108,9 @@ CREATE TABLE IF NOT EXISTS `sections` (
 --
 
 INSERT INTO `sections` (`section_id`, `course_id`, `course_name`, `class_name`,`course_section_number`, `section_name`, `course_material_link`) VALUES
-(1, 1, 'Electrical Engineering', 'Alpha', 1, 'Introduction','url'),
-(2, 1, 'Electrical Engineering', 'Beta', 1, 'Introduction','url'),
-(3, 1, 'Electrical Engineering', 'Alpha', 2, 'The Second Chapter','url');
+(1, 1, 'Electrical Engineering', 'G1', 1, 'Introduction','url'),
+(2, 1, 'Electrical Engineering', 'G2', 1, 'Introduction','url'),
+(3, 1, 'Electrical Engineering', 'G1', 2, 'The Second Chapter','url');
 COMMIT;
 
 --
@@ -175,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `required_courses` (
     PRIMARY KEY (`required_course_id`),
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `required_courses`
@@ -192,32 +196,6 @@ INSERT INTO `required_courses` (`required_course_id`, `user_id`, `user_name`,`co
 COMMIT;
 
 --
--- COURSE_TRAINERS table
---
-
-DROP TABLE IF EXISTS `course_trainers`;
-CREATE TABLE IF NOT EXISTS `course_trainers` (
-    `course_trainer_id` int(64) NOT NULL AUTO_INCREMENT,  
-    `course_id` int(64) NOT NULL,
-    `course_name` varchar(64) NOT NULL,
-    `user_id` int(64) NOT NULL,
-    `user_name` varchar(64) NOT NULL,
-    PRIMARY KEY (`course_trainer_id`),
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (course_id) REFERENCES courses(course_id)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `course_trainers`
---
-
-INSERT INTO `course_trainers` (`course_trainer_id`, `course_id`, `course_name`, `user_id`, `user_name`) VALUES
-(1, 1, 'Electrical Engineering', 2, 'Roger'),
-(2, 2, 'Introduction to Mechanical Engineering', 2, 'Roger'),
-(3, 3, 'Introduction to Scrum Methodology', 2, 'Roger');
-COMMIT;
-
---
 -- TRAINER_QUALIFICATION table
 --
 
@@ -231,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `trainer_qualifications` (
     PRIMARY KEY (`trainer_qualification_id`),
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `trainer_qualifications`
@@ -240,7 +218,8 @@ CREATE TABLE IF NOT EXISTS `trainer_qualifications` (
 INSERT INTO `trainer_qualifications` (`trainer_qualification_id`, `user_id`, `user_name`,`course_id`, `course_name`) VALUES
 (1, 2, 'Roger', 1, 'Electrical Engineering'),
 (2, 2, 'Roger', 2, 'Introduction to Mechanical Engineering'),
-(3, 2, 'Roger', 3, 'Introduction to Scrum Methodology');
+(3, 2, 'Roger', 3, 'Introduction to Scrum Methodology'),
+(4, 1, 'Ben', 3, 'Introduction to Scrum Methodology');
 COMMIT;
 
 --
@@ -342,6 +321,33 @@ INSERT INTO `section_progress` (`section_progress_id`, `user_id`, `user_name`,`c
 (2, 1, 'Jonathan', 2, 'Introduction to Mechanical Engineering', 'Alpha', 2, 'Not Completed', 'Not Completed'),
 (3, 1, 'Jonathan', 2, 'Introduction to Mechanical Engineering', 'Alpha', 3, 'Not Completed', 'Not Completed');
 COMMIT;
+
+--
+-- COURSE_TRAINERS table
+--
+
+-- DROP TABLE IF EXISTS `course_trainers`;
+-- CREATE TABLE IF NOT EXISTS `course_trainers` (
+--     `course_trainer_id` int(64) NOT NULL AUTO_INCREMENT,  
+--     `course_id` int(64) NOT NULL,
+--     `course_name` varchar(64) NOT NULL,
+--     `user_id` int(64) NOT NULL,
+--     `user_name` varchar(64) NOT NULL,
+--     PRIMARY KEY (`course_trainer_id`),
+--     FOREIGN KEY (user_id) REFERENCES users(user_id),
+--     FOREIGN KEY (course_id) REFERENCES courses(course_id)
+-- ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `course_trainers`
+--
+
+-- INSERT INTO `course_trainers` (`course_trainer_id`, `course_id`, `course_name`, `user_id`, `user_name`) VALUES
+-- (1, 1, 'Electrical Engineering', 2, 'Roger'),
+-- (2, 2, 'Introduction to Mechanical Engineering', 2, 'Roger'),
+-- (3, 3, 'Introduction to Scrum Methodology', 2, 'Roger');
+-- COMMIT;
+
 
 --
 -- QUIZ_PROGRESS table

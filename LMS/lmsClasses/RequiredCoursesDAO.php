@@ -1,7 +1,7 @@
 <?php
 require_once 'autoload.php';
 
-class requiredCoursesDAO {
+class RequiredCoursesDAO {
     public function getRequiredCourses($user_id) {
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
@@ -47,12 +47,12 @@ class requiredCoursesDAO {
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
 
-        $sql = 'DELETE FROM required_courses WHERE course_id = :course_id && user_id = :user_id';
+        $sql = 'DELETE FROM required_courses WHERE user_id = :user_id && course_id = :course_id';
         
         try {
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':course_id', $course_id, PDO::PARAM_INT);
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(':course_id', $course_id, PDO::PARAM_INT);
 
             if($stmt->execute()) {
                 $result = TRUE;

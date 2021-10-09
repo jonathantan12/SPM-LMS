@@ -1,7 +1,7 @@
 <?php
 require_once 'autoload.php';
 
-class enrolledCoursesDAO {
+class EnrolledCoursesDAO {
     public function getEnrolledCourses($user_id) {
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
@@ -22,8 +22,32 @@ class enrolledCoursesDAO {
         return $result;
     }
 
-    public function addEnrolledCourses($user_id, $course_id) {
+    public function addEnrolledCourses($user_id, $user_name, $course_id, $course_name) {
+        $result = FALSE;
+        $connMgr = new ConnectionManager();
+        $pdo = $connMgr->getConnection();
+
+        $sql = 'INSERT INTO enrolled_courses VALUES (default, :user_id, :user_name, :course_id, :course_name)';
         
+        try {
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(':user_name', $user_name, PDO::PARAM_STR);
+            $stmt->bindParam(':course_id', $course_id, PDO::PARAM_INT);
+            $stmt->bindParam(':course_name', $course_name, PDO::PARAM_STR);
+
+            if($stmt->execute()) {
+                $result = TRUE;
+            }
+        } catch (Exception $e) {
+            return $result;    
+        }
+
+        $stmt = null;
+        $pdo = null;
+
+        return $result;
     }
 }
 

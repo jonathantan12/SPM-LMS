@@ -10,7 +10,7 @@ class ConnectionManager {
       $password = ''; 
       // $password = 'root';
       $dbname = 'lms'; 
-      //$port = 3306;
+    
 
         
       // Create connection

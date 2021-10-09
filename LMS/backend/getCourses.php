@@ -13,6 +13,8 @@
         $item["start_date"] = $aCourse->getStartDate();
         $item["end_date"] = $aCourse->getEndDate();
         $item["slots_available"] = $aCourse->getSlotsAvailable();
+        $item["trainer_id"] = $aCourse->getTrainerId();
+        $item["trainer_name"] = $aCourse->getTrainerName();
         $item["image"] = $aCourse->getImage();
         $items[] = $item;
     }
