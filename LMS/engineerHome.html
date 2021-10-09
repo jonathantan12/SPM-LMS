@@ -12,7 +12,7 @@
         border-color: black;
       }
       .scrolling-wrapper{
-        overflow-x: auto;
+        overflow-y: auto;
       }
       .course_cards {
         margin:10px;
@@ -30,6 +30,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/25a40ecb83.js" crossorigin="anonymous"></script>
+    <script src="js/engineerHome.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -84,15 +85,8 @@
     <div class="row" class="course_cards">
       <h4 >Current Courses</h4>
       <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
-        <div class="col-4">
-          <div class="card" style="width: 20rem;">
-            <a href="#"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
-            <div class="card-body">
-              <h5 class="card-title">Course name</h5>
-              <p class="card-text">Materials completion progress: <span>5/10</span></p>
-              <p class="card-text">Quiz completion progress: <span>5/10</span></p>
-            </div>
-          </div>
+        <div class="card-deck" id="coursesEnrolled">
+          <!-- New courses here -->
         </div>
       </div>
     <div class="row" class="course_cards">

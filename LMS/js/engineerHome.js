@@ -1,51 +1,52 @@
 var request = new XMLHttpRequest()
 
-var url = "../LMS/backend/getRequiredCourses.php"
+var url = "../LMS/backend/retrieveEnrolledCourses.php"
 
 request.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         var responce = JSON.parse(this.responseText);
-        var requiredCourses = responce;
-        var requiredCoursesHtml = document.getElementById("coursesAvailable");
-        var numRequiredCourses = requiredCourses.length;
-        if (requiredCourses) {
-            var courseUrl = "../LMS/backend/courseCatalogue.php";
-            request.onreadystatechange = function () {
+        var enrolledCourses = responce;
+        if (enrolledCourses) {
+            var enrolledCoursesHtml = document.getElementById("coursesEnrolled");
+            var numEnrolledCourses = enrolledCourses.length;
+            var new_url = "../LMS/backend/getCourses.php"
+            request.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     var response = JSON.parse(this.responseText);
-                    var courses = {};
                     var numCourses = response.length;
+                    var courses = {};
                     for (var i=0; i< numCourses ;i++) {
                         courses[response[i].course_name] = {
                             "class_name": response[i].class_name,
                             "course_desc": response[i].course_desc,
                             "course_id": response[i].course_id,
                             "end_date": response[i].end_date,
-                            "start_date": response[i].start_date,
-                            "slots_available": response[i].slots_available
+                            "start_date": response[i].start_date
                         }
                     }
                     if(courses){
-                        for (var x=0; x< numRequiredCourses ;x++) {
+                        for (var i=0; i< numEnrolledCourses ;i++) {
                             var changeHTML =    `
                             <div class="col-sm-6 col-md-4">
                                 <div class="card" style="width: 20rem;">
                                 <a href="#"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
                                     <div class="card-body">
-                                        <h5 class="card-title text-center">${requiredCourses[x].course_name} <br>(Required)</h5>
-                                        <p class="card-text">Class size: <span>${courses[requiredCourses[x].course_name].slots_available}</span></p>
-                                        <a href="enrol.html" class="btn btn-outline-success">Enrol</a>
+                                        <h5 class="card-title">${enrolledCourses[i].course_name}</h5>
+                                        <p class="card-text">Duration: <span>${courses[enrolledCourses[i].course_name].start_date} - ${courses[enrolledCourses[i].course_name].end_date}</span></p>
+                                        <p class="card-text">Materials completion progress: <span>5/10</span></p>
+                                        <p class="card-text">Quiz completion progress: <span>5/10</span></p>
                                     </div>
                                 </div>
-                            </div> `;
+                            </div> 
+            
+                            `;
                                                 
-                            requiredCoursesHtml.innerHTML += changeHTML;
+                            enrolledCoursesHtml.innerHTML += changeHTML;
                         }
                     }
-                    
                 }
             }
-            request.open("GET", courseUrl, true)
+            request.open("GET", new_url, true)
             request.send()
         }
 
