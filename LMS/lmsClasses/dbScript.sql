@@ -251,27 +251,44 @@ COMMIT;
 --
 -- QUIZZES table
 --
-
+        -- q.course_id = cid;
+        -- q.course_class_id = ccid;
+        -- q.section_id = sid;
+        -- q.quiz_id = qid;
+        -- q.quiz_title = quizTitle;
+        -- q.quiz_type = quizType;
+        -- var question_number = qno[i];
+        -- q.question_no = question_number;
+        -- q.question = que[question_number];
+        -- q.number_of_options = numOp[question_number];
+        -- q.options_content = optionContent[question_number];
+        -- var posAns = answerArray[question_number];
+        -- q.correct_answer = optionContent[question_number][posAns];
 DROP TABLE IF EXISTS `quizzes`;
 CREATE TABLE IF NOT EXISTS `quizzes` (
-    `quiz_id` int(64) NOT NULL AUTO_INCREMENT, 
+    `course_id` int(64) NOT NULL ,
+    `course_class_id` int(64) NOT NULL,
     `section_id` int(64) NOT NULL,
-    `question` int(64) NOT NULL,
-    `question_type` varchar(64) NOT NULL,
+    `quiz_id` int(64) NOT NULL,
+    `quiz_title` varchar(100) NOT NULL,
+    `quiz_type` varchar(80) NOT NULL,
+    `question_no` int(64) NOT NULL,
+    `question` varchar(100) NOT NULL,
     `number_of_options` int(64) NOT NULL,
-    `correct_answer` varchar(64) NOT NULL,
-    PRIMARY KEY (`quiz_id`),
-    FOREIGN KEY (section_id) REFERENCES sections(section_id)
+    `options_content` varchar(1000) NOT NULL,
+    `correct_answer` varchar(100) NOT NULL
+    -- FOREIGN KEY (section_id) REFERENCES sections(section_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+ALTER TABLE quizzes ADD CONSTRAINT PK_Quiz PRIMARY KEY (course_id,course_class_id,section_id,quiz_id,question_no);
 --
 -- Dumping data for table `quiz_answers`
 --
 
-INSERT INTO `quizzes` (`quiz_id`, `section_id`, `question`, `question_type`, `number_of_options`, `correct_answer`) VALUES
-(1, 1, 'Is it true that it is like this?', 'truefalse', 2, 'true'),
-(2, 1, 'Is it true that it is like this?', 'truefalse', 2, 'false'),
-(3, 1, 'Which option is correct?', 'mcq', 4, '4');
+INSERT INTO `quizzes` (`course_id`,`course_class_id`,`section_id`,`quiz_id`,`quiz_title`,`quiz_type`, `question_no`, `question`, `number_of_options`, `options_content` ,`correct_answer`) VALUES
+(1, 1, 1, 1,'quiz title 1','graded',1,'Is it true that it is like this?', 2, 'true,false','true'),
+(1, 1, 1, 1,'guiz title 2','ungraded',2,'Is it true that it is like this?', 2, 'true,false','false'),
+(1, 1, 1, 1,'quiz title 3','graded',3,'Is it true that it is like this?', 2, 'true,false','false');
 COMMIT;
 
 --
