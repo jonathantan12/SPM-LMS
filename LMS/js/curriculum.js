@@ -1,32 +1,21 @@
 
 
-//try changing the attribute for id="createOptions"
-    // q.course_id="1" (for now hard code)
-    // q.section_id="1"; (for now hard code)
-    // q.quiz_id="1";
-    // q.question_no ="4"
-    // q.question ="this is for section 1 quiz 1 question 4";
-    // q.number_of_options= "2";
-    // q.correct_answer="True";
-
-var quizTitle="";
-var quizType="";
-var cid="1"; //hard code, this is course id
-var ccid="1";// this is the class number for each course
-var sid="1"; //hard code
-var qid="1"; //quiz_id for now is always 1,hard code
-var qno=[];//question_no in arr
-var que={};// {1:"this i question 1", 2: "this is question 2"}
-var numOp={}; //{1:"2",2:"4"}
-var optionContent={} //{1:[a,b],2:[a,b,c,d]}
-var answerArray={}; // gives the position of the correct answer, so for example in question 1 there is 2 options, if second option is correct, it will return 1
+var quizTitle = "";
+var quizType = "";
+var cid = "2"; //hard code, this is course id, if you want to change the id , just change here
+var ccid = "1";// this is the class number for each course
+var sid = "1"; //hard code
+var qid = "1"; //quiz_id for now is always 1,hard code
+var qno = [];//question_no in arr
+var que = {};// {1:"this i question 1", 2: "this is question 2"}
+var numOp = {}; //{1:"2",2:"4"}
+var optionContent = {} //{1:[a,b],2:[a,b,c,d]}
+var answerArray = {}; // gives the position of the correct answer, so for example in question 1 there is 2 options, if second option is correct, it will return 1
 
 
 
 
-
-
-var z=0
+var z = 0
 function createQuestionCard(){
     z++
     qno.push(z);
@@ -34,47 +23,47 @@ function createQuestionCard(){
     var divTag=document.createElement('div');
     var t = "questionCard"+z;
     divTag.setAttribute("id",t);
-    var form= document.createElement('form')
+    var form = document.createElement('form')
     divTag.appendChild(form)
 
-    var div1= document.createElement('div')
+    var div1 = document.createElement('div')
     div1.className ="form-group row"
     form.appendChild(div1)
 
-    var label= document.createElement('label')
-    label.className="col-sm-2 col-form-label"
-    var content1 =document.createTextNode("Question")
+    var label = document.createElement('label')
+    label.className = "col-sm-2 col-form-label"
+    var content1 = document.createTextNode("Question")
     label.appendChild(content1)
     div1.appendChild(label)
 
     var div2=document.createElement("div")
     div2.className="col-sm-8"
-    div2.style="padding-right:0px"
+    div2.style = "padding-right:0px"
     div1.appendChild(div2)
 
-    var input1= document.createElement("input")
-    input1.type="text"
-    input1.className="form-control"
-    input1.name="questions[]"
-    input1.id="question"+z
-    input1.placeholder="Question"
+    var input1 = document.createElement("input")
+    input1.type = "text"
+    input1.className = "form-control"
+    input1.name = "questions[]"
+    input1.id = "question"+z
+    input1.placeholder = "Question"
     div2.appendChild(input1)
 
     var select= document.createElement("select")
-    select.className="col-sm-2"
-    select.id="options"+z
-    select.style="border:2px solid grey"
+    select.className = "col-sm-2"
+    select.id = "options"+z
+    select.style = "border:2px solid grey"
     div1.appendChild(select)
 
-    var option =document.createElement("option")
-    option.value=""
-    var option1 =document.createElement("option")
-    option1.value="2"
-    var option1_2 =document.createTextNode("2")
+    var option = document.createElement("option")
+    option.value = ""
+    var option1 = document.createElement("option")
+    option1.value = "2"
+    var option1_2 = document.createTextNode("2")
     option1.appendChild(option1_2)
-    var option2=document.createElement("option")
-    option2.value="4"
-    var option2_4 =document.createTextNode("4")
+    var option2 = document.createElement("option")
+    option2.value = "4"
+    var option2_4 = document.createTextNode("4")
     option2.appendChild(option2_4)
     select.appendChild(option)
     select.appendChild(option1)
@@ -89,22 +78,22 @@ function createQuestionCard(){
 //create a div under question to put options
 //put options under the created div
 function addDiv(z){
-    var z =z;
-    var optionsCard= document.createElement("div")
-    var ele="optionCard"+z
+    var z = z;
+    var optionsCard = document.createElement("div")
+    var ele = "optionCard"+z
     optionsCard.id=ele
-    theId="questionCard"+z
+    theId = "questionCard"+z
     document.getElementById(theId).appendChild(optionsCard)
     create(z)
 }
 
 
 function create(z){
-    var selectedValue="options"+z
+    var selectedValue = "options"+z
     var select = document.getElementById(selectedValue).value; //this is the number of options the user click
-    numOp[z]=select;
+    numOp[z] = select;
     // console.log(numOp);
-    var a= "optionCard"+z
+    var a = "optionCard"+z
     var co = document.getElementById(a)
     var str = '';
     for(var i = 0; i < select; i++) {
@@ -119,81 +108,60 @@ function create(z){
         </div>
         `
     }
-    co.innerHTML=str;
+    co.innerHTML = str;
 }
 
 
 function quizArray(){
-    quizTitle=document.getElementById("quizTitle").value;
-    var type= document.getElementsByName("quizType");
+    quizTitle = document.getElementById("quizTitle").value;
+    var type = document.getElementsByName("quizType");
     for(i = 0; i < type.length; i++) {
         if(type[i].checked){
-            quizType=type[i].value;
+            quizType = type[i].value;
         }
     }
     
-    var optionsArray=[];
+    var optionsArray = [];
     var inputOptions = document.getElementsByName('options[]');
     for (var i = 0; i < inputOptions.length; i++) {
-        var b =inputOptions[i];
+        var b = inputOptions[i];
         optionsArray.push(b.value);
     }
     // console.log(optionsArray);
 
 
-    for (var i= 1; i< z+1; i++){ // go to each question
-        var questionContentId="question"+i;
-        que[i]=document.getElementById(questionContentId).value; //need create dict
-        var o =numOp[i]; //number of options for each question 
-        optionContent[i]=optionsArray.splice(0,o);
+    for (var i = 1; i < z+1; i++){ // go to each question
+        var questionContentId = "question"+i;
+        que[i] = document.getElementById(questionContentId).value; //need create dict
+        var o = numOp[i]; //number of options for each question 
+        optionContent[i] = optionsArray.splice(0,o);
         
     }
     
-    for (var i= 1; i< z+1; i++){
-        var a =i;
-        aStr=a.toString();
-        for (var x=0; x<numOp[i];x++){
-            var b =x;
-            var bStr= b.toString();
-            var zi= aStr+bStr;
+    for (var i = 1; i < z+1; i++){
+        var a = i;
+        aStr = a.toString();
+        for (var x  =0; x < numOp[i] ;x++){
+            var b = x;
+            var bStr = b.toString();
+            var zi = aStr+bStr;
             // console.log(zi);
             if (document.getElementById(zi).checked){
-                answerArray[i]=x;
+                answerArray[i] = x;
             }
         }
     }
-    
-        
-    
-    // console.log(answerArray);
-    // console.log(optionContent);
-    // console.log(que);
-    //console.log(qno.length);
-    
 
     addQuiz();
 }
 
-// first u find how many question, then start from question 1, find how many options, pop first 2 options from array and push into dictionary. 
-
-// var quizTitle= document.getElementById("quizTitle").value;
-// var quizType="";
-// var cid="1"; //hard code, this is course id
-// var ccid="1";// this is the class number for each course
-// var sid="1"; //hard code
-// var qid="1"; //quiz_id for now is always 1,hard code
-// var qno=[];//question_no in arr
-// var que={};// {1:"this i question 1", 2: "this is question 2"}
-// var numOp={}; //{1:"2",2:"4"}
-// var optionContent={} //{1:[a,b],2:[a,b,c,d]}
-// var answerArray={}; // gives the position of the correct answer, so for example in question 1 there is 2 options, if second option is correct, it will return 1
 
 
 
 function addQuiz(){
-    var arr =[];
+    var arr = [];
     for (i = 0; i < qno.length; i++){
-        var q ={};
+        var q = {};
         q.course_id = cid;
         q.course_class_id = ccid;
         q.section_id = sid;
@@ -209,28 +177,6 @@ function addQuiz(){
         q.correct_answer = optionContent[question_number][posAns];
         arr.push(q);
     }
-    console.log(arr);
-    // var arr=[];
-    // var q={};
-    // // var u={};
-    // q.course_id="1"
-    // q.section_id="1";
-    // q.quiz_id="1";
-    // q.question_no ="4"
-    // q.question ="this is for section 1 quiz 1 question 4";
-    // q.number_of_options= "2";
-    // q.correct_answer="True";
-    // arr.push(q);
-    // console.log(arr);
-
-    // u.quiz_id="question2,";
-    // u.section_id="2";
-    // u.question ="this is for section 2 quiz 2 question 1";
-    // u.question_type="tf";
-    // u.number_of_options= "2";
-    // u.correct_answer="True";
-    // arr.push(u);
-
     //console.log(arr);
 
     $.ajax({
@@ -239,7 +185,15 @@ function addQuiz(){
         data: {arr:JSON.stringify(arr)},
         success: function(res){
             console.log(res);
-        }
+            document.getElementById("quizHere").innerHTML = `
+            <div class="card" style="width:full; padding-left: 5px;" > 
+                <div><b> Quiz: `+quizTitle+`</b>
+                    <button type="button" class="btn btn-danger btn-small" style="float: right;">Delete</button>
+                    <button type="button" class="btn btn-primary btn-small" style="float: right;">Edit</button>
+                </div>
+            </div>
+            `
+        } //then write some alert, to prompt if not successful
 
     })
 
