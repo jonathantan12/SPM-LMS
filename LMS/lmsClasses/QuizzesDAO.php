@@ -2,47 +2,49 @@
 require_once 'autoload.php';
 
 class quizzesDAO {
-    public function getQuestions($section_id) {
-        $connMgr = new ConnectionManager();
-        $pdo = $connMgr->getConnection();
+    // public function getQuestions($section_id) {
+    //     $connMgr = new ConnectionManager();
+    //     $pdo = $connMgr->getConnection();
 
-        $sql = 'select * from quizzes where section_id=:section_id';
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':section_id', $section_id, PDO::PARAM_STR);
-        $stmt->execute();
+    //     $sql = 'select * from quizzes where section_id=:section_id';
+    //     $stmt = $pdo->prepare($sql);
+    //     $stmt->bindParam(':section_id', $section_id, PDO::PARAM_STR);
+    //     $stmt->execute();
 
-        $result = [];
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        while($row = $stmt->fetch()) {
-            $result[] = new quizzes($row['quiz_id'], $row['section_id'] , $row['question'], $row['question_type'], $row['number_of_options'], $row['correct_answer']);
-        }
-        $stmt = null;
-        $pdo = null;
+    //     $result = [];
+    //     $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    //     while($row = $stmt->fetch()) {
+    //         $result[] = new quizzes($row['quiz_id'], $row['section_id'] , $row['question'], $row['question_type'], $row['number_of_options'], $row['correct_answer']);
+    //     }
+    //     $stmt = null;
+    //     $pdo = null;
         
-        return $result;
-    }
+    //     return $result;
+    // }
 
 
 
     public function add($quiz) {
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
-        $sql = 'insert into quizzes (quiz_id, section_id, question, question_type, number_of_options, correct_answer) values (:quiz_id, :section_id, :question, :question_type, :number_of_options, :correct_answer)';
+        $sql = 'INSERT INTO quizzes (course_id, section_id, quiz_id, question_no, question, number_of_options, correct_answer) values (:course_id, :section_id, :quiz_id, :question_no, :question, :number_of_options, :correct_answer)';
         $isAddOK = "FALSE";
         try { 
             $stmt = $pdo->prepare($sql); 
-            $quiz_id = $quiz->getQuizId();
+
+            $course_id = $quiz->getCourseId();
             $section_id = $quiz->getSectionId();
+            $quiz_id = $quiz->getQuizId();
+            $question_no = $quiz->getQuestionNo();
             $question = $quiz->getQuestion();
-            $question_type = $quiz->getQuestionType();
             $number_of_options = $quiz->getNumberOfOptions();
             $correct_answer = $quiz-> getCorrectAnswer();
-
             
-            $stmt->bindParam(':quiz_id', $quiz_id, PDO::PARAM_STR);
-            $stmt->bindParam(':section_id', $section_id, PDO::PARAM_STR);
+            $stmt->bindParam(':course_id',$course_id, PDO::PARAM_INT);
+            $stmt->bindParam(':section_id', $section_id, PDO::PARAM_INT);
+            $stmt->bindParam(':quiz_id', $quiz_id, PDO::PARAM_INT);
+            $stmt->bindParam(':question_no', $question_no, PDO::PARAM_INT);
             $stmt->bindParam(':question', $question, PDO::PARAM_STR);
-            $stmt->bindParam(':question_type', $question_type, PDO::PARAM_STR);
             $stmt->bindParam(':number_of_options', $number_of_options, PDO::PARAM_STR);
             $stmt->bindParam(':correct_answer', $correct_answer, PDO::PARAM_STR);
         
@@ -53,6 +55,7 @@ class quizzesDAO {
             $stmt->closeCursor();
             $pdo = null;
         } catch (Exception $e) {
+            return $e;
             return $isAddOK;    
         }
 

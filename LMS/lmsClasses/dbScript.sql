@@ -275,24 +275,25 @@ COMMIT;
 
 DROP TABLE IF EXISTS `quizzes`;
 CREATE TABLE IF NOT EXISTS `quizzes` (
-    `quiz_id` int(64) NOT NULL AUTO_INCREMENT, 
+    `course_id` int(64) NOT NULL ,
     `section_id` int(64) NOT NULL,
-    `question` int(64) NOT NULL,
-    `question_type` varchar(64) NOT NULL,
+    `quiz_id` int(64) NOT NULL,
+    `question_no` int(64) NOT NULL,
+    `question` varchar(100) NOT NULL,
     `number_of_options` int(64) NOT NULL,
-    `correct_answer` varchar(64) NOT NULL,
-    PRIMARY KEY (`quiz_id`),
-    FOREIGN KEY (section_id) REFERENCES sections(section_id)
+    `correct_answer` varchar(64) NOT NULL
+    -- FOREIGN KEY (section_id) REFERENCES sections(section_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+ALTER TABLE quizzes ADD CONSTRAINT PK_Quiz PRIMARY KEY (course_id,section_id,quiz_id,question_no);
 --
 -- Dumping data for table `quiz_answers`
 --
 
-INSERT INTO `quizzes` (`quiz_id`, `section_id`, `question`, `question_type`, `number_of_options`, `correct_answer`) VALUES
-(1, 1, 'Is it true that it is like this?', 'truefalse', 2, 'true'),
-(2, 1, 'Is it true that it is like this?', 'truefalse', 2, 'false'),
-(3, 1, 'Which option is correct?', 'mcq', 4, '4');
+INSERT INTO `quizzes` (`course_id`, `section_id`,`quiz_id`, `question_no`, `question`, `number_of_options`, `correct_answer`) VALUES
+(1, 1, 1, 1, 'Is it true that it is like this?', 2, 'true'),
+(1, 1, 1, 2, 'Is it true that it is like this?', 2, 'true'),
+(1, 1, 1, 3, 'Is it true that it is like this?', 2, 'true');
 COMMIT;
 
 --

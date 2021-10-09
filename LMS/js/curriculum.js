@@ -1,7 +1,8 @@
 
 
 //try changing the attribute for id="createOptions"
-var quizIdArray=[];
+var qa= {};
+
 
 var z=0
 function createQuestionCard(){
@@ -136,14 +137,15 @@ function addQuiz(){
     var arr=[];
     var q={};
     // var u={};
-    q.quiz_id="1";
+    q.course_id="1"
     q.section_id="1";
-    q.question ="this is for section 1 quiz 1 question 1";
-    q.question_type="tf";
+    q.quiz_id="1";
+    q.question_no ="4"
+    q.question ="this is for section 1 quiz 1 question 4";
     q.number_of_options= "2";
     q.correct_answer="True";
     arr.push(q);
-    
+    console.log(arr);
 
     // u.quiz_id="question2,";
     // u.section_id="2";

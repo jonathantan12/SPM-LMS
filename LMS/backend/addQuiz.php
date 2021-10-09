@@ -7,14 +7,16 @@
     //print_r($a["quiz_id"]);
     foreach ($arr as $a){
         //print_r($a);
-        $quiz_id=$a["quiz_id"];
-        $section_id=$a["section_id"];
-        $question=$a["question"];
-        $question_type=$a["question_type"];
-        $number_of_options=$a["number_of_options"];
-        $correct_answer=$a["correct_answer"];
+        $course_id = $a["course_id"];
+        $section_id = $a["section_id"];
+        $quiz_id = $a["quiz_id"];
+        $question_no = $a["question_no"];
+        $question = $a["question"];
+        $number_of_options = $a["number_of_options"];
+        $correct_answer = $a["correct_answer"];
 
-        $quiz = new quizzes($quiz_id, $section_id, $question, $question_type, $number_of_options, $correct_answer);
+        $quiz = new quizzes($course_id, $section_id, $quiz_id, $question_no, $question, $number_of_options, $correct_answer);
+        //print_r($quiz);
         $quizzesDAO = new QuizzesDAO;
         $result = $quizzesDAO->add($quiz);
         print_r($result);
