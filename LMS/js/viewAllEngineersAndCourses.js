@@ -22,11 +22,11 @@ function retrieveEngineers() {
                     for (const course of value['courses']) {
                         course_id = course['course_id'].toString()
                         course_name = course['course_name']
-                        toPrint = toPrint + '<li><input class="form-check-input m-1" type="checkbox" name="' + user_id + 'requiredCourses[]" value="" id="U' + user_id + '_C' + course_id + '">'
+                        toPrint = toPrint + '<li><input class="form-check-input m-1" type="checkbox" name="' + user_id + 'requiredCourses[]" value="' + course_name + '" id="U' + user_id + '_C' + course_id + '">'
                                  + '<label class="form-check-label" for="U' + user_id + '_C' + course_id + '">' + course_name + '</li>'
                     }
 
-                    toPrint = toPrint + '&nbsp<li><button type="button" class="btn btn-success btn-sm" onclick="enrol(this.id)" id="U' + user_id + '">Enrol</button></li></div></ul></div></td></tr>'
+                    toPrint = toPrint + '&nbsp<li><button type="button" class="btn btn-success btn-sm" onclick="enrol(this.id)" id="U' + user_id + '_' + key + '">Enrol</button></li></div></ul></div></td></tr>'
                 }
                 engineers.innerHTML = toPrint  
 
@@ -63,11 +63,11 @@ function retrieveCourses() {
                     for (const learner of value['learners']) {
                         user_id = learner['user_id'].toString()
                         user_name = learner['user_name']
-                        toPrint = toPrint + '<li><input class="form-check-input m-1" type="checkbox" name="' + course_id + 'eligibleLearners[]" value="" id="C' + course_id + '_U' + user_id + '">'
+                        toPrint = toPrint + '<li><input class="form-check-input m-1" type="checkbox" name="' + course_id + 'eligibleLearners[]" value="' + user_name + '" id="C' + course_id + '_U' + user_id + '">'
                                  + '<label class="form-check-label" for="C' + course_id + '_U' + user_id + '">' + user_name + '</li>'
                     }
 
-                    toPrint = toPrint + '&nbsp<li><button type="button" class="btn btn-success btn-sm" onclick="enrol(this.id)" id="C' + course_id + '">Enrol</button></li></div></ul></div></td></tr>'
+                    toPrint = toPrint + '&nbsp<li><button type="button" class="btn btn-success btn-sm" onclick="enrol(this.id)" id="C' + course_id + '_' + key + '">Enrol</button></li></div></ul></div></td></tr>'
                 }
                 courses.innerHTML = toPrint  
 
@@ -82,10 +82,12 @@ function retrieveCourses() {
 
 function selectAll(id) {
 
+    id_num = id.split("_")[0]
+
     if(id[0] == "C") {
-        var checkbox_name = id.toString().substring(1, id.toString().length) + "eligibleLearners[]"
+        var checkbox_name = id_num.toString().substring(1, id.toString().length) + "eligibleLearners[]"
     } else{
-        var checkbox_name = id.toString().substring(1, id.toString().length) + "requiredCourses[]"
+        var checkbox_name = id_num.toString().substring(1, id.toString().length) + "requiredCourses[]"
     }
 
     var checkboxes = document.getElementsByName(checkbox_name)
@@ -102,48 +104,77 @@ function selectAll(id) {
 
 function enrol(id) {
 
+    id_num = id.split("_")[0]
+    id_name = id.split("_")[1]
+
     if(id[0] == "C") {
-        var checkbox_name = id.toString().substring(1, id.toString().length) + "eligibleLearners[]"
+        var checkbox_name = id_num.toString().substring(1, id.toString().length) + "eligibleLearners[]"
     } else{
-        var checkbox_name = id.toString().substring(1, id.toString().length) + "requiredCourses[]"
+        var checkbox_name = id_num.toString().substring(1, id.toString().length) + "requiredCourses[]"
     }
 
     var checkboxes = document.getElementsByName(checkbox_name)
-    
+
+    var results1 = []
+    var results2 = []
     for (const checkbox of checkboxes){
+        var result = 'false'
         if(checkbox.checked == true) {
 
             var arr = checkbox.id.split("_")
             if(id[0] == "C"){
                 var user_id = arr[1].substring(1, arr[1].length)
                 var course_id = arr[0].substring(1, arr[1].length)
+                var user_name = checkbox.value
+                var course_name = id_name
             } else{
                 var user_id = arr[0].substring(1, arr[1].length)
                 var course_id = arr[1].substring(1, arr[1].length)
+                var user_name = id_name
+                var course_name = checkbox.value
             }
 
-            deleteCourse(user_id, course_id)
+            var result1 = deleteCourse(user_id, course_id)
+            var result2 = addCourse(user_id, user_name, course_id, course_name)
+            results1.push(result1)
+            results2.push(result2)
+            
         }
         
     }
 
-        //this refreshes the list shown
-        retrieveEngineers()
-        retrieveCourses()
+        var count = 0
+        for (const check of results1) {
+            if (check == 'false') {
+                count = count + 1
+            }
+        }
+        for (const check of results2) {
+            if (check == 'false') {
+                count = count + 1
+            }
+        }
 
-        //alert("Enrolment successful")
+        if (count == 0){
+            retrieveEngineers()
+            retrieveCourses()
+            alert("Enrolment successful")
+        }
+
 }
 
+
+//this function deletes required courses from the table
 function deleteCourse(user_id, course_id) {
     var request = new XMLHttpRequest()
 
     var details = "userId=" + user_id + "&courseId=" + course_id
-    var url = "backend/deleteRequiredCourses.php?" 
+    var url = "backend/deleteRequiredCourses.php?" + details
 
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var result = this.responseText
-            console.log(result)
+            return result
         }
     }
 
@@ -151,3 +182,20 @@ function deleteCourse(user_id, course_id) {
     request.send()
 }
 
+//this function adds enrolled courses to the table
+function addCourse(user_id, user_name, course_id, course_name) {
+    var request = new XMLHttpRequest()
+
+    var details = "userId=" + user_id + "&userName=" + user_name + "&courseId=" + course_id + "&courseName=" + course_name
+    var url = "backend/addEnrolledCourses.php?" + details
+
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var result = this.responseText
+            return result
+        }
+    }
+
+    request.open("GET", url, true)
+    request.send()
+}
