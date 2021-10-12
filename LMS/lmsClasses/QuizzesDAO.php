@@ -28,7 +28,7 @@ class quizzesDAO {
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
         $sql = 'INSERT INTO quizzes (course_id, course_class_id, section_id, quiz_id, quiz_title, quiz_type, question_no, question, number_of_options, options_content, correct_answer) values (:course_id, :course_class_id, :section_id, :quiz_id, :quiz_title, :quiz_type, :question_no, :question, :number_of_options, :options_content, :correct_answer)';
-        $isAddOK = "FALSE";
+        $isAddOK = FALSE;
         try { 
             $stmt = $pdo->prepare($sql); 
 
@@ -57,7 +57,8 @@ class quizzesDAO {
             $stmt->bindParam(':correct_answer', $correct_answer, PDO::PARAM_STR);
         
             if ($stmt->execute()) {
-                $isAddOK = "TRUE";
+                $isAddOK = TRUE;
+                return $isAddOK;
             }
             
             $stmt->closeCursor();
@@ -67,7 +68,6 @@ class quizzesDAO {
             return $isAddOK;    
         }
 
-        return $isAddOK;
     }
 }
 

@@ -13,7 +13,7 @@ var optionContent = {} //{1:[a,b],2:[a,b,c,d]}
 var answerArray = {}; // gives the position of the correct answer, so for example in question 1 there is 2 options, if second option is correct, it will return 1
 
 
-
+var originalState = $("#quizForm").html();
 
 var z = 0
 function createQuestionCard(){
@@ -24,6 +24,7 @@ function createQuestionCard(){
     var t = "questionCard"+z;
     divTag.setAttribute("id",t);
     var form = document.createElement('form')
+    form.id = "questionForm"+z
     divTag.appendChild(form)
 
     var div1 = document.createElement('div')
@@ -78,11 +79,11 @@ function createQuestionCard(){
 //create a div under question to put options
 //put options under the created div
 function addDiv(z){
-    var z = z;
     var optionsCard = document.createElement("div")
     var ele = "optionCard"+z
     optionsCard.id=ele
     theId = "questionCard"+z
+    //console.log(optionsCard);
     document.getElementById(theId).appendChild(optionsCard)
     create(z)
 }
@@ -150,8 +151,11 @@ function quizArray(){
                 answerArray[i] = x;
             }
         }
+        
     }
-
+   
+    document.getElementById("quizForm").reset();
+    $("#quizForm").html(originalState);
     addQuiz();
 }
 
@@ -185,15 +189,55 @@ function addQuiz(){
         data: {arr:JSON.stringify(arr)},
         success: function(res){
             console.log(res);
-            document.getElementById("quizHere").innerHTML = `
-            <div class="card" style="width:full; padding-left: 5px;" > 
-                <div><b> Quiz: `+quizTitle+`</b>
-                    <button type="button" class="btn btn-danger btn-small" style="float: right;">Delete</button>
-                    <button type="button" class="btn btn-primary btn-small" style="float: right;">Edit</button>
-                </div>
-            </div>
-            `
-        } //then write some alert, to prompt if not successful
+            if (res == 1){
+                alert("Your Quiz has been saved!");
+                var quizHere= document.getElementById("quizHere");
+                var div1 = document.createElement("div");
+                div1.className = "card";
+                div1.style = "width:full; padding-left: 5px;";
+                div1.id = "qid"+qid;
+                quizHere.appendChild(div1);
+
+                var div2 = document.createElement("div");
+                var bold = document.createElement("b");
+                var qTitle = document.createTextNode("Quiz: "+quizTitle);
+                bold.appendChild(qTitle);
+                div2.appendChild(bold);
+                div1.appendChild(div2);
+
+                var button1 = document.createElement("button");
+                button1.type = "button";
+                button1.className = "btn btn-danger btn-small";
+                button1.style = "float: right"
+                var content1 = document.createTextNode("Delete")
+                button1.appendChild(content1);
+                div2.appendChild(button1);
+
+                var button2 = document.createElement("button");
+                button2.type = "button";
+                button2.className = "btn btn-primary btn-small";
+                button2.style = "float: right"
+                var content2 = document.createTextNode("Edit")
+                button2.appendChild(content2);
+                div2.appendChild(button2);
+            } else{
+                alert("You have not entered the required fields correctly");
+            }
+
+            quizTitle = "";
+            quizType = "";
+            cid = "2"; //hard code, this is course id, if you want to change the id , just change here
+            ccid = "1";// this is the class number for each course
+            sid = "1"; //hard code
+            qid = parseInt(qid)+1 //quiz_id for now is always 1,hard code
+            qid = qid.toString();
+            qno = [];//question_no in arr
+            que = {};// {1:"this i question 1", 2: "this is question 2"}
+            numOp = {}; //{1:"2",2:"4"}
+            optionContent = {} //{1:[a,b],2:[a,b,c,d]}
+            answerArray = {};
+            z=0;
+        }
 
     })
 
