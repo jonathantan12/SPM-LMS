@@ -189,7 +189,7 @@ function addQuiz(){
         data: {arr:JSON.stringify(arr)},
         success: function(res){
             console.log(res);
-            if (res == 1){
+            if (res.slice(-1) == 1){
                 alert("Your Quiz has been saved!");
                 var quizHere= document.getElementById("quizHere");
                 var div1 = document.createElement("div");
@@ -217,9 +217,14 @@ function addQuiz(){
                 button2.type = "button";
                 button2.className = "btn btn-primary btn-small";
                 button2.style = "float: right"
+                button2.id = "button"+qid;
+                button2.dataset.toggle = "modal";
+                button2.dataset.target = "#editQuiz";
                 var content2 = document.createTextNode("Edit")
                 button2.appendChild(content2);
                 div2.appendChild(button2);
+
+                
             } else{
                 alert("You have not entered the required fields correctly");
             }
@@ -243,6 +248,10 @@ function addQuiz(){
 
    
 }
+
+
+
+
 
 
 
