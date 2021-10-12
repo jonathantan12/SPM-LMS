@@ -154,7 +154,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-                    <button type="button" class="btn btn-primary" id="quizArray" onclick="quizArray()">Save</button>
+                    <button type="button" class="btn btn-primary" id="quizArray" onclick="quizArray()" data-dismiss="modal">Save</button>
                 </div>
             </div>
             </div>
@@ -189,7 +189,7 @@
         </div>
         <div class="container" id="section1Container">
             <div class="card" style="width: full; margin-top: 10px;">
-                <div class="card-body">
+                <div class="card-body" id="c1s1">
                     <h5 class="card-title">Course 1 Section 1</h5>
                     <div class="card" style="width:full; padding-left: 5px;" > 
                         <div><b> Section 1 Lesson 1</b>
@@ -197,6 +197,7 @@
                             <button type="button" class="btn btn-primary btn-small" style="float: right;">Edit</button>
                         </div>
                     </div>
+                    <div id="quizHere"></div>
                     <button type="button" class="btn btn-primary btn-small" style="float: left; margin: 5px;" data-toggle="modal" data-target="#createLessonMaterial">+ Add Lesson</button>
                     <button type="button" class="btn btn-primary btn-small" style="float: left; margin: 5px;"data-toggle="modal" data-target="#createQuiz" > + Add Quiz</button>
                 </div>
