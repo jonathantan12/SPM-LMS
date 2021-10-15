@@ -38,7 +38,6 @@ request.onreadystatechange = function () {
                                     </div>
                                 </div>
                             </div> 
-            
                             `;
                                                 
                             enrolledCoursesHtml.innerHTML += changeHTML;
