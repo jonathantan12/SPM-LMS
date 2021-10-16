@@ -1,56 +1,69 @@
 
 
-//try changing the attribute for id="createOptions"
-var quizIdArray=[];
+var quizTitle = "";
+var quizType = "";
+var cid = "2"; //hard code, this is course id, if you want to change the id , just change here
+var ccid = "1";// this is the class number for each course
+var sid = "1"; //hard code
+var qid = "1"; //quiz_id for now is always 1,hard code
+var qno = [];//question_no in arr
+var que = {};// {1:"this i question 1", 2: "this is question 2"}
+var numOp = {}; //{1:"2",2:"4"}
+var optionContent = {} //{1:[a,b],2:[a,b,c,d]}
+var answerArray = {}; // gives the position of the correct answer, so for example in question 1 there is 2 options, if second option is correct, it will return 1
 
-var z=0
+
+
+
+var z = 0
 function createQuestionCard(){
     z++
-    quizIdArray.push(z);
+    qno.push(z);
+    // console.log(qno);
     var divTag=document.createElement('div');
     var t = "questionCard"+z;
     divTag.setAttribute("id",t);
-    var form= document.createElement('form')
+    var form = document.createElement('form')
     divTag.appendChild(form)
 
-    var div1= document.createElement('div')
+    var div1 = document.createElement('div')
     div1.className ="form-group row"
     form.appendChild(div1)
 
-    var label= document.createElement('label')
-    label.className="col-sm-2 col-form-label"
-    var content1 =document.createTextNode("Question")
+    var label = document.createElement('label')
+    label.className = "col-sm-2 col-form-label"
+    var content1 = document.createTextNode("Question")
     label.appendChild(content1)
     div1.appendChild(label)
 
     var div2=document.createElement("div")
     div2.className="col-sm-8"
-    div2.style="padding-right:0px"
+    div2.style = "padding-right:0px"
     div1.appendChild(div2)
 
-    var input1= document.createElement("input")
-    input1.type="text"
-    input1.className="form-control"
-    input1.name="questions[]"
-    input1.id="question"+z
-    input1.placeholder="Question"
+    var input1 = document.createElement("input")
+    input1.type = "text"
+    input1.className = "form-control"
+    input1.name = "questions[]"
+    input1.id = "question"+z
+    input1.placeholder = "Question"
     div2.appendChild(input1)
 
     var select= document.createElement("select")
-    select.className="col-sm-2"
-    select.id="options"+z
-    select.style="border:2px solid grey"
+    select.className = "col-sm-2"
+    select.id = "options"+z
+    select.style = "border:2px solid grey"
     div1.appendChild(select)
 
-    var option =document.createElement("option")
-    option.value=""
-    var option1 =document.createElement("option")
-    option1.value="2"
-    var option1_2 =document.createTextNode("2")
+    var option = document.createElement("option")
+    option.value = ""
+    var option1 = document.createElement("option")
+    option1.value = "2"
+    var option1_2 = document.createTextNode("2")
     option1.appendChild(option1_2)
-    var option2=document.createElement("option")
-    option2.value="4"
-    var option2_4 =document.createTextNode("4")
+    var option2 = document.createElement("option")
+    option2.value = "4"
+    var option2_4 = document.createTextNode("4")
     option2.appendChild(option2_4)
     select.appendChild(option)
     select.appendChild(option1)
@@ -65,99 +78,129 @@ function createQuestionCard(){
 //create a div under question to put options
 //put options under the created div
 function addDiv(z){
-    var z =z;
-    var optionsCard= document.createElement("div")
-    var ele="optionCard"+z
+    var z = z;
+    var optionsCard = document.createElement("div")
+    var ele = "optionCard"+z
     optionsCard.id=ele
-    theId="questionCard"+z
+    theId = "questionCard"+z
     document.getElementById(theId).appendChild(optionsCard)
-    //console.log(theId)
     create(z)
 }
 
 
 function create(z){
-    var selectedValue="options"+z
+    var selectedValue = "options"+z
     var select = document.getElementById(selectedValue).value; //this is the number of options the user click
-    var a= "optionCard"+z
+    numOp[z] = select;
+    // console.log(numOp);
+    var a = "optionCard"+z
     var co = document.getElementById(a)
     var str = '';
     for(var i = 0; i < select; i++) {
-
         str += `
         <div class="input-group mb-3" style="margin-top :2px">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                    <input type="radio" name="answer`+z+`" aria-label="Radio for following text input">
+                    <input type="radio" id="`+z+i+`" name="answer`+z+`" value ="` +i+ `"aria-label="Radio for following text input">
                 </div>
             </div>
             <input type="text" name="options[]" class="form-control" aria-label="Text input with radio">
         </div>
         `
     }
-    co.innerHTML=str;
+    co.innerHTML = str;
 }
 
 
-
-var questions=[];
 function quizArray(){
-    var questionArray=[];
-    var optionsArray=[];
-    var answerArray=[];
-    var inputQuestion = document.getElementsByName('questions[]');
-    for (var i = 0; i < inputQuestion.length; i++) {
-        var a = inputQuestion[i];
-        questionArray.push(a.value);
-    };
-    questions=questionArray;
-    //console.log(questions);
+    quizTitle = document.getElementById("quizTitle").value;
+    var type = document.getElementsByName("quizType");
+    for(i = 0; i < type.length; i++) {
+        if(type[i].checked){
+            quizType = type[i].value;
+        }
+    }
+    
+    var optionsArray = [];
     var inputOptions = document.getElementsByName('options[]');
     for (var i = 0; i < inputOptions.length; i++) {
-        var b =inputOptions[i];
+        var b = inputOptions[i];
         optionsArray.push(b.value);
     }
-    var inputAnswer = document.getElementsByName('answer'+z);
-    for (var i = 0; i < inputAnswer.length; i++) {
-        var c =inputAnswer[i];
-        answerArray.push(c.value);
-    }
-    console.log(questionArray);
-    console.log(optionsArray);
-    console.log(answerArray);
-    addQuiz()
+    // console.log(optionsArray);
 
+
+    for (var i = 1; i < z+1; i++){ // go to each question
+        var questionContentId = "question"+i;
+        que[i] = document.getElementById(questionContentId).value; //need create dict
+        var o = numOp[i]; //number of options for each question 
+        optionContent[i] = optionsArray.splice(0,o);
+        
+    }
+    
+    for (var i = 1; i < z+1; i++){
+        var a = i;
+        aStr = a.toString();
+        for (var x  =0; x < numOp[i] ;x++){
+            var b = x;
+            var bStr = b.toString();
+            var zi = aStr+bStr;
+            // console.log(zi);
+            if (document.getElementById(zi).checked){
+                answerArray[i] = x;
+            }
+        }
+    }
+
+    addQuiz();
 }
 
 
 
 
 function addQuiz(){
-    var quiz_id="1";
-    var section_id="1";
-    var question ="this is for section 1 quiz 1 question 1";
-    var question_type="tf";
-    var number_of_options= "2";
-    var correct_answer="True";
-
-    var request = new XMLHttpRequest();
-
-    var details= "quiz_id=" +quiz_id + "&section_id=" + section_id + "&question=" +question+ "&question_type=" +question_type+ "&number_of_options=" + number_of_options + "&correct_answer=" + correct_answer;
-    var url= "backend/addQuiz.php?"+ details;
-
-    request.onreadystatechange= function(){
-        if (this.readyState == 4 && this.status == 200){
-            var result= this.responseText //string
-            console.log(result);
-            if(result=='true'){
-                console.log("added");
-            } else{
-                console.log("fail");
-            }
-
-        }
+    var arr = [];
+    for (i = 0; i < qno.length; i++){
+        var q = {};
+        q.course_id = cid;
+        q.course_class_id = ccid;
+        q.section_id = sid;
+        q.quiz_id = qid;
+        q.quiz_title = quizTitle;
+        q.quiz_type = quizType;
+        var question_number = qno[i];
+        q.question_no = question_number;
+        q.question = que[question_number];
+        q.number_of_options = numOp[question_number];
+        q.options_content = optionContent[question_number];
+        var posAns = answerArray[question_number];
+        q.correct_answer = optionContent[question_number][posAns];
+        arr.push(q);
     }
-    request.open("GET", url, true)
-    request.send()
+    //console.log(arr);
 
+    $.ajax({
+        url:"backend/addQuiz.php",
+        method:"post",
+        data: {arr:JSON.stringify(arr)},
+        success: function(res){
+            console.log(res);
+            document.getElementById("quizHere").innerHTML = `
+            <div class="card" style="width:full; padding-left: 5px;" > 
+                <div><b> Quiz: `+quizTitle+`</b>
+                    <button type="button" class="btn btn-danger btn-small" style="float: right;">Delete</button>
+                    <button type="button" class="btn btn-primary btn-small" style="float: right;">Edit</button>
+                </div>
+            </div>
+            `
+        } //then write some alert, to prompt if not successful
+
+    })
+
+   
 }
+
+
+
+
+src="https://code.jquery.com/jquery-3.1.1.min.js"; 

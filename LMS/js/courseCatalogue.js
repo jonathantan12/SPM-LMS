@@ -9,7 +9,7 @@ request.onreadystatechange = function () {
         var requiredCoursesHtml = document.getElementById("coursesAvailable");
         var numRequiredCourses = requiredCourses.length;
         if (requiredCourses) {
-            var courseUrl = "../LMS/backend/courseCatalogue.php";
+            var courseUrl = "../LMS/backend/getCourses.php";
             request.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     var response = JSON.parse(this.responseText);
@@ -34,6 +34,7 @@ request.onreadystatechange = function () {
                                     <div class="card-body">
                                         <h5 class="card-title text-center">${requiredCourses[x].course_name} <br>(Required)</h5>
                                         <p class="card-text">Class size: <span>${courses[requiredCourses[x].course_name].slots_available}</span></p>
+                                        <p class="card-text">Duration: <span>${courses[requiredCourses[x].course_name].start_date} - ${courses[requiredCourses[x].course_name].end_date}</span></p>
                                         <a href="enrol.html" class="btn btn-outline-success">Enrol</a>
                                     </div>
                                 </div>

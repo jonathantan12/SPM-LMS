@@ -133,13 +133,13 @@
                             <legend class="col-form-label col-sm-2 pt-0">Type</legend>
                             <div class="col-sm-10">
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="quizType" id="graded" value="option1">
+                                <input class="form-check-input" type="radio" name="quizType" id="graded" value="graded">
                                 <label class="form-check-label" for="gridRadios1">
                                   Graded
                                 </label>
                               </div>
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="quizType" id="ungraded" value="option2">
+                                <input class="form-check-input" type="radio" name="quizType" id="ungraded" value="ungraded">
                                 <label class="form-check-label" for="gridRadios2">
                                     Ungraded
                                 </label>
@@ -147,12 +147,6 @@
                             </div>
                           </div>
                         </fieldset>
-                        <div class="form-group row">
-                            <label for="quizInstruction" class="col-sm-2 col-form-label">Instruction</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="quizInstruction" placeholder="Quiz Instruction">
-                            </div>
-                        </div>
                         <div id="questionCard"></div>
                         
                         <button type="button" id="card" class="btn btn-primary btn-small" style="float: left; margin: 5px;" onclick="createQuestionCard()"> + Add New Question</button>
@@ -160,7 +154,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-                    <button type="button" class="btn btn-primary" id="quizArray" onclick="quizArray()">Save</button>
+                    <button type="button" class="btn btn-primary" id="quizArray" onclick="quizArray()" data-dismiss="modal">Save</button>
                 </div>
             </div>
             </div>
@@ -195,7 +189,7 @@
         </div>
         <div class="container" id="section1Container">
             <div class="card" style="width: full; margin-top: 10px;">
-                <div class="card-body">
+                <div class="card-body" id="c1s1">
                     <h5 class="card-title">Course 1 Section 1</h5>
                     <div class="card" style="width:full; padding-left: 5px;" > 
                         <div><b> Section 1 Lesson 1</b>
@@ -203,6 +197,7 @@
                             <button type="button" class="btn btn-primary btn-small" style="float: right;">Edit</button>
                         </div>
                     </div>
+                    <div id="quizHere"></div>
                     <button type="button" class="btn btn-primary btn-small" style="float: left; margin: 5px;" data-toggle="modal" data-target="#createLessonMaterial">+ Add Lesson</button>
                     <button type="button" class="btn btn-primary btn-small" style="float: left; margin: 5px;"data-toggle="modal" data-target="#createQuiz" > + Add Quiz</button>
                 </div>
@@ -227,4 +222,5 @@
     
         <!-- JS here -->
         <script src="js/curriculum.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     </body>

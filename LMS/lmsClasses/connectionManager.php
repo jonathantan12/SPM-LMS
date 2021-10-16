@@ -7,9 +7,10 @@ class ConnectionManager {
       //LocalHost
       $servername = 'localhost';
       $username = 'root';
-      // $password = ''; 
-      $password = 'root';
-      $dbname = 'LMS'; 
+      $password = ''; 
+      // $password = 'root';
+      $dbname = 'lms'; 
+    
 
         
       // Create connection
