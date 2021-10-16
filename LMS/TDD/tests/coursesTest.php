@@ -33,7 +33,7 @@ class coursesTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(1, $courseId);
         $this->assertEquals('Electrical Engineering', $courseName);
-        $this->assertEquals(null, $courseDesc); #Why is this null
+        $this->assertEquals('course description', $courseDesc); #Why is this null
         $this->assertEquals('G1', $className);
         $this->assertEquals('2021-01-01 00:00:00', $startDate);
         $this->assertEquals('2021-02-01 00:00:00', $endDate);
