@@ -218,11 +218,15 @@ function addQuiz(){
                 button2.className = "btn btn-primary btn-small";
                 button2.style = "float: right"
                 button2.id = "button"+qid;
+                console.log(button2.id);
                 button2.dataset.toggle = "modal";
                 button2.dataset.target = "#editQuiz";
                 var content2 = document.createTextNode("Edit")
                 button2.appendChild(content2);
                 div2.appendChild(button2);
+                
+                button2.onclick = function(){retrieveQuiz(qid-1);};
+                //still need to do window storage...
 
                 
             } else{
