@@ -1,3 +1,6 @@
+sessionStorage.setItem("user_id","1")
+sessionStorage.setItem("user_name","Jonathan")
+
 var request = new XMLHttpRequest()
 
 var url = "../LMS/backend/getCourses.php"

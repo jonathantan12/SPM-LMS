@@ -30,6 +30,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/25a40ecb83.js" crossorigin="anonymous"></script>
+    <script src="js/enrol.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -37,21 +38,27 @@
       All-in-One LMS Portal
       <img src="assets/placeholder_img.png" class="nav_icon" alt="logo placeholder">
     </a>
-    <div class="dropdown row">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="navbar-toggler-icon">
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="#">Course 1</a></li>
-        <li><a class="dropdown-item" href="#">Course 2</a></li>
-        <li><a class="dropdown-item" href="#">Course 3</a></li>
-        <li><a class="dropdown-item" href="#">Course 4</a></li>
-      </ul>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        All Courses
+      </button>
+      <div id="allCourses" class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <h6 class="dropdown-header">Current Courses</h6>
+        <div id="currentlyEnrolled">
+          <!-- dropdown items -->
+        </div>
+        
+        <h6 class="dropdown-header">Completed Courses</h6>
+        <div id="completed">
+          <!-- dropdown items -->
+        </div>
+      </div>
     </div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-ellipsis-v"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    </button> -->
+    <a class="nav-link" href="./courseCatalogue.html"><img src="assets/catalogue.png" alt="catalogue icon" class="nav_icon filter"></a>
+    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="#"><img src="assets/icon.png" alt="user profile" class="nav_icon filter"><span>User Name</span></a>
@@ -66,7 +73,7 @@
           <a class="nav-link" href="#"><img src="assets/setting.png" alt="setting icon" class="nav_icon filter"></a>
         </li>
       </ul>
-    </div>
+    </div> -->
     <div class="row">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
@@ -83,30 +90,29 @@
   <div class="container-fluid">
     <div class="row m-3 border">
       <img src="assets/placeholder_img.png" class="col-4">
-      <h2 class="col-6">Course Name</h2>
+      <h2 class="col-6" id="courseName"></h2>
       <div class="col-2 align-middle">
-        <button type="button" class="btn btn-outline-success align-middle">Enrol</button>
+        <button id="enrolToCourse" type="button" class="btn btn-outline-success align-middle">Enrol</button>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <h1>Course Components:</h1>
         <ul>
             <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam officiis animi excepturi, labore rem non enim vel assumenda, repellat consequatur molestiae iure explicabo natus similique. Pariatur assumenda mollitia molestias unde?</li>
             <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam officiis animi excepturi, labore rem non enim vel assumenda, repellat consequatur molestiae iure explicabo natus similique. Pariatur assumenda mollitia molestias unde?</li>
             <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam officiis animi excepturi, labore rem non enim vel assumenda, repellat consequatur molestiae iure explicabo natus similique. Pariatur assumenda mollitia molestias unde?</li>
         </ul>
-    </div>
+    </div> -->
     <div class="row">
-        <h1 class="">Course Synopsis:</h1>
-        <p class="justify-content-end">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, inventore recusandae? Laboriosam earum dolore esse nihil distinctio quidem repellat voluptatum eum ipsa, doloremque, incidunt cupiditate dolor, atque totam. Minima, tenetur.
-
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit in suscipit ea eaque blanditiis, dolorum perferendis laborum nemo quibusdam quo esse placeat iusto cumque dolorem? Nostrum, dolorem. Fuga, deserunt porro.
+        <h1>Course Description:</h1>
+        <p class="justify-content-end" id="courseDesc">
+            <!-- course desc here -->
         </p>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
