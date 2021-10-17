@@ -14,7 +14,7 @@
     public function __construct($course_id, $course_name, $course_desc, $class_name, $start_date, $end_date, $slots_available, $trainer_id, $trainer_name,$image) {
         $this->course_id = $course_id;
         $this->course_name = $course_name;
-        $this->$course_desc = $course_desc;
+        $this->course_desc = $course_desc;
         $this->class_name = $class_name;
         $this->start_date = $start_date;
         $this->end_date = $end_date;

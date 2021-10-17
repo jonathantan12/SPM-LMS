@@ -2,25 +2,30 @@
 require_once 'autoload.php';
 
 class quizzesDAO {
-    // public function getQuestions($section_id) {
-    //     $connMgr = new ConnectionManager();
-    //     $pdo = $connMgr->getConnection();
+    public function getQuizzes($course_id,$course_class_id,$section_id,$quiz_id) {
+        $connMgr = new ConnectionManager();
+        $pdo = $connMgr->getConnection();
 
-    //     $sql = 'select * from quizzes where section_id=:section_id';
-    //     $stmt = $pdo->prepare($sql);
-    //     $stmt->bindParam(':section_id', $section_id, PDO::PARAM_STR);
-    //     $stmt->execute();
+        $sql = 'select * from quizzes where course_id=:course_id AND course_class_id=:course_class_id AND section_id=:section_id AND quiz_id=:quiz_id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':course_id',$course_id, PDO::PARAM_INT);
+        $stmt->bindParam(':course_class_id',$course_class_id, PDO::PARAM_INT);
+        $stmt->bindParam(':section_id', $section_id, PDO::PARAM_INT);
+        $stmt->bindParam(':quiz_id', $quiz_id, PDO::PARAM_INT);
+        $stmt->execute();
 
-    //     $result = [];
-    //     $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    //     while($row = $stmt->fetch()) {
-    //         $result[] = new quizzes($row['quiz_id'], $row['section_id'] , $row['question'], $row['question_type'], $row['number_of_options'], $row['correct_answer']);
-    //     }
-    //     $stmt = null;
-    //     $pdo = null;
+        $result = [];
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+        while($row = $stmt->fetch()) {
+            $result[] = new quizzes($row['course_id'], $row['course_class_id'], $row['section_id'], $row['quiz_id'], $row['quiz_title'], $row['quiz_type'], $row['question_no'], $row['question'], $row['number_of_options'],$row['options_content'],$row['correct_answer']);
+        }
+       
+        $stmt = null;
+        $pdo = null;
         
-    //     return $result;
-    // }
+        return $result;
+    }
 
 
 
@@ -28,7 +33,7 @@ class quizzesDAO {
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
         $sql = 'INSERT INTO quizzes (course_id, course_class_id, section_id, quiz_id, quiz_title, quiz_type, question_no, question, number_of_options, options_content, correct_answer) values (:course_id, :course_class_id, :section_id, :quiz_id, :quiz_title, :quiz_type, :question_no, :question, :number_of_options, :options_content, :correct_answer)';
-        $isAddOK = "FALSE";
+        $isAddOK = FALSE;
         try { 
             $stmt = $pdo->prepare($sql); 
 
@@ -57,7 +62,8 @@ class quizzesDAO {
             $stmt->bindParam(':correct_answer', $correct_answer, PDO::PARAM_STR);
         
             if ($stmt->execute()) {
-                $isAddOK = "TRUE";
+                $isAddOK = TRUE;
+                return $isAddOK;
             }
             
             $stmt->closeCursor();
@@ -67,7 +73,6 @@ class quizzesDAO {
             return $isAddOK;    
         }
 
-        return $isAddOK;
     }
 }
 
