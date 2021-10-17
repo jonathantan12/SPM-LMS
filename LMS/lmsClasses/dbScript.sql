@@ -40,7 +40,7 @@ DROP TABLE IF EXISTS `courses`;
 CREATE TABLE IF NOT EXISTS `courses` (
     `course_id` int(64) NOT NULL ,
     `course_name` varchar(64) NOT NULL,
-    `course_desc` text NOT NULL,
+    `course_desc` varchar(64) NOT NULL,
     `class_name` varchar(64) NOT NULL,
     `start_date` DATETIME NOT NULL,
     `end_date` DATETIME NOT NULL,

@@ -7,8 +7,8 @@ namespace Composer\Autoload;
 class ComposerStaticInit6f0afa9e83c4b9ea18f4b5a1413b88d3
 {
     public static $files = array (
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
     );
 
@@ -41,8 +41,8 @@ class ComposerStaticInit6f0afa9e83c4b9ea18f4b5a1413b88d3
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -71,7 +71,11 @@ class ComposerStaticInit6f0afa9e83c4b9ea18f4b5a1413b88d3
     );
 
     public static $classMap = array (
+        'Cart' => __DIR__ . '/../..' . '/../lmsClasses/Cart.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'ConnectionManager' => __DIR__ . '/../..' . '/../lmsClasses/connectionManager.php',
+        'CoursesDAO' => __DIR__ . '/../..' . '/../lmsClasses/CoursesDAO.php',
+        'EnrolledCoursesDAO' => __DIR__ . '/../..' . '/../lmsClasses/EnrolledCoursesDAO.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\ActualValueIsNotAnObjectException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Exception/ActualValueIsNotAnObjectException.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
@@ -488,6 +492,7 @@ class ComposerStaticInit6f0afa9e83c4b9ea18f4b5a1413b88d3
         'PharIo\\Version\\VersionConstraintParser' => __DIR__ . '/..' . '/phar-io/version/src/VersionConstraintParser.php',
         'PharIo\\Version\\VersionConstraintValue' => __DIR__ . '/..' . '/phar-io/version/src/VersionConstraintValue.php',
         'PharIo\\Version\\VersionNumber' => __DIR__ . '/..' . '/phar-io/version/src/VersionNumber.php',
+        'RequiredCoursesDAO' => __DIR__ . '/../..' . '/../lmsClasses/RequiredCoursesDAO.php',
         'SebastianBergmann\\CliParser\\AmbiguousOptionException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
         'SebastianBergmann\\CliParser\\Exception' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/Exception.php',
         'SebastianBergmann\\CliParser\\OptionDoesNotAllowArgumentException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/OptionDoesNotAllowArgumentException.php',
@@ -697,6 +702,27 @@ class ComposerStaticInit6f0afa9e83c4b9ea18f4b5a1413b88d3
         'TheSeer\\Tokenizer\\TokenCollectionException' => __DIR__ . '/..' . '/theseer/tokenizer/src/TokenCollectionException.php',
         'TheSeer\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/theseer/tokenizer/src/Tokenizer.php',
         'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
+        'completedCourses' => __DIR__ . '/../..' . '/../lmsClasses/completedCourses.php',
+        'completedCoursesDAO' => __DIR__ . '/../..' . '/../lmsClasses/CompletedCoursesDAO.php',
+        'coursePrerequisites' => __DIR__ . '/../..' . '/../lmsClasses/coursePrerequisites.php',
+        'coursePrerequisitesDAO' => __DIR__ . '/../..' . '/../lmsClasses/CoursePrerequisitesDAO.php',
+        'courseTrainers' => __DIR__ . '/../..' . '/../lmsClasses/courseTrainers.php',
+        'courseTrainersDAO' => __DIR__ . '/../..' . '/../lmsClasses/CourseTrainersDAO.php',
+        'courses' => __DIR__ . '/../..' . '/../lmsClasses/courses.php',
+        'enrolledCourses' => __DIR__ . '/../..' . '/../lmsClasses/enrolledCourses.php',
+        'quizzes' => __DIR__ . '/../..' . '/../lmsClasses/quizzes.php',
+        'quizzesDAO' => __DIR__ . '/../..' . '/../lmsClasses/QuizzesDAO.php',
+        'requiredCourses' => __DIR__ . '/../..' . '/../lmsClasses/requiredCourses.php',
+        'section' => __DIR__ . '/../..' . '/../lmsClasses/section.php',
+        'sectionDAO' => __DIR__ . '/../..' . '/../lmsClasses/SectionDAO.php',
+        'sectionProgress' => __DIR__ . '/../..' . '/../lmsClasses/sectionProgress.php',
+        'sectionProgressDAO' => __DIR__ . '/../..' . '/../lmsClasses/SectionProgressDAO.php',
+        'sections' => __DIR__ . '/../..' . '/../lmsClasses/sections.php',
+        'sectionsDAO' => __DIR__ . '/../..' . '/../lmsClasses/SectionsDAO.php',
+        'trainerQualifications' => __DIR__ . '/../..' . '/../lmsClasses/trainerQualifications.php',
+        'trainerQualificationsDAO' => __DIR__ . '/../..' . '/../lmsClasses/TrainerQualificationsDAO.php',
+        'users' => __DIR__ . '/../..' . '/../lmsClasses/users.php',
+        'usersDAO' => __DIR__ . '/../..' . '/../lmsClasses/UsersDAO.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
