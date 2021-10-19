@@ -70,7 +70,7 @@ function retrieveQuiz(qid){
                     var input1 = document.createElement("input")
                     input1.type = "text"
                     input1.className = "form-control"
-                    input1.name = "questions[]"
+                    input1.name = "editedQuestions[]"
                     input1.id = "question"+questionNo
                     input1.placeholder = "Question"
                     input1.value = ques
@@ -78,7 +78,7 @@ function retrieveQuiz(qid){
 
                     var select= document.createElement("select")
                     select.className = "col-sm-2"
-                    select.id = "options"+questionNo
+                    select.id = "editedOptions"+questionNo
                     select.style = "border:2px solid grey"
                     div1.appendChild(select)
 
@@ -99,7 +99,7 @@ function retrieveQuiz(qid){
                     
                     for (var y = 0; y<numberOfOptions ;y++){
                         var optionsCard = document.createElement("div")
-                        optionsCard.id = "optionCard"+questionNo
+                        optionsCard.id = "editedOptionCard"+questionNo
                         divTag.appendChild(optionsCard);
 
                         var opDiv1 = document.createElement("div");
@@ -124,7 +124,7 @@ function retrieveQuiz(qid){
 
                         var opInput2 = document.createElement("input");
                         opInput2.type ="text";
-                        opInput2.name = "editOptions[]";
+                        opInput2.name = "editedOptions[]";
                         opInput2.className = "form-control";
                         opInput2.value = optionsContent[y];
                         opDiv1.appendChild(opInput2);
@@ -143,5 +143,64 @@ function retrieveQuiz(qid){
     })
    
 }
+var editedTitle = "";
+var editedQuizType = "";
+var editedQuestionsArray = []; //contains all edited questions
+var editedQuestionsDict = {};
+var editedNumberOfOptions = {};
+var editedOptionsArray = [];
+var editedOptionsDict ={};
+var editedCaPosDict ={};
 
 
+function editQuizArray(){
+    editedTitle =  document.getElementById('editQuizTitle').value;
+    var editedQuizTypeEle = document.getElementsByName('editQuizType');
+    var editedQuizType = "";
+    for (var x=0; x<editedQuizTypeEle.length; x++) {
+        if (editedQuizTypeEle[x].checked == true) {
+            editedQuizType = editedQuizTypeEle[x].getAttribute('value') 
+        }
+    }
+    
+    var editedQuestions = document.getElementsByName('editedQuestions[]');
+    for (var i = 0; i < editedQuestions.length; i++) {
+        var b = editedQuestions[i];
+        editedQuestionsArray.push(b.value);
+    }
+
+    for (var x = 0; x < editedQuestionsArray.length; x++){
+        editedQuestionsDict[x+1] = editedQuestionsArray[x];
+        editedNumberOfOptions[x+1] = document.getElementById("editedOptions"+x+1).value;
+    }
+
+    var editedInputOptions = document.getElementsByName('editedOptions[]');
+    for (var y = 0; y < editedInputOptions.length; y++) {
+        var c = editedInputOptions[y];
+        editedOptionsArray.push(c.value);
+    }
+
+    for (var z = 1; z < editedQuestionsArray.length +1; z++ ){
+        var enoo = editedNumberOfOptions[z];
+        editedOptionsDict[z] = editedOptionsArray.splice(0, enoo);
+        var editedOpRadioEle = document.getElementsByName('editAnswer'+z);
+        for (var j=0; j<editedOpRadioEle.length; z++) {
+            if (editedOpRadioEle[j].checked == true) {
+                var editedCaPos = editedOpRadioEle[z].getAttribute('value');
+                editedCaPosDict[z] = editedCaPos;
+
+            }
+        }
+    }
+
+    console.log(editedTitle);
+    console.log(editedQuizType);
+    console.log(editedQuestionsArray);
+    console.log(editedQuestionsDict);
+    console.log(editedNumberOfOptions);
+    console.log(editedOptionsArray);
+    console.log(editedOptionsDict);
+    console.log(editedCaPosDict);
+
+
+}
