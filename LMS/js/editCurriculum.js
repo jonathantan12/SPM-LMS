@@ -11,15 +11,17 @@ function retrieveQuiz(qid){
     var ccid = "1";// this is the class number for each course
     var sid = "1"; //hard code
     var quizid = qid ;
+    console.log(qid);
     arr.push(cid, ccid, sid, quizid);
     $.ajax({
         url:"backend/getQuizzes.php",
         method:"post",
         data: {arr:JSON.stringify(arr)},
         success: function(res){
+            console.log(res);
                 var arrayQuiz = JSON.parse(res);
                 var numberOfQuestions = arrayQuiz.length
-                console.log(numberOfQuestions);
+                //console.log(numberOfQuestions);
                 for(var i = 0; i < numberOfQuestions; i++) {
                     var quizDict = arrayQuiz[i]
                     var quizTitle = quizDict["quiz_title"]
@@ -199,7 +201,8 @@ function editQuizArray(){
     }
     console.log(editedCaPosDict);
     deleteQuiz();
-    addEditedQuiz();
+   
+    
 
 }
 
@@ -210,8 +213,10 @@ function deleteQuiz(){
         data: {arr:JSON.stringify(arr)},
         success: function(res){
             console.log(res);
+            addEditedQuiz();
         }
     })
+
 }
 
 var arr = []; //cid, ccid, sid, quizid
@@ -226,6 +231,7 @@ function addEditedQuiz(){
         q.quiz_title = editedTitle;
         q.quiz_type = editedQuizType;
         var question_number = i+1;
+        console.log(question_number);
         q.question_no = question_number;
         q.question = editedQuestionsDict[question_number];
         q.number_of_options = editedNumberOfOptions[question_number];
@@ -234,7 +240,7 @@ function addEditedQuiz(){
         q.correct_answer = editedOptionsDict[question_number][posAns];
         editedArr.push(q);
     }
-    //console.log(arr);
+    console.log(editedArr);
 
     $.ajax({
         url:"backend/addQuiz.php",
@@ -242,6 +248,7 @@ function addEditedQuiz(){
         data: {arr:JSON.stringify(editedArr)},
         success: function(res){
             console.log(res);
+            location.reload();
         }
     })
 }

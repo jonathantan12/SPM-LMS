@@ -2,11 +2,35 @@
 require_once 'autoload.php';
 
 class quizzesDAO {
+    public function retrieveAll($course_id,$course_class_id,$section_id){
+        $connMgr = new ConnectionManager();
+        $pdo = $connMgr->getConnection();
+        $sql = 'select * from quizzes where course_id=:course_id AND course_class_id=:course_class_id AND section_id=:section_id ;';
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':course_id',$course_id, PDO::PARAM_INT);
+        $stmt->bindParam(':course_class_id',$course_class_id, PDO::PARAM_INT);
+        $stmt->bindParam(':section_id', $section_id, PDO::PARAM_INT);
+       
+        $stmt->execute();
+
+        $result = [];
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+        while($row = $stmt->fetch()) {
+            $result[] = new quizzes($row['course_id'], $row['course_class_id'], $row['section_id'], $row['quiz_id'], $row['quiz_title'], $row['quiz_type'], $row['question_no'], $row['question'], $row['number_of_options'],$row['options_content'],$row['correct_answer']);
+        }
+       
+        $stmt = null;
+        $pdo = null;
+        
+        return $result;
+    }
+
+    
     public function getQuizzes($course_id,$course_class_id,$section_id,$quiz_id) {
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
-
-        $sql = 'select * from quizzes where course_id=:course_id AND course_class_id=:course_class_id AND section_id=:section_id AND quiz_id=:quiz_id';
+        $sql = 'select * from quizzes where course_id=:course_id AND course_class_id=:course_class_id AND section_id=:section_id AND quiz_id=:quiz_id ;';
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':course_id',$course_id, PDO::PARAM_INT);
         $stmt->bindParam(':course_class_id',$course_class_id, PDO::PARAM_INT);
