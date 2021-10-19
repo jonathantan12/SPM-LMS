@@ -227,7 +227,48 @@ function addQuiz(){
                 
                 button2.onclick = function(){retrieveQuiz(qid-1);};
                 //still need to do window storage...
+                // var modalDiv= document.createElement("div");
+                // modalDiv.id = "editQuiz"+qid;
+                // modalDiv.className = "modal fade";
+                // modalDiv.tabIndex = "-1";
+                // modalDiv.role = "dialog";
+                // document.body.appendChild(modalDiv)
 
+                // var modalDiv2 = document.createElement("div");
+                // modalDiv2.className = "modal-dialog";
+                // modalDiv2.role = "document"
+                // modalDiv.appendChild(modalDiv2);
+                // document.body.appendChild(modalDiv)
+
+                // var modalDiv3 = document.createElement("div");
+                // modalDiv3.className = "modal-content";
+                // modalDiv.appendChild(modalDiv3)
+
+                // var modalDiv4 = document.createElement("div");
+                // modalDiv4.className("modal-header");
+                // modalDiv3.appendChild(modalDiv4);
+
+                // var modalDiv5 = document.createElement("h5");
+                // modalDiv5.className = "modal-title"
+                // var modalContent1 = document.createTextNode("Edit Quiz");
+                // modalDiv5.appendChild(modalContent1);
+                // modalDiv3.appendChild(modalDiv5);
+
+                // var modalButton1 = document.createElement("button");
+                // modalButton1.className ="close";
+                // modalButton1.dataset.dismiss = "modal";
+                // modalDiv3.appendChild(modalButton1);
+
+                // var modalDiv6 = document.createElement("span");
+                // modalDiv6.ariaHidden = "true";
+                // var modalContent2 = document.createTextNode("&times;");
+                // modalDiv6.appendChild(modalContent2)
+                // modalButton1.appendChild(modalDiv6);
+
+                // var modalDiv7 = 
+
+                
+            
                 
             } else{
                 alert("You have not entered the required fields correctly");
