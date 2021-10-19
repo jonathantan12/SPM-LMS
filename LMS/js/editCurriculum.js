@@ -5,8 +5,8 @@
 // var numberOfOptions ={};
 // var optionsContent ={};
 // var correctAnswer ={};
+var arr = []; //cid, ccid, sid, quizid
 function retrieveQuiz(qid){
-    var arr = [];
     var cid = "2"; //hard code, this is course id, if you want to change the id , just change here
     var ccid = "1";// this is the class number for each course
     var sid = "1"; //hard code
@@ -117,8 +117,8 @@ function retrieveQuiz(qid){
 
                         var opInput = document.createElement("input");
                         opInput.type = "radio";
-                        opInput.id ="editOpInput"+questionNo;
-                        opInput.name = "editAnswer"+questionNo;
+                        opInput.id ="editOpInput"+ questionNo + y.toString();
+                        opInput.name = "editAnswer"+questionNo ;
                         opInput.value =y;
                         opDiv3.appendChild(opInput);
 
@@ -130,7 +130,7 @@ function retrieveQuiz(qid){
                         opDiv1.appendChild(opInput2);
                         
                     }
-                    console.log(optionsContent);
+                    //console.log(optionsContent);
                     var opRadioEle = document.getElementsByName('editAnswer'+questionNo);
                     for (var z=0; z<opRadioEle.length; z++) {
                         if (opRadioEle[z].getAttribute('value') == caPos) {
@@ -155,13 +155,14 @@ var editedCaPosDict ={};
 
 function editQuizArray(){
     editedTitle =  document.getElementById('editQuizTitle').value;
+    //console.log(editedTitle);
     var editedQuizTypeEle = document.getElementsByName('editQuizType');
-    var editedQuizType = "";
     for (var x=0; x<editedQuizTypeEle.length; x++) {
         if (editedQuizTypeEle[x].checked == true) {
             editedQuizType = editedQuizTypeEle[x].getAttribute('value') 
         }
     }
+    //console.log(editedQuizType);
     
     var editedQuestions = document.getElementsByName('editedQuestions[]');
     for (var i = 0; i < editedQuestions.length; i++) {
@@ -169,38 +170,78 @@ function editQuizArray(){
         editedQuestionsArray.push(b.value);
     }
 
+    //console.log(editedQuestionsArray);
+
     for (var x = 0; x < editedQuestionsArray.length; x++){
         editedQuestionsDict[x+1] = editedQuestionsArray[x];
-        editedNumberOfOptions[x+1] = document.getElementById("editedOptions"+x+1).value;
+        var select = document.getElementById("editedOptions"+(x+1));
+        console.log(select);
+        editedNumberOfOptions[x+1] = select.options[select.selectedIndex].value;
     }
+    console.log(editedNumberOfOptions);
 
     var editedInputOptions = document.getElementsByName('editedOptions[]');
     for (var y = 0; y < editedInputOptions.length; y++) {
         var c = editedInputOptions[y];
         editedOptionsArray.push(c.value);
     }
+    console.log(editedOptionsArray);
 
     for (var z = 1; z < editedQuestionsArray.length +1; z++ ){
         var enoo = editedNumberOfOptions[z];
         editedOptionsDict[z] = editedOptionsArray.splice(0, enoo);
+        console.log(editedOptionsDict);
         var editedOpRadioEle = document.getElementsByName('editAnswer'+z);
-        for (var j=0; j<editedOpRadioEle.length; z++) {
-            if (editedOpRadioEle[j].checked == true) {
-                var editedCaPos = editedOpRadioEle[z].getAttribute('value');
-                editedCaPosDict[z] = editedCaPos;
-
+        for (var j=0; j<editedNumberOfOptions[z]; j++)
+            if (document.getElementById("editOpInput"+z+j).checked){
+                editedCaPosDict[z] = j;
             }
-        }
     }
-
-    console.log(editedTitle);
-    console.log(editedQuizType);
-    console.log(editedQuestionsArray);
-    console.log(editedQuestionsDict);
-    console.log(editedNumberOfOptions);
-    console.log(editedOptionsArray);
-    console.log(editedOptionsDict);
     console.log(editedCaPosDict);
+    deleteQuiz();
+    addEditedQuiz();
 
+}
 
+function deleteQuiz(){
+    $.ajax({
+        url:"backend/deleteQuiz.php",
+        method:"post",
+        data: {arr:JSON.stringify(arr)},
+        success: function(res){
+            console.log(res);
+        }
+    })
+}
+
+var arr = []; //cid, ccid, sid, quizid
+function addEditedQuiz(){
+    var editedArr = [];
+    for (i = 0; i < editedQuestionsArray.length; i++){
+        var q = {};
+        q.course_id = arr[0];
+        q.course_class_id = arr[1];
+        q.section_id = arr[2];
+        q.quiz_id = arr[3];
+        q.quiz_title = editedTitle;
+        q.quiz_type = editedQuizType;
+        var question_number = i+1;
+        q.question_no = question_number;
+        q.question = editedQuestionsDict[question_number];
+        q.number_of_options = editedNumberOfOptions[question_number];
+        q.options_content = editedOptionsDict[question_number];
+        var posAns = editedCaPosDict[question_number];
+        q.correct_answer = editedOptionsDict[question_number][posAns];
+        editedArr.push(q);
+    }
+    //console.log(arr);
+
+    $.ajax({
+        url:"backend/addQuiz.php",
+        method:"post",
+        data: {arr:JSON.stringify(editedArr)},
+        success: function(res){
+            console.log(res);
+        }
+    })
 }

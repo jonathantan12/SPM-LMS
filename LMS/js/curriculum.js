@@ -212,6 +212,7 @@ function addQuiz(){
                 var content1 = document.createTextNode("Delete")
                 button1.appendChild(content1);
                 div2.appendChild(button1);
+                button1.onclick = function(){deleteQuiz();};
 
                 var button2 = document.createElement("button");
                 button2.type = "button";
