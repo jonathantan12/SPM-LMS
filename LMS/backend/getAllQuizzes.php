@@ -8,20 +8,14 @@
     $course_id = $arr[0];
     $course_class_id = $arr[1];
     $section_id = $arr[2];
-    $quiz_id = (string)$arr[3];
-
-    $quizzes = $dao->getQuizzes($course_id,$course_class_id,$section_id,$quiz_id);
+  
+    $quizzes = $dao->retrieveAll($course_id,$course_class_id,$section_id);
 
     $items = [];
     foreach ( $quizzes as $aQuiz ) {
         $item["quiz_id"] = $aQuiz->getQuizId();
         $item["quiz_title"] = $aQuiz->getQuizTitle();  
-        $item["quiz_type"] = $aQuiz->getQuizType();
-        $item["question_no"] = $aQuiz->getQuestionNo();
-        $item["question"] = $aQuiz->getQuestion();
-        $item["number_of_options"] = $aQuiz->getNumberOfOptions();
-        $item["options_content"] = $aQuiz ->getOptionsContent();
-        $item["correct_answer"] = $aQuiz->getCorrectAnswer();
+        
         $items[] = $item;
     }
 

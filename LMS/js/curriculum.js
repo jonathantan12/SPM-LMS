@@ -212,6 +212,7 @@ function addQuiz(){
                 var content1 = document.createTextNode("Delete")
                 button1.appendChild(content1);
                 div2.appendChild(button1);
+                button1.onclick = function(){deleteQuiz();};
 
                 var button2 = document.createElement("button");
                 button2.type = "button";
@@ -225,10 +226,9 @@ function addQuiz(){
                 button2.appendChild(content2);
                 div2.appendChild(button2);
                 
-                button2.onclick = function(){retrieveQuiz(qid-1);};
-                //still need to do window storage...
+                button2.onclick = function(){retrieveQuiz(qid-1);};               
 
-                
+                               
             } else{
                 alert("You have not entered the required fields correctly");
             }
@@ -257,7 +257,81 @@ function addQuiz(){
 
 
 
+window.addEventListener('load', function() {
+    var arr =[];
+    var cid = "2"; //hard code, this is course id, if you want to change the id , just change here
+    var ccid = "1";// this is the class number for each course
+    var sid = "1"; //hard code
+    arr.push(cid, ccid, sid);
+    $.ajax({
+        url:"backend/getAllQuizzes.php",
+        method:"post",
+        data: {arr:JSON.stringify(arr)},
+        success: function(res){
+            var quiz = JSON.parse(res)
+            if (quiz.length == 0){
+                console.log("There is no quiz for this section yet")
+            }else{
+                var quizIdArr = [];
+                var quizTitleArr =[];
+                for (var i = 0; i<quiz.length; i++){
+                    var qid = quiz[i]["quiz_id"];
+                    if(quizIdArr.indexOf(qid) == -1){
+                        quizIdArr.push(qid);
+                    }
+                    var qTitle = quiz[i]["quiz_title"];
+                    if (quizTitleArr.indexOf(qTitle) == -1){
+                        quizTitleArr.push(qTitle);
+                    }
+                }
+                console.log(quizIdArr);
+                console.log(quizTitleArr);
+                var numOfQuiz = quizTitleArr.length;
+                for (var z =0; z<numOfQuiz; z++){
+                    var quizHere= document.getElementById("quizHere");
+                    var div1 = document.createElement("div");
+                    div1.className = "card";
+                    div1.style = "width:full; padding-left: 5px;";
+                    div1.id = "qid"+(z+1);
+                    quizHere.appendChild(div1);
+
+                    var div2 = document.createElement("div");
+                    var bold = document.createElement("b");
+                    var qTitle = document.createTextNode("Quiz: "+ quizTitleArr[z]);
+                    bold.appendChild(qTitle);
+                    div2.appendChild(bold);
+                    div1.appendChild(div2);
+
+                    var button1 = document.createElement("button");
+                    button1.type = "button";
+                    button1.className = "btn btn-danger btn-small";
+                    button1.style = "float: right"
+                    var content1 = document.createTextNode("Delete")
+                    button1.appendChild(content1);
+                    div2.appendChild(button1);
+                    button1.onclick = function(){deleteQuiz();};
+
+                    var button2 = document.createElement("button");
+                    button2.type = "button";
+                    button2.className = "btn btn-primary btn-small";
+                    button2.style = "float: right"
+                    button2.id = "button"+qid;
+                    console.log(button2.id);
+                    button2.dataset.toggle = "modal";
+                    button2.dataset.target = "#editQuiz";
+                    var content2 = document.createTextNode("Edit")
+                    button2.appendChild(content2);
+                    div2.appendChild(button2);
+                    var qid = quizIdArr[z]
+                    button2.onclick = function(){retrieveQuiz(qid);};          
+                }
+            }
 
 
+        
+        }
+    })
+
+})
 
 src="https://code.jquery.com/jquery-3.1.1.min.js"; 
