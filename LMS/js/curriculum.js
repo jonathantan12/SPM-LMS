@@ -309,7 +309,7 @@ window.addEventListener('load', function() {
                     var content1 = document.createTextNode("Delete")
                     button1.appendChild(content1);
                     div2.appendChild(button1);
-                    button1.onclick = function(){deleteQuiz();};
+                    
 
                     var button2 = document.createElement("button");
                     button2.type = "button";
@@ -322,7 +322,9 @@ window.addEventListener('load', function() {
                     var content2 = document.createTextNode("Edit")
                     button2.appendChild(content2);
                     div2.appendChild(button2);
-                    var qid = quizIdArr[z]
+                    var qid = quizIdArr[z];
+                    console.log(qid);
+                    button1.onclick = function(){deleteQuizSection(qid);};
                     button2.onclick = function(){retrieveQuiz(qid);};          
                 }
             }
@@ -333,5 +335,22 @@ window.addEventListener('load', function() {
     })
 
 })
+
+function deleteQuizSection(quizId){
+    var arr =[];
+    var cid = "2"; //hard code, this is course id, if you want to change the id , just change here
+    var ccid = "1";// this is the class number for each course
+    var sid = "1"; //hard code
+    arr.push(cid, ccid, sid, quizId);
+    $.ajax({
+        url:"backend/deleteQuiz.php",
+        method:"post",
+        data: {arr:JSON.stringify(arr)},
+        success: function(res){
+            console.log(res);
+            location.reload();
+        }
+    })
+}
 
 src="https://code.jquery.com/jquery-3.1.1.min.js"; 
