@@ -18,7 +18,7 @@ class quizzesTest extends \PHPUnit\Framework\TestCase
 
         $mockRepo->method('getQuizzes')->willReturn($mockQuizzesObject);
 
-        $quizzes = $mockRepo->getQuizzes(); #Getting back the database object
+        $quizzes = $mockRepo->getQuizzes(1,1,1,1); #Getting back the database object
 
         $courseId = $quizzes[0]->getCourseId();
         $courseClassId = $quizzes[0]->getCourseClassId();
