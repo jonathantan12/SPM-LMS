@@ -1,5 +1,5 @@
 <?php
-  class courses{
+  class classes{
     private $course_id;
     private $course_name;
     private $class_name;
