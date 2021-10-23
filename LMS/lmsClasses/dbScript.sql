@@ -414,29 +414,28 @@ COMMIT;
 -- COMMIT;
 
 
---
+
 -- QUIZ_PROGRESS table
---
 
--- DROP TABLE IF EXISTS `quiz_progress`;
--- CREATE TABLE IF NOT EXISTS `quiz_progress` (
---     `quiz_progress_id` int(64) NOT NULL AUTO_INCREMENT, 
---     `user_id` int(64) NOT NULL,
---     `course_id` int(64) NOT NULL,
---     `section_id` int(64) NOT NULL,
---     `completion_status` varchar(64) NOT NULL,
---     PRIMARY KEY (`quiz_progress_id`),
---     FOREIGN KEY (user_id) REFERENCES users(user_id),
---     FOREIGN KEY (course_id) REFERENCES courses(course_id),
---     FOREIGN KEY (section_id) REFERENCES sections(section_id)
--- ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
---
+DROP TABLE IF EXISTS `quiz_progress`;
+CREATE TABLE IF NOT EXISTS `quiz_progress` (
+    `user_id` int(64) NOT NULL,
+    `course_id` int(64) NOT NULL,
+    `course_class_id` int(64) NOT NULL,
+    `section_id` int(64) NOT NULL,
+    `completion_status` varchar(64) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+ALTER TABLE quiz_progress ADD CONSTRAINT PK_Quiz PRIMARY KEY (user_id,course_id,course_class_id,section_id);
+
 -- Dumping data for table `quiz_progress`
---
 
--- INSERT INTO `quiz_progress` (`quiz_progress_id`, `user_id`, `course_id`, `section_id`, `completion_status`) VALUES
--- (1, 1, 2, 1, 'Completed'),
--- (2, 1, 2, 2, 'Not Completed'),
--- (3, 1, 2, 3, 'Not Completed');
--- COMMIT;
+
+INSERT INTO `quiz_progress` ( `user_id`, `course_id`, `course_class_id`, `section_id`, `completion_status`) VALUES
+(1, 1, 1, 1, 'Not Completed'),
+(1, 1, 2, 2, 'Not Completed'),
+(1, 1, 2, 3, 'Not Completed');
+COMMIT;

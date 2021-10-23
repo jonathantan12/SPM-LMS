@@ -1,6 +1,6 @@
 var quizType = "";
 function getQuiz(cid,ccid,sid,quizId){
-    arr=[];
+    var arr =[];
     arr.push(cid, ccid, sid, quizId);
     $.ajax({
         url:"backend/getQuizzes.php",
@@ -21,19 +21,21 @@ function getQuiz(cid,ccid,sid,quizId){
 }
 
 var answers=[];
+var addArr =[];
 function getQuestions(cid,ccid,sid,quizId){
-    arr=[];
+    var arr=[];
     arr.push(cid, ccid, sid, quizId);
+    addArr.push(cid, ccid, sid, quizId)
     $.ajax({
         url:"backend/getQuizzes.php",
         method:"post",
         data: {arr:JSON.stringify(arr)},
         success: function(res){
             var arrayQuiz = JSON.parse(res);
-            console.log(arrayQuiz);
             numberOfQuestions = arrayQuiz.length
             for(var i = 0; i < numberOfQuestions; i++) {
                 var quizDict = arrayQuiz[i]
+                quizType = quizDict["quiz_type"]
                 var ques = quizDict["question"]
                 var numberOfOptions = quizDict["number_of_options"]
                 var optionsContent = quizDict["options_content"]
@@ -77,6 +79,7 @@ function getQuestions(cid,ccid,sid,quizId){
 
             }
             var sub = document.createElement("button")
+            sub.id = "resButton"
             sub.style = "margin-left: 20px"
             sub.className="btn btn-primary"
             var subContent =document.createTextNode("Submit")
@@ -84,7 +87,7 @@ function getQuestions(cid,ccid,sid,quizId){
             document.getElementById("quizQuestions").appendChild(sub)
             sub.dataset.toggle = "modal";
             sub.dataset.target = "#result";
-            sub.onclick = function(){checkAns();};
+            sub.onclick = function(){checkAns(); stopTimer();};
         }
     })
 }
@@ -104,26 +107,24 @@ function checkAns(){
     }
     var score = 0;
     var res = "";
-    for (var c=0; c < answers.length; c++){
+    
+    for (var c=0; c < inputAns.length; c++){
         console.log(inputAns[c]);
         console.log(answers[c]);
         if (inputAns[c] == answers[c]){
             score+=1
         }
     }
-
     if (score/answers.length >= 0.8){
         res = "Passed";
         if (quizType == "graded"){
             passTest()
-        }
+        };
 
     }else{
         res ="Failed";
     }
-
     document.getElementById("score").innerHTML = "Your score is <b>"+score+"/"+answers.length+"</b> .<br> You have <b>"+res+"</b> the test."
-
 }
 
 
@@ -132,5 +133,20 @@ function retry(){
 }
 
 function passTest(){
+    console.log("I will add this to database")
+    
+
+}
+var myTime = null;
+function myTimer(){
+    myTime = setTimeout(timer, 5000);
+}
+
+function stopTimer(){
+    clearTimeout(myTime)
+}
+function timer(){
+    alert ("time is up") ;
+    document.getElementById("resButton").click();
     
 }
