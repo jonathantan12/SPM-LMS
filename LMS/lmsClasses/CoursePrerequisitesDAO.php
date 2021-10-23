@@ -2,12 +2,13 @@
 require_once 'autoload.php';
 
 class coursePrerequisitesDAO {
-    public function getCoursePrerequisites() {
+    public function getCoursePrerequisites($course_id) {
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
 
-        $sql = 'select * from course_prerequisites';
+        $sql = 'SELECT * from course_prerequisites where course_id = :course_id';
         $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':course_id', $course_id, PDO::PARAM_INT);
         $stmt->execute();
         $result = [];
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
