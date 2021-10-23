@@ -133,10 +133,25 @@ function retry(){
 }
 
 function passTest(){
-    console.log("I will add this to database")
-    
+    console.log("I will add this to database");
+    addArr.pop();
+    var userId = "1";
+    addArr.splice(0, 0, userId);
+    var completionStatus ="Completed";
+    addArr.push(completionStatus);
+    console.log(addArr);
+
+    $.ajax({
+        url:"backend/updateQuizProgress.php",
+        method:"post",
+        data: {arr:JSON.stringify(addArr)},
+        success: function(res){
+            console.log(res);
+        }
+    });
 
 }
+
 var myTime = null;
 function myTimer(){
     myTime = setTimeout(timer, 5000);
