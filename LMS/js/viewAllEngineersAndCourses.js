@@ -48,7 +48,6 @@ function retrieveCourses() {
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var result = JSON.parse(this.responseText)
-            console.log(result)
             if (result) {
                 //convert this into html code to display in table (assign to engineers)
                 toPrint = ""
@@ -135,32 +134,18 @@ function enrol(id) {
                 var course_name = checkbox.value
             }
 
-            var result1 = deleteCourse(user_id, course_id)
-            var result2 = addCourse(user_id, user_name, course_id, course_name)
-            results1.push(result1)
-            results2.push(result2)
+            deleteCourse(user_id, course_id)
+            addCourse(user_id, user_name, course_id, course_name)
+            alert("Enrollment successful")
+            retrieveCourses()
+            retrieveEngineers()
+            
             
         }
         
     }
 
-        var count = 0
-        for (const check of results1) {
-            if (check == 'false') {
-                count = count + 1
-            }
-        }
-        for (const check of results2) {
-            if (check == 'false') {
-                count = count + 1
-            }
-        }
-
-        if (count == 0){
-            retrieveEngineers()
-            retrieveCourses()
-            alert("Enrolment successful")
-        }
+        
 
 }
 
@@ -187,7 +172,9 @@ function deleteCourse(user_id, course_id) {
 function addCourse(user_id, user_name, course_id, course_name) {
     var request = new XMLHttpRequest()
 
-    var details = "userId=" + user_id + "&userName=" + user_name + "&courseId=" + course_id + "&courseName=" + course_name
+    var class_name = getClassWithVacancy(course_id)
+    console.log(class_name)
+    var details = "userId=" + user_id + "&userName=" + user_name + "&courseId=" + course_id + "&courseName=" + course_name + "&className=" + class_name 
     var url = "backend/addEnrolledCourses.php?" + details
 
     request.onreadystatechange = function () {
@@ -199,4 +186,36 @@ function addCourse(user_id, user_name, course_id, course_name) {
 
     request.open("GET", url, true)
     request.send()
+}
+
+function addCourse(user_id, user_name, course_id, course_name) {
+    var request = new XMLHttpRequest()
+
+    var details = "courseId=" + course_id
+    var url = "backend/getClassWithVacancy.php?" + details
+    var result = ''
+
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            class_name = this.responseText
+            var request2 = new XMLHttpRequest()
+
+            var details2 = "userId=" + user_id + "&userName=" + user_name + "&courseId=" + course_id + "&courseName=" + course_name + "&className=" + class_name 
+            var url2 = "backend/addEnrolledCourses.php?" + details2
+
+            request2.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var result = this.responseText
+                    return result
+                }
+            }
+
+            request2.open("GET", url2, true)
+            request2.send()
+        }
+    }
+
+    request.open("GET", url, true)
+    request.send()
+
 }

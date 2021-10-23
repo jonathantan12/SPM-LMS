@@ -2,12 +2,14 @@
 require_once 'autoload.php';
 
 class ClassesDAO {
-    public function getClasses() {
+    public function getClassesWithVacancy($course_id) {
+
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
 
-        $sql = 'select * from classes';
+        $sql = 'SELECT * from classes where course_id = :course_id';
         $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':course_id', $course_id, PDO::PARAM_INT);
         $stmt->execute();
         $result = [];
         $stmt->setFetchMode(PDO::FETCH_ASSOC);

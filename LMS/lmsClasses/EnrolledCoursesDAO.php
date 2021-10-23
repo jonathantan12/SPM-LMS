@@ -14,7 +14,7 @@ class EnrolledCoursesDAO {
         $result = [];
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         while($row = $stmt->fetch()) {
-            $result[] = new enrolledCourses($row['enrolled_course_id'], $row['user_id'], $row['user_name'], $row['course_id'] ,$row['course_name']);
+            $result[] = new enrolledCourses($row['enrolled_course_id'], $row['user_id'], $row['user_name'], $row['course_id'] ,$row['course_name'], $row['class_name']);
         }
         $stmt = null;
         $pdo = null;
@@ -22,12 +22,12 @@ class EnrolledCoursesDAO {
         return $result;
     }
 
-    public function addEnrolledCourses($user_id, $user_name, $course_id, $course_name) {
+    public function addEnrolledCourses($user_id, $user_name, $course_id, $course_name, $class_name) {
         $result = FALSE;
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
 
-        $sql = 'INSERT INTO enrolled_courses VALUES (default, :user_id, :user_name, :course_id, :course_name)';
+        $sql = 'INSERT INTO enrolled_courses VALUES (default, :user_id, :user_name, :course_id, :course_name, :class_name)';
         
         try {
             $stmt = $pdo->prepare($sql);
@@ -36,6 +36,7 @@ class EnrolledCoursesDAO {
             $stmt->bindParam(':user_name', $user_name, PDO::PARAM_STR);
             $stmt->bindParam(':course_id', $course_id, PDO::PARAM_INT);
             $stmt->bindParam(':course_name', $course_name, PDO::PARAM_STR);
+            $stmt->bindParam(':class_name', $class_name, PDO::PARAM_STR);
 
             if($stmt->execute()) {
                 $result = TRUE;
