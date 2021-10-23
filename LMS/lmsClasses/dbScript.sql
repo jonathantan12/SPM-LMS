@@ -351,9 +351,9 @@ ALTER TABLE quizzes ADD CONSTRAINT PK_Quiz PRIMARY KEY (course_id,course_class_i
 --
 
 INSERT INTO `quizzes` (`course_id`,`course_class_id`,`section_id`,`quiz_id`,`quiz_title`,`quiz_type`, `question_no`, `question`, `number_of_options`, `options_content` ,`correct_answer`) VALUES
-(1, 1, 1, 1,'quiz title 1','graded',1,'Is it true that it is like this?', 2, 'true,false','true'),
-(1, 1, 1, 1,'guiz title 2','ungraded',2,'Is it true that it is like this?', 2, 'true,false','false'),
-(1, 1, 1, 1,'quiz title 3','graded',3,'Is it true that it is like this?', 2, 'true,false','false');
+(2, 1, 1, 1,'quiz title 1','graded',1,'Is it true that it is like this?', 2, "['true','false']",'true'),
+(2, 1, 1, 1,'guiz title 2','ungraded',2,'Is it true that it is like this?', 2, "['true','false']",'false'),
+(2, 1, 1, 1,'quiz title 3','graded',3,'Is it true that it is like this?', 2, "['true','false']",'false');
 COMMIT;
 
 --
