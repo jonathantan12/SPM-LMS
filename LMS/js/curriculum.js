@@ -55,6 +55,14 @@ function createQuestionCard(){
     select.id = "options"+z
     select.style = "border:2px solid grey"
     div1.appendChild(select)
+    
+    // var del = document.createElement("button")
+    // del.className = "btn btn-danger col-sm-2"
+    // del.id = z
+    // var delText = document.createTextNode("delete")
+    // del.appendChild(delText)
+    // div1.appendChild(del)
+    // del.onclick = function(){delDiv(this.id);};
 
     var option = document.createElement("option")
     option.value = ""
@@ -188,7 +196,7 @@ function addQuiz(){
         method:"post",
         data: {arr:JSON.stringify(arr)},
         success: function(res){
-            console.log(res);
+            //console.log(res);
             if (res.slice(-1) == 1){
                 alert("Your Quiz has been saved!");
                 var quizHere= document.getElementById("quizHere");
@@ -219,14 +227,17 @@ function addQuiz(){
                 button2.className = "btn btn-primary btn-small";
                 button2.style = "float: right"
                 button2.id = "button"+qid;
-                console.log(button2.id);
+                //console.log(button2.id);
                 button2.dataset.toggle = "modal";
                 button2.dataset.target = "#editQuiz";
                 var content2 = document.createTextNode("Edit")
                 button2.appendChild(content2);
                 div2.appendChild(button2);
                 
-                button2.onclick = function(){retrieveQuiz(qid-1);};               
+                button2.onclick = function(){retrieveQuiz(qid-1);}; 
+                
+                var aQuiz = document.getElementById("addQuiz");
+                aQuiz.disabled = "True";
 
                                
             } else{
@@ -272,6 +283,8 @@ window.addEventListener('load', function() {
             if (quiz.length == 0){
                 console.log("There is no quiz for this section yet")
             }else{
+                var aQuiz = document.getElementById("addQuiz");
+                aQuiz.disabled = "True";
                 var quizIdArr = [];
                 var quizTitleArr =[];
                 for (var i = 0; i<quiz.length; i++){
@@ -284,8 +297,8 @@ window.addEventListener('load', function() {
                         quizTitleArr.push(qTitle);
                     }
                 }
-                console.log(quizIdArr);
-                console.log(quizTitleArr);
+                // console.log(quizIdArr);
+                // console.log(quizTitleArr);
                 var numOfQuiz = quizTitleArr.length;
                 for (var z =0; z<numOfQuiz; z++){
                     var quizHere= document.getElementById("quizHere");
@@ -309,20 +322,22 @@ window.addEventListener('load', function() {
                     var content1 = document.createTextNode("Delete")
                     button1.appendChild(content1);
                     div2.appendChild(button1);
-                    button1.onclick = function(){deleteQuiz();};
+                    
 
                     var button2 = document.createElement("button");
                     button2.type = "button";
                     button2.className = "btn btn-primary btn-small";
                     button2.style = "float: right"
                     button2.id = "button"+qid;
-                    console.log(button2.id);
+                    //console.log(button2.id);
                     button2.dataset.toggle = "modal";
                     button2.dataset.target = "#editQuiz";
                     var content2 = document.createTextNode("Edit")
                     button2.appendChild(content2);
                     div2.appendChild(button2);
-                    var qid = quizIdArr[z]
+                    var qid = quizIdArr[z];
+                    //console.log(qid);
+                    button1.onclick = function(){deleteQuizSection(qid);};
                     button2.onclick = function(){retrieveQuiz(qid);};          
                 }
             }
@@ -334,4 +349,25 @@ window.addEventListener('load', function() {
 
 })
 
+function deleteQuizSection(quizId){
+    var arr =[];
+    var cid = "2"; //hard code, this is course id, if you want to change the id , just change here
+    var ccid = "1";// this is the class number for each course
+    var sid = "1"; //hard code
+    arr.push(cid, ccid, sid, quizId);
+    $.ajax({
+        url:"backend/deleteQuiz.php",
+        method:"post",
+        data: {arr:JSON.stringify(arr)},
+        success: function(res){
+            console.log(res);
+            location.reload();
+        }
+    })
+}
+
+
+// function delDiv(id){
+//     document.getElementById("questionCard"+id).remove();
+// }
 src="https://code.jquery.com/jquery-3.1.1.min.js"; 

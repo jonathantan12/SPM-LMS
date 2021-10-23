@@ -3,6 +3,7 @@ require_once 'autoload.php';
 
 class ClassesDAO {
     public function getClassesWithVacancy($course_id) {
+
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
 

@@ -5,23 +5,22 @@
 // var numberOfOptions ={};
 // var optionsContent ={};
 // var correctAnswer ={};
+var editedQno =[];
 var arr = []; //cid, ccid, sid, quizid
+var numberOfQuestions ="";
 function retrieveQuiz(qid){
     var cid = "2"; //hard code, this is course id, if you want to change the id , just change here
     var ccid = "1";// this is the class number for each course
     var sid = "1"; //hard code
     var quizid = qid ;
-    console.log(qid);
     arr.push(cid, ccid, sid, quizid);
     $.ajax({
         url:"backend/getQuizzes.php",
         method:"post",
         data: {arr:JSON.stringify(arr)},
         success: function(res){
-            console.log(res);
                 var arrayQuiz = JSON.parse(res);
-                var numberOfQuestions = arrayQuiz.length
-                //console.log(numberOfQuestions);
+                numberOfQuestions = arrayQuiz.length
                 for(var i = 0; i < numberOfQuestions; i++) {
                     var quizDict = arrayQuiz[i]
                     var quizTitle = quizDict["quiz_title"]
@@ -65,7 +64,7 @@ function retrieveQuiz(qid){
                     div1.appendChild(label)
 
                     var div2=document.createElement("div")
-                    div2.className="col-sm-8"
+                    div2.className="col-sm-6"
                     div2.style = "padding-right:0px"
                     div1.appendChild(div2)
 
@@ -82,7 +81,17 @@ function retrieveQuiz(qid){
                     select.className = "col-sm-2"
                     select.id = "editedOptions"+questionNo
                     select.style = "border:2px solid grey"
+                    select.disabled = "true"
                     div1.appendChild(select)
+
+                    var del = document.createElement("button")
+                    del.className = "btn btn-danger col-sm-2"
+                    del.id = questionNo
+                    var delText = document.createTextNode("delete")
+                    del.appendChild(delText)
+                    div1.appendChild(del)
+                    del.onclick = function(){deleteDiv(this.id);};
+
 
                     var option = document.createElement("option")
                     option.value = ""
@@ -132,7 +141,6 @@ function retrieveQuiz(qid){
                         opDiv1.appendChild(opInput2);
                         
                     }
-                    //console.log(optionsContent);
                     var opRadioEle = document.getElementsByName('editAnswer'+questionNo);
                     for (var z=0; z<opRadioEle.length; z++) {
                         if (opRadioEle[z].getAttribute('value') == caPos) {
@@ -140,11 +148,13 @@ function retrieveQuiz(qid){
                         }
                     }
                     
+                    
                 }
         }
     })
    
 }
+var qno = [];//question_no in arr
 var editedTitle = "";
 var editedQuizType = "";
 var editedQuestionsArray = []; //contains all edited questions
@@ -153,6 +163,109 @@ var editedNumberOfOptions = {};
 var editedOptionsArray = [];
 var editedOptionsDict ={};
 var editedCaPosDict ={};
+
+
+function createQCard(){
+    numberOfQuestions++
+    qno.push(numberOfQuestions); //newly added question question no
+    var divTag=document.createElement('div');
+    var t = "editedQuestionCard"+numberOfQuestions;
+    divTag.setAttribute("id",t);
+    var form = document.createElement('form')
+    form.id = "questionForm"+numberOfQuestions
+    divTag.appendChild(form)
+
+    var div1 = document.createElement('div')
+    div1.className ="form-group row"
+    form.appendChild(div1)
+
+    var label = document.createElement('label')
+    label.className = "col-sm-2 col-form-label"
+    var content1 = document.createTextNode("Question")
+    label.appendChild(content1)
+    div1.appendChild(label)
+
+    var div2=document.createElement("div")
+    div2.className="col-sm-6"
+    div2.style = "padding-right:0px"
+    div1.appendChild(div2)
+
+    var input1 = document.createElement("input")
+    input1.type = "text"
+    input1.className = "form-control"
+    input1.name = "editedQuestions[]"
+    input1.id = "question"+numberOfQuestions
+    input1.placeholder = "Question"
+    div2.appendChild(input1)
+
+    var select= document.createElement("select")
+    select.className = "col-sm-2"
+    select.id = "editedOptions"+numberOfQuestions;
+    select.style = "border:2px solid grey"
+    div1.appendChild(select)
+
+    var del = document.createElement("button")
+    del.className = "btn btn-danger col-sm-2"
+    var delText = document.createTextNode("delete")
+    del.appendChild(delText)
+    div1.appendChild(del)
+
+    var option = document.createElement("option")
+    option.value = ""
+    var option1 = document.createElement("option")
+    option1.value = "2"
+    var option1_2 = document.createTextNode("2")
+    option1.appendChild(option1_2)
+    var option2 = document.createElement("option")
+    option2.value = "4"
+    var option2_4 = document.createTextNode("4")
+    option2.appendChild(option2_4)
+    select.appendChild(option)
+    select.appendChild(option1)
+    select.appendChild(option2)
+
+    document.getElementById("editQuestionCard").appendChild(divTag)
+
+    select.onchange = function(){addEditDiv(numberOfQuestions);};
+    
+
+}
+//create a div under question to put options
+//put options under the created div
+function addEditDiv(numberOfQuestions){
+    var optionsCard = document.createElement("div")
+    var ele = "editedOptionCard"+numberOfQuestions
+    optionsCard.id=ele
+    theId = "editedQuestionCard"+numberOfQuestions
+    document.getElementById(theId).appendChild(optionsCard)
+    createEdit(numberOfQuestions)
+}
+
+
+function createEdit(numberOfQuestions){
+    var selectedValue = "editedOptions"+numberOfQuestions
+    var select = document.getElementById(selectedValue).value; //this is the number of options the user click
+    editedNumberOfOptions[numberOfQuestions] = select;
+    var a = "editedOptionCard"+numberOfQuestions
+    var co = document.getElementById(a)
+    var str = '';
+    for(var i = 0; i < select; i++) {
+        str += `
+        <div class="input-group mb-3" style="margin-top :2px">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="radio" id="editOpInput`+numberOfQuestions+i+`" name="editAnswer`+numberOfQuestions+`" value ="` +i+ `"aria-label="Radio for following text input">
+                </div>
+            </div>
+            <input type="text" name="editedOptions[]" class="form-control" aria-label="Text input with radio">
+        </div>
+        `
+    }
+    co.innerHTML = str;
+}
+
+
+
 
 
 function editQuizArray(){
@@ -165,7 +278,8 @@ function editQuizArray(){
         }
     }
     //console.log(editedQuizType);
-    
+
+
     var editedQuestions = document.getElementsByName('editedQuestions[]');
     for (var i = 0; i < editedQuestions.length; i++) {
         var b = editedQuestions[i];
@@ -177,7 +291,6 @@ function editQuizArray(){
     for (var x = 0; x < editedQuestionsArray.length; x++){
         editedQuestionsDict[x+1] = editedQuestionsArray[x];
         var select = document.getElementById("editedOptions"+(x+1));
-        console.log(select);
         editedNumberOfOptions[x+1] = select.options[select.selectedIndex].value;
     }
     console.log(editedNumberOfOptions);
@@ -187,19 +300,19 @@ function editQuizArray(){
         var c = editedInputOptions[y];
         editedOptionsArray.push(c.value);
     }
-    console.log(editedOptionsArray);
+    //console.log(editedOptionsArray);
 
     for (var z = 1; z < editedQuestionsArray.length +1; z++ ){
         var enoo = editedNumberOfOptions[z];
         editedOptionsDict[z] = editedOptionsArray.splice(0, enoo);
         console.log(editedOptionsDict);
-        var editedOpRadioEle = document.getElementsByName('editAnswer'+z);
+        //var editedOpRadioEle = document.getElementsByName('editAnswer'+z);
         for (var j=0; j<editedNumberOfOptions[z]; j++)
             if (document.getElementById("editOpInput"+z+j).checked){
                 editedCaPosDict[z] = j;
             }
     }
-    console.log(editedCaPosDict);
+    //console.log(editedCaPosDict);
     deleteQuiz();
    
     
@@ -218,6 +331,7 @@ function deleteQuiz(){
     })
 
 }
+
 
 var arr = []; //cid, ccid, sid, quizid
 function addEditedQuiz(){
@@ -252,3 +366,10 @@ function addEditedQuiz(){
         }
     })
 }
+
+
+
+function deleteDiv(id){
+    document.getElementById("editQuestionCard"+id).remove();
+    numberOfQuestions-=1;
+};

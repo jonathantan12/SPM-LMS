@@ -9,12 +9,6 @@
         $item["course_id"] = $aCourse->getCourseId();
         $item["course_name"] = $aCourse->getCourseName();
         $item["course_desc"] = $aCourse->getCourseDesc();
-        $item["class_name"] = $aCourse->getClassName();
-        $item["start_date"] = $aCourse->getStartDate();
-        $item["end_date"] = $aCourse->getEndDate();
-        $item["slots_available"] = $aCourse->getSlotsAvailable();
-        $item["trainer_id"] = $aCourse->getTrainerId();
-        $item["trainer_name"] = $aCourse->getTrainerName();
         $item["image"] = $aCourse->getImage();
         $items[] = $item;
     }

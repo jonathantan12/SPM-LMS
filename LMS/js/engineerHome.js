@@ -3,7 +3,7 @@ sessionStorage.setItem("user_name","Jonathan")
 
 var request = new XMLHttpRequest()
 
-var url = "../LMS/backend/getCourses.php"
+var url = "../LMS/backend/getClasses.php"
 
 request.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -17,7 +17,6 @@ request.onreadystatechange = function () {
         for (var i=0; i< numCourses ;i++) {
             courses[response[i].course_name] = {
                 "class_name": response[i].class_name,
-                "course_desc": response[i].course_desc,
                 "course_id": response[i].course_id,
                 "end_date": response[i].end_date,
                 "start_date": response[i].start_date
