@@ -1,4 +1,5 @@
 var quizType = "";
+
 function getQuiz(cid,ccid,sid,quizId){
     var arr =[];
     arr.push(cid, ccid, sid, quizId);
@@ -8,7 +9,7 @@ function getQuiz(cid,ccid,sid,quizId){
         data: {arr:JSON.stringify(arr)},
         success: function(res){
             var arrayQuiz = JSON.parse(res);
-            numberOfQuestions = arrayQuiz.length
+            var numberOfQuestions = arrayQuiz.length
             for(var i = 0; i < numberOfQuestions; i++) {
                 var quizDict = arrayQuiz[i]
                 var quizTitle = quizDict["quiz_title"]
@@ -20,8 +21,10 @@ function getQuiz(cid,ccid,sid,quizId){
     })
 }
 
-var answers=[];
+
+var answers={};
 var addArr =[];
+
 function getQuestions(cid,ccid,sid,quizId){
     var arr=[];
     arr.push(cid, ccid, sid, quizId);
@@ -32,7 +35,7 @@ function getQuestions(cid,ccid,sid,quizId){
         data: {arr:JSON.stringify(arr)},
         success: function(res){
             var arrayQuiz = JSON.parse(res);
-            numberOfQuestions = arrayQuiz.length
+            var numberOfQuestions = arrayQuiz.length
             for(var i = 0; i < numberOfQuestions; i++) {
                 var quizDict = arrayQuiz[i]
                 quizType = quizDict["quiz_type"]
@@ -43,7 +46,7 @@ function getQuestions(cid,ccid,sid,quizId){
                 optionsContent = optionsContent.replace(/['"]+/g, '');
                 optionsContent = optionsContent.split(",");
                 var correctAnswer = quizDict["correct_answer"]
-                answers.push(correctAnswer)
+                answers[i+1]=correctAnswer
                 var caPos = optionsContent.indexOf(correctAnswer)
 
                 var div1 = document.createElement("h5")
@@ -88,34 +91,38 @@ function getQuestions(cid,ccid,sid,quizId){
             sub.dataset.toggle = "modal";
             sub.dataset.target = "#result";
             sub.onclick = function(){checkAns(); stopTimer();};
+
+            myTimer(numberOfQuestions);
         }
     })
 }
 
 
 function checkAns(){
-    var inputAns = [];
+    console.log(answers);
+    var inputAns = {};
     var score = 0;
     var res = "";
-    for (var a=0; a < answers.length; a++){
+    for (var a=0; a < Object.keys(answers).length; a++){
         var ans = document.getElementsByName('option'+(a+1));
+        console.log(ans);
         for (var b=0; b<ans.length; b++) {
             if (ans[b].checked == true) {
-                inputAns.push(ans[b].getAttribute('value') )
+                inputAns[a+1]=ans[b].getAttribute('value') ;
             }
         }
     }
     var score = 0;
     var res = "";
-    
-    for (var c=0; c < inputAns.length; c++){
-        console.log(inputAns[c]);
-        console.log(answers[c]);
-        if (inputAns[c] == answers[c]){
+    for (var c=0; c < Object.keys(answers).length; c++){
+        if (typeof(inputAns[c+1]) == "undefined"){
+            inputAns[c+1] = "undefinedAnswer"
+        }
+        if (inputAns[c+1] == answers[c+1]){
             score+=1
         }
     }
-    if (score/answers.length >= 0.8){
+    if (score/Object.keys(answers).length >= 0.8){
         res = "Passed";
         if (quizType == "graded"){
             passTest()
@@ -124,7 +131,7 @@ function checkAns(){
     }else{
         res ="Failed";
     }
-    document.getElementById("score").innerHTML = "Your score is <b>"+score+"/"+answers.length+"</b> .<br> You have <b>"+res+"</b> the test."
+    document.getElementById("score").innerHTML = "Your score is <b>"+score+"/"+Object.keys(answers).length+"</b> .<br> You have <b>"+res+"</b> the test."
 }
 
 
@@ -133,7 +140,6 @@ function retry(){
 }
 
 function passTest(){
-    console.log("I will add this to database");
     addArr.pop();
     var userId = "1";
     addArr.splice(0, 0, userId);
@@ -146,15 +152,16 @@ function passTest(){
         method:"post",
         data: {arr:JSON.stringify(addArr)},
         success: function(res){
-            console.log(res);
+            //console.log(res);
         }
     });
 
 }
 
+
 var myTime = null;
-function myTimer(){
-    myTime = setTimeout(timer, 5000);
+function myTimer(q){
+    myTime = setTimeout(timer, 60000*q);
 }
 
 function stopTimer(){
