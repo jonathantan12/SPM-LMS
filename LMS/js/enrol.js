@@ -2,17 +2,18 @@ const queryString = location.search.substring(1);
 const urlParams = new URLSearchParams(queryString);
 const courseId = urlParams.get('courseId')
 if(sessionStorage.getItem("user_id")){
-    let user_id = sessionStorage.getItem("user_id");
+    var userId = sessionStorage.getItem("user_id");
 }
 else{
     sessionStorage.setItem("user_id","1");
 }
 if(sessionStorage.getItem("user_name")){
-    let user_name = sessionStorage.getItem("user_name");
+    var userName = sessionStorage.getItem("user_name");
 }
 else{
     sessionStorage.setItem("user_name","Jonathan");
 }
+console.log(userId,userName,courseId)
 
 var request = new XMLHttpRequest()
 
