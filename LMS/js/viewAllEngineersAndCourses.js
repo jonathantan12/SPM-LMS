@@ -197,32 +197,11 @@ function deleteCourse(user_id, course_id) {
     request.send()
 }
 
-//this function adds enrolled courses to the table
-function addCourse(user_id, user_name, course_id, course_name) {
-    var request = new XMLHttpRequest()
-
-    var class_name = getClassWithVacancy(course_id)
-    console.log(class_name)
-    var details = "userId=" + user_id + "&userName=" + user_name + "&courseId=" + course_id + "&courseName=" + course_name + "&className=" + class_name 
-    var url = "backend/addEnrolledCourses.php?" + details
-
-    request.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var result = this.responseText
-            return result
-        }
-    }
-
-    request.open("GET", url, true)
-    request.send()
-}
-
 function addCourse(user_id, user_name, course_id, course_name) {
     var request = new XMLHttpRequest()
 
     var details = "courseId=" + course_id
     var url = "backend/getClassWithVacancy.php?" + details
-    var result = ''
 
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -241,6 +220,21 @@ function addCourse(user_id, user_name, course_id, course_name) {
 
             request2.open("GET", url2, true)
             request2.send()
+
+            var request3 = new XMLHttpRequest()
+
+            var details3 = "courseId=" + course_id + "&className=" + class_name 
+            var url3 = "backend/updateClassVacancy.php?" + details3
+
+            request3.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var result = this.responseText
+                    return result
+                }
+            }
+
+            request3.open("GET", url3, true)
+            request3.send()
         }
     }
 

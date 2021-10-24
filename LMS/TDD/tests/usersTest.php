@@ -1,5 +1,7 @@
 <?php
 
+# jiesin.lim.2019
+
 # require '../../lmsClasses/Cart.php';
 
 class usersTest extends \PHPUnit\Framework\TestCase 
@@ -10,7 +12,7 @@ class usersTest extends \PHPUnit\Framework\TestCase
 
         $mockUsersObject = [
             # ($user_id, $user_name, $user_role, $login_id, $login_password)
-            new users(1, 'Jonathan','engineer', 'test@hotmail.com', '0000')
+            new users(1, 'Jonathan','engineer', 'test@gmail.com', '0000'),
         ];
 
         $mockRepo->method('getUsers')->willReturn($mockUsersObject);
@@ -25,8 +27,8 @@ class usersTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(1, $userId);
         $this->assertEquals('Jonathan', $userName);
-        $this->assertEquals('engineer', $userRole); #Why is this null
-        $this->assertEquals('test@hotmail.com', $loginId);
+        $this->assertEquals('engineer', $userRole);
+        $this->assertEquals('test@gmail.com', $loginId);
         $this->assertEquals('0000', $loginPassword);
     }
 }

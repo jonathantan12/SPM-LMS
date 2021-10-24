@@ -23,6 +23,31 @@ class ClassesDAO {
         return $result;
     }
 
+    public function updateClassVacancy($course_id, $class_name) {
+
+        $connMgr = new ConnectionManager();
+        $pdo = $connMgr->getConnection();
+
+        $sql = 'UPDATE classes set slots_available = slots_available-1 where course_id = :course_id and class_name = :class_name';
+
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':course_id',$course_id, PDO::PARAM_INT);
+            $stmt->bindParam(':class_name', $class_name, PDO::PARAM_STR);
+
+            if($stmt->execute()) {
+                $result = TRUE;
+            }
+        } catch (Exception $e) {
+            return $result;    
+        }
+
+        $stmt = null;
+        $pdo = null;
+
+        return $result;
+    }
+
 }
 
 
