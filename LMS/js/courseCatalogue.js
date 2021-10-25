@@ -51,7 +51,7 @@ function retrieveEngineerRequiredCourses(res) {
         }
     }
 }
- 
+
 function callToDb(url, cFunction) {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
