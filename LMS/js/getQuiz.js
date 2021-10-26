@@ -99,13 +99,13 @@ function getQuestions(cid,ccid,sid,quizId){
 
 
 function checkAns(){
-    console.log(answers);
+    //console.log(answers);
     var inputAns = {};
     var score = 0;
     var res = "";
     for (var a=0; a < Object.keys(answers).length; a++){
         var ans = document.getElementsByName('option'+(a+1));
-        console.log(ans);
+        //console.log(ans);
         for (var b=0; b<ans.length; b++) {
             if (ans[b].checked == true) {
                 inputAns[a+1]=ans[b].getAttribute('value') ;
@@ -145,7 +145,7 @@ function passTest(){
     addArr.splice(0, 0, userId);
     var completionStatus ="Completed";
     addArr.push(completionStatus);
-    console.log(addArr);
+    //console.log(addArr);
 
     $.ajax({
         url:"backend/updateQuizProgress.php",
@@ -161,7 +161,7 @@ function passTest(){
 
 var myTime = null;
 function myTimer(q){
-    myTime = setTimeout(timer, 60000*q);
+    myTime = setTimeout(timer, 1000*q);
 }
 
 function stopTimer(){
