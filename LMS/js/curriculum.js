@@ -279,7 +279,9 @@ window.addEventListener('load', function() {
         method:"post",
         data: {arr:JSON.stringify(arr)},
         success: function(res){
+            //console.log(res);
             var quiz = JSON.parse(res)
+            
             if (quiz.length == 0){
                 console.log("There is no quiz for this section yet")
             }else{
