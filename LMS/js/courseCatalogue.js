@@ -13,7 +13,10 @@ else{
 
 
 var courses = {};
-var engineerRequiredCourseUrl = "../LMS/backend/getEngineersAndRequiredCourses.php"
+var requiredCourses = {};
+var completedCourses = {};
+var completedCoursesUrl = "../LMS/backend/getCompletedCourses.php";
+var engineerRequiredCourseUrl = "../LMS/backend/getEngineersAndRequiredCourses.php";
 var courseUrl = "../LMS/backend/getClasses.php";
 function retrieveAllCourses(res) {
     var numCourses = res.length;
@@ -50,6 +53,23 @@ function retrieveEngineerRequiredCourses(res) {
             requiredCoursesHtml.innerHTML += changeHTML;
         }
     }
+}
+
+function retrieveAllCompleted(res) {
+    var completed = res;
+    var numCompletedCourses = res.length;
+    if (completed) {
+        for (var i=0; i< numCompletedCourses ;i++) {
+            completedCourses[res[i].course_name] = {
+                "completed_course_id": res[i].completed_course_id,
+                "course_id": res[i].course_id,
+                "course_name": res[i].course_name,
+                "user_id": res[i].user_id,
+                "user_name": res[i].user_name
+            }
+        }
+    }
+    console.log(completedCourses)
 }
 
 function callToDb(url, cFunction) {
