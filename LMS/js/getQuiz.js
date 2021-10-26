@@ -14,6 +14,7 @@ function getQuiz(cid,ccid,sid,quizId){
                 var quizDict = arrayQuiz[i]
                 var quizTitle = quizDict["quiz_title"]
                 quizType = quizDict["quiz_type"]
+                console.log(quizType);
                 document.getElementById("quizType").innerHTML = "<p><h2>"+quizTitle+"</h2></p>This is a "+quizType+" quiz. <p>Please re-Attempt the quiz till you pass.</p>"
                
             }
@@ -124,13 +125,15 @@ function checkAns(){
     }
     if (score/Object.keys(answers).length >= 0.8){
         res = "Passed";
-        if (quizType == "graded"){
-            passTest()
-        };
+        passTest()
 
     }else{
         res ="Failed";
+        if (quizType == "ungraded"){
+            passTest()
+        };
     }
+    
     document.getElementById("score").innerHTML = "Your score is <b>"+score+"/"+Object.keys(answers).length+"</b> .<br> You have <b>"+res+"</b> the test."
 }
 
@@ -161,7 +164,7 @@ function passTest(){
 
 var myTime = null;
 function myTimer(q){
-    myTime = setTimeout(timer, 1000*q);
+    myTime = setTimeout(timer, 5000*q);
 }
 
 function stopTimer(){
