@@ -120,9 +120,9 @@ CREATE TABLE IF NOT EXISTS `classes` (
 
 INSERT INTO `classes` (`course_id`, `course_name`, `class_name`,`start_date`, `end_date`, `slots_available`, `trainer_id`, `trainer_name`) VALUES
 (1, 'Electrical Engineering I', 'G1','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 2, 'Roger'),
-(1, 'Electrical Engineering I', 'G2','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 5, 'Ben'),
 (2, 'Electrical Engineering II', 'G1','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 5, 'Ben'),
-(3, 'Electrical Engineering III', 'G1','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 5, 'Ben'),
+(3, 'Electrical Engineering III', 'G1','2021-01-01 00:00:00', '2021-02-01 00:00:00', 0, 5, 'Ben'),
+(3, 'Electrical Engineering III', 'G2','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 2, 'Roger'),
 (4, 'Introduction to Mechanical Engineering I', 'G1', '2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 2, 'Roger'),
 (5, 'Introduction to Mechanical Engineering II', 'G1', '2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 2, 'Roger'),
 (6, 'Introduction to Mechanical Engineering III', 'G1', '2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 6, 'Aaron'),
@@ -206,10 +206,10 @@ CREATE TABLE IF NOT EXISTS `trainer_qualifications` (
 
 INSERT INTO `trainer_qualifications` (`trainer_qualification_id`, `user_id`, `user_name`,`course_id`, `course_name`) VALUES
 (1, 2, 'Roger', 1, 'Electrical Engineering I'),
-(2, 2, 'Roger', 4, 'Introduction to Mechanical Engineering I'),
-(3, 2, 'Roger', 5, 'Introduction to Mechanical Engineering II'),
-(4, 2, 'Roger', 7, 'Introduction to Scrum Methodology I'),
-(5, 5, 'Ben', 1, 'Electrical Engineering I'),
+(2, 2, 'Roger', 3, 'Electrical Engineering III'),
+(3, 2, 'Roger', 4, 'Introduction to Mechanical Engineering I'),
+(4, 2, 'Roger', 5, 'Introduction to Mechanical Engineering II'),
+(5, 2, 'Roger', 7, 'Introduction to Scrum Methodology I'),
 (6, 5, 'Ben', 2, 'Electrical Engineering II'),
 (7, 5, 'Ben', 3, 'Electrical Engineering III'),
 (8, 6, 'Aaron', 4, 'Introduction to Mechanical Engineering I'),
@@ -297,6 +297,7 @@ CREATE TABLE IF NOT EXISTS `enrolled_courses` (
     `user_name` varchar(64) NOT NULL,
     `course_id` int(64) NOT NULL,
     `course_name` varchar(64) NOT NULL,
+    `class_name` varchar(64) NOT NULL,
     PRIMARY KEY (`enrolled_course_id`),
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
@@ -306,10 +307,10 @@ CREATE TABLE IF NOT EXISTS `enrolled_courses` (
 -- Dumping data for table `enrolled_courses`
 --
 
-INSERT INTO `enrolled_courses` (`enrolled_course_id`, `user_id`, `user_name`,`course_id`, `course_name`) VALUES
-(1, 1, 'Jonathan', 4, 'Introduction to Mechanical Engineering I'),
-(2, 4, 'Kelly', 2, 'Electrical Engineering II'),
-(3, 4, 'Kelly', 5, 'Introduction to Mechanical Engineering II');
+INSERT INTO `enrolled_courses` (`enrolled_course_id`, `user_id`, `user_name`,`course_id`, `course_name`, `class_name`) VALUES
+(1, 1, 'Jonathan', 4, 'Introduction to Mechanical Engineering I', 'G1'),
+(2, 4, 'Kelly', 2, 'Electrical Engineering II', 'G1'),
+(3, 4, 'Kelly', 5, 'Introduction to Mechanical Engineering II', 'G1');
 
 COMMIT;
 
