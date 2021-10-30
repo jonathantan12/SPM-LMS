@@ -165,10 +165,11 @@ function passTest(){
 var myTime = null;
 function myTimer(q){
     myTime = setTimeout(timer, 5000*q);
-    var now = new Date().getTime();
-    var countDownDate = new Date(now + q*5000);
+    var current = new Date().getTime();
+    var countDownDate = new Date(current + q*5000);
     // Update the count down every 1 second
     var x = setInterval(function() {
+        var now = new Date().getTime();
         // Find the distance between now and the count down date
         var distance = countDownDate - now;
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
