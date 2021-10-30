@@ -136,25 +136,25 @@ COMMIT;
 -- SECTION table (just section)
 --
 
-DROP TABLE IF EXISTS `section`;
-CREATE TABLE IF NOT EXISTS `section` (
-    `section_id` int(64) NOT NULL AUTO_INCREMENT, 
-    `course_id` int(64) NOT NULL,
-    `section_title` varchar(64) NOT NULL,
-    `order` int(11) NOT NULL,
-    PRIMARY KEY (`section_id`),
-    FOREIGN KEY (course_id) REFERENCES courses(course_id)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `section`;
+-- CREATE TABLE IF NOT EXISTS `section` (
+--     `section_id` int(64) NOT NULL AUTO_INCREMENT, 
+--     `course_id` int(64) NOT NULL,
+--     `section_title` varchar(64) NOT NULL,
+--     `order` int(11) NOT NULL,
+--     PRIMARY KEY (`section_id`),
+--     FOREIGN KEY (course_id) REFERENCES courses(course_id)
+-- ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `section`
---
+-- --
+-- -- Dumping data for table `section`
+-- --
 
-INSERT INTO `section` (`section_id`, `course_id`, `section_title`, `order`) VALUES
-(1, 1, 'Electrical Engineering 1',  1 ),
-(2, 1, 'Electrical Engineering 2',  2 ),
-(3, 1, 'Electrical Engineering 3',  3 );
-COMMIT;
+-- INSERT INTO `section` (`section_id`, `course_id`, `section_title`, `order`) VALUES
+-- (1, 1, 'Electrical Engineering 1',  1 ),
+-- (2, 1, 'Electrical Engineering 2',  2 ),
+-- (3, 1, 'Electrical Engineering 3',  3 );
+-- COMMIT;
 
 --
 -- SECTIONS table
