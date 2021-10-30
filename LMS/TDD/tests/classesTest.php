@@ -31,7 +31,7 @@ class classesTest extends \PHPUnit\Framework\TestCase
         $trainerName = $classes[0]->getTrainerName();
 
         $this->assertEquals(1, $courseId);
-        $this->assertEquals('Electrical Engineering', $courseName);
+        $this->assertEquals('Electrical Engineering I', $courseName);
         $this->assertEquals('G2', $className);
         $this->assertEquals('2021-01-01 00:00:00', $startDate);
         $this->assertEquals('2021-02-01 00:00:00', $endDate);
