@@ -2,8 +2,6 @@
 
 # junlong.toh.2019
 
-# require '../../LMS/lmsClasses/ClassesDAO.php';
-
 class classesTest extends \PHPUnit\Framework\TestCase 
 {
     public function testClassesAreReturned() 
@@ -19,6 +17,7 @@ class classesTest extends \PHPUnit\Framework\TestCase
 
         $mockRepo->method('getClassesWithVacancy')->willReturn($mockClassesObject);
 
+        
         $classes = $mockRepo->getClassesWithVacancy(); #Getting back the database object
 
         $courseId = $classes[0]->getCourseId();
