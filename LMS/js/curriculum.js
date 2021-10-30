@@ -2,7 +2,7 @@
 
 var quizTitle = "";
 var quizType = "";
-var cid = "2"; //hard code, this is course id, if you want to change the id , just change here
+var cid = "1"; //hard code, this is course id, if you want to change the id , just change here
 var ccid = "1";// this is the class number for each course
 var sid = "1"; //hard code
 var qid = "1"; //quiz_id for now is always 1,hard code
@@ -246,7 +246,7 @@ function addQuiz(){
 
             quizTitle = "";
             quizType = "";
-            cid = "2"; //hard code, this is course id, if you want to change the id , just change here
+            cid = "1"; //hard code, this is course id, if you want to change the id , just change here
             ccid = "1";// this is the class number for each course
             sid = "1"; //hard code
             qid = parseInt(qid)+1 //quiz_id for now is always 1,hard code
@@ -270,7 +270,7 @@ function addQuiz(){
 
 window.addEventListener('load', function() {
     var arr =[];
-    var cid = "2"; //hard code, this is course id, if you want to change the id , just change here
+    var cid = "1"; //hard code, this is course id, if you want to change the id , just change here
     var ccid = "1";// this is the class number for each course
     var sid = "1"; //hard code
     arr.push(cid, ccid, sid);
@@ -279,7 +279,9 @@ window.addEventListener('load', function() {
         method:"post",
         data: {arr:JSON.stringify(arr)},
         success: function(res){
+            //console.log(res);
             var quiz = JSON.parse(res)
+            
             if (quiz.length == 0){
                 console.log("There is no quiz for this section yet")
             }else{
@@ -351,7 +353,7 @@ window.addEventListener('load', function() {
 
 function deleteQuizSection(quizId){
     var arr =[];
-    var cid = "2"; //hard code, this is course id, if you want to change the id , just change here
+    var cid = "1"; //hard code, this is course id, if you want to change the id , just change here
     var ccid = "1";// this is the class number for each course
     var sid = "1"; //hard code
     arr.push(cid, ccid, sid, quizId);

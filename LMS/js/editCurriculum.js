@@ -9,7 +9,7 @@ var editedQno =[];
 var arr = []; //cid, ccid, sid, quizid
 var numberOfQuestions ="";
 function retrieveQuiz(qid){
-    var cid = "2"; //hard code, this is course id, if you want to change the id , just change here
+    var cid = "1"; //hard code, this is course id, if you want to change the id , just change here
     var ccid = "1";// this is the class number for each course
     var sid = "1"; //hard code
     var quizid = qid ;
