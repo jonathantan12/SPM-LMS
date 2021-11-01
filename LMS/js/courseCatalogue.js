@@ -15,9 +15,11 @@ else{
 var courses = {};
 var requiredCourses = {};
 var completedCourses = {};
+var preRequisiteCourse = {};
 var completedCoursesUrl = "../LMS/backend/getCompletedCourses.php";
 var engineerRequiredCourseUrl = "../LMS/backend/getEngineersAndRequiredCourses.php";
 var courseUrl = "../LMS/backend/getClasses.php";
+
 function retrieveAllCourses(res) {
     var numCourses = res.length;
     for (var i=0; i< numCourses ;i++) {
@@ -27,30 +29,6 @@ function retrieveAllCourses(res) {
             "end_date": res[i].end_date,
             "start_date": res[i].start_date,
             "slots_available": res[i].slots_available
-        }
-    }
-}
-console.log(courses)
-function retrieveEngineerRequiredCourses(res) {
-    var userRequiredCourses = res[user_name]["courses"];
-    var requiredCoursesHtml = document.getElementById("coursesAvailable");
-    var numRequiredCourses = userRequiredCourses.length;
-    if (userRequiredCourses) {
-        for (var x=0; x< numRequiredCourses ;x++) {
-            var changeHTML =    `
-            <div class="col-sm-6 col-md-4">
-                <div class="card" style="width: 20rem;">
-                <a href="#"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
-                    <div class="card-body">
-                        <h5 class="card-title text-center">${userRequiredCourses[x].course_name}<br>(Required)</h5>
-                        <p class="card-text">Class size: <span>${courses[userRequiredCourses[x].course_name]["slots_available"]}</span></p>
-                        <p class="card-text">Duration: <span>${courses[userRequiredCourses[x].course_name].start_date} - ${courses[userRequiredCourses[x].course_name].end_date}</span></p>
-                        <a href="enrol.html?courseId=${userRequiredCourses[x].course_id}" class="btn btn-outline-success" id="enrol ${userRequiredCourses[x].course_name}">Enrol</a>
-                    </div>
-                </div>
-            </div> `;
-                                
-            requiredCoursesHtml.innerHTML += changeHTML;
         }
     }
 }
@@ -69,7 +47,75 @@ function retrieveAllCompleted(res) {
             }
         }
     }
-    console.log(completedCourses)
+}
+
+function retrieveAllCoursesPrerequisites(res) {
+    var preReqCourses = res.length;
+    for (var i=0; i< preReqCourses ;i++) {
+        preRequisiteCourse[res[i].course_name] = {
+            "course_id": res[i].course_id,
+            "end_date": res[i].end_date,
+            "prerequisite_course_id": res[i].prerequisite_course_id,
+            "prerequisite_course_name": res[i].prerequisite_course_name
+        }
+    }
+}
+
+function retrieveEngineerRequiredCourses(res) {
+    var userRequiredCourses = res[user_name]["courses"];
+    var requiredCoursesHtml = document.getElementById("coursesAvailable");
+    var numRequiredCourses = userRequiredCourses.length;
+    if (userRequiredCourses) {
+        var x;
+        for (x=0; x< numRequiredCourses ;x++) {
+            var url = "../LMS/backend/getCoursePrerequisites.php?course_id=" + userRequiredCourses[x]["course_id"];
+            var request = new XMLHttpRequest();
+            var completePreReq = false;
+            request.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var response = JSON.parse(this.responseText);
+                    var numPreReqCourses = response.length;
+                    for (var i=0; i< numPreReqCourses ;i++) {
+                        if (response[i]["prerequisite_course_name"] in completedCourses){
+                            completePreReq = true;
+                        } else {
+                            completePreReq = false;
+                            break
+                        }
+                    }
+                    if (completePreReq){
+                        var changeHTML =    `
+                            <div class="col-sm-6 col-md-4">
+                                <div class="card" style="width: 20rem;">
+                                <a href="#"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">${response[0].course_name}<br>(Required)</h5>
+                                        <p class="card-text">Class size: <span>${courses[response[0].course_name]["slots_available"]}</span></p>
+                                        <p class="card-text">Duration: <span>${courses[response[0].course_name].start_date} - ${courses[response[0].course_name].end_date}</span></p>
+                                        <a href="enrol.html?courseId=${response[0].course_id}" class="btn btn-outline-success" id="enrol ${response[0].course_name}">Enrol</a>
+                                    </div>
+                                </div>
+                            </div> `;
+                                            
+                        requiredCoursesHtml.innerHTML += changeHTML;
+                    } else {
+                        var changeHTML =    `
+                            <h1>You are currently not eligible for ${userRequiredCourses[x].course_name}. Please ensure that you have completed the following pre-requisite courses:</h1>
+                            <ul>`;
+                        for (var i=0; i< numPreReqCourses ;i++) {
+                            changeHTML += `<li>${response[i]["prerequisite_course_name"]}</li>`;
+                        }
+                                
+                        changeHTML += `</ul>`;
+                                                
+                        requiredCoursesHtml.innerHTML += changeHTML;
+                    }
+                }
+            }
+            request.open("GET", url, true)
+            request.send()
+        }
+    }
 }
 
 function callToDb(url, cFunction) {
@@ -85,4 +131,4 @@ function callToDb(url, cFunction) {
 
 callToDb(engineerRequiredCourseUrl, retrieveEngineerRequiredCourses);
 callToDb(courseUrl, retrieveAllCourses);
-
+callToDb(completedCoursesUrl, retrieveAllCompleted);

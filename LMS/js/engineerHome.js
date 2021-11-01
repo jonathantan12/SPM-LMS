@@ -1,5 +1,5 @@
 sessionStorage.setItem("user_id","1");
-sessionStorage.setItem("user_name","Jonathan");
+sessionStorage.setItem("user_name","Jonathan")
 
 var url1 = "../LMS/backend/getClasses.php";
 var url2 = "../LMS/backend/retrieveEnrolledCourses.php";
