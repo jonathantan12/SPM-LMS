@@ -40,7 +40,7 @@ function retrieveAllEnrolled(res) {
     var numEnrolledCourses = enrolledCourses.length;
     if (enrolledCourses) {
         for (var i=0; i< numEnrolledCourses ;i++) {
-            var changeDropdownItem = `<li><a class="dropdown-item" href="#">${enrolledCourses[i].course_name}</a></li>`;
+            var changeDropdownItem = `<li><a class="dropdown-item" href="engineerCoursePage.html?courseId=${enrolledCourses[i].course_id}">${enrolledCourses[i].course_name}</a></li>`;
             enrolledDropdown.innerHTML += changeDropdownItem;
         }
     }
@@ -52,7 +52,7 @@ function retrieveAllCompleted(res) {
     var numCompletedCourses = res.length;
     if (completed) {
         for (var i=0; i< numCompletedCourses ;i++) {
-            var changeDropdownItem = `<a class="dropdown-item" href="#">${res[i].course_name}</a>`;
+            var changeDropdownItem = `<a class="dropdown-item" href="engineerCoursePage.html?courseId=${res[i].course_id}">${res[i].course_name}</a>`;
             completedDropdown.innerHTML += changeDropdownItem;
         }
     }

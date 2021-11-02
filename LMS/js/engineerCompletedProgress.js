@@ -32,7 +32,7 @@ function getEngineerCourseProgress(obj) {
                             </div>
                         </div> 
                         `;
-        var changeDropdownItem = `<a class="dropdown-item" href="#">${obj[i].course_name}</a>`;
+        var changeDropdownItem = `<a class="dropdown-item" href="engineerCoursePage.html?courseId=${obj[i].course_id}">${obj[i].course_name}</a>`;
         completedDropdown.innerHTML += changeDropdownItem;
     }   
 
@@ -87,7 +87,7 @@ function retrieveAllEnrolled(res) {
     var numEnrolledCourses = enrolledCourses.length;
     if (enrolledCourses) {
         for (var i=0; i< numEnrolledCourses ;i++) {
-            var changeDropdownItem = `<li><a class="dropdown-item" href="#">${enrolledCourses[i].course_name}</a></li>`;
+            var changeDropdownItem = `<li><a class="dropdown-item" href="engineerCoursePage.html?courseId=${enrolledCourses[i].course_id}">${enrolledCourses[i].course_name}</a></li>`;
             enrolledDropdown.innerHTML += changeDropdownItem;
         }
     }
