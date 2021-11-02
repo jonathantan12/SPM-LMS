@@ -410,3 +410,24 @@ INSERT INTO `quiz_progress` ( `user_id`, `course_id`, `course_class_id`, `sectio
 (1, 1, 2, 2, 'Not Completed'),
 (1, 1, 2, 3, 'Not Completed');
 COMMIT;
+
+DROP TABLE IF EXISTS `materials`;
+CREATE TABLE IF NOT EXISTS `materials` (
+    `course_id` int(64) NOT NULL ,
+    `course_class_id` int(64) NOT NULL,
+    `section_id` int(64) NOT NULL,
+    `material_id` int(64) NOT NULL,
+    `material_name` varchar(100) NOT NULL,
+    `material_url` varchar(80) NOT NULL,
+    `completion_status` varchar(80) NOT NULL
+    -- FOREIGN KEY (section_id) REFERENCES sections(section_id)
+);
+
+ALTER TABLE materials ADD CONSTRAINT PK_Material PRIMARY KEY (course_id,course_class_id,section_id,material_id);
+
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (8, 1, 1, 1, 'What is Scrum?', 'https://www.youtube.com/watch?v=oTZd2vo3FQU', 'Not Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (8, 1, 2, 1, 'Scrum in under 5 Minutes', 'https://www.youtube.com/watch?v=2Vt7Ik8Ublw', 'Not Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (8, 1, 3, 1, 'Scrum Methodology', 'https://www.youtube.com/watch?v=8dGdIcyDk1w', 'Not Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (4, 1, 1, 1, 'What is Mechanical Engineering?', 'https://www.youtube.com/watch?v=W74y1RxN6BA', 'Not Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (4, 1, 2, 1, 'Fundamentals of Mechanical Engineering','https://www.youtube.com/watch?v=ehi_hkLlutw','Not Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (4, 1, 3, 1, 'How to be a Mechanical Engineer in Nepal?', 'https://www.youtube.com/watch?v=t0W_Qq2-hkM', 'Not Completed');

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Engineer - Quiz</title>
+        <title></title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/lms.png" />
         <!-- Bootstrap icons-->
@@ -113,6 +113,7 @@
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark flex-shrink-0">
     <div class="container-fluid px-5">
       <a class="navbar-brand" href="index.html">LMS</a>
+      <h4 id="courseName" class="text-white"></h4>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContents" aria-controls="navbarContents" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -149,6 +150,19 @@
       </div>
     </div>
   </nav>
+  <ul class="nav">
+    
+  </ul>
+  <div class="col-sm-6 col-md-4">
+      <div class="card" style="width: 20rem;">
+      <a href="course.html?courseId=${enrolledCourses[i].course_id}"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
+          <div class="card-body">
+              <h5 class="card-title">${enrolledCourses[i].course_name}</h5>
+              <p class="card-text">Duration: <span>${courses[enrolledCourses[i].course_name].start_date} - ${courses[enrolledCourses[i].course_name].end_date}</span></p>
+              <p class="card-text">Sections progress: <span>5/10</span></p>
+          </div>
+      </div>
+  </div> 
   <div class="sidenav">
       
     <button class="dropdown-btn">Chapter 1 
@@ -164,7 +178,8 @@
     <p id="quizType"></p>
     <button type="button" class="btn btn-primary btn-small" style="float: left; margin: 5px;" onclick=" location.href = 'quiz.html'; "> Start Quiz </button>    
   </div>
- 
+  
+  <script src="js/course.js"></script>
   <script>
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
   var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -183,19 +198,6 @@
   }
   </script>
   
-
-
-
-
-
-
-
-
-
-
-
-
-
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>

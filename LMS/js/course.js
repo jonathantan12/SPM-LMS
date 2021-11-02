@@ -1,17 +1,56 @@
-sessionStorage.setItem("user_id","1");
-sessionStorage.setItem("user_name","Jonathan")
+const queryString = location.search.substring(1);
+const urlParams = new URLSearchParams(queryString);
+const courseId = urlParams.get('courseId');
+if(sessionStorage.getItem("user_id")){
+    var userId = sessionStorage.getItem("user_id");
+}
+else{
+    sessionStorage.setItem("user_id","1");
+}
+if(sessionStorage.getItem("user_name")){
+    var userName = sessionStorage.getItem("user_name");
+}
+else{
+    sessionStorage.setItem("user_name","Jonathan");
+}
+var enrolledCourseUrl = "../LMS/backend/getEnrolledCourses.php";
+function retrieveCourseName(res) {
+    var numCourses = res.length;
+    var queryString = location.search.substring(1);
+    var urlParams = new URLSearchParams(queryString);
+    var courseId = urlParams.get('courseId');
+    var courseTabHtml = document.getElementsByTagName('title');
+    var courseTitleHtml = document.getElementById("courseName");
+    for (var i=0; i< numCourses ;i++) {
+        if (res[i].course_id == courseId) {
+            courseTabHtml[0].innerText = res[i].course_name;
+            courseTitleHtml.innerText = res[i].course_name;
+        }
+    }
+}
+
+// var changeHTML =    `
+// <div class="col-sm-6 col-md-4">
+//     <div class="card" style="width: 20rem;">
+//     <a href="course.html?courseId=${enrolledCourses[i].course_id}"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
+//         <div class="card-body">
+//             <h5 class="card-title">${enrolledCourses[i].course_name}</h5>
+//             <p class="card-text">Duration: <span>${courses[enrolledCourses[i].course_name].start_date} - ${courses[enrolledCourses[i].course_name].end_date}</span></p>
+//             <p class="card-text">Sections progress: <span>5/10</span></p>
+//         </div>
+//     </div>
+// </div> 
+// `;
+// enrolledCoursesHtml.innerHTML += changeHTML;
 
 var url1 = "../LMS/backend/getClasses.php";
 var url2 = "../LMS/backend/retrieveEnrolledCourses.php";
 var url3 = "../LMS/backend/getCompletedCourses.php";
-var quizUrl = "";
 
 
 var courses = {};
 var enrolled = {};
 var completed = {};
-var quizzes = {};
-var quizProgress = {};
 function retrieveAllCourses(res) {
     var response = res;
     var numCourses = response.length;
@@ -26,7 +65,6 @@ function retrieveAllCourses(res) {
 }
 
 function retrieveAllEnrolled(res) {
-    var enrolledCoursesHtml = document.getElementById("coursesEnrolled");
     var enrolledDropdown = document.getElementById("currentlyEnrolled");
     var enrolledCourses = res;
     var numEnrolledCourses = enrolledCourses.length;
@@ -38,29 +76,16 @@ function retrieveAllEnrolled(res) {
                 "user_id": enrolledCourses[i].user_id,
                 "user_name": enrolledCourses[i].user_name
             }
-            var changeHTML =    `
-            <div class="col-sm-6 col-md-4">
-                <div class="card" style="width: 20rem;">
-                <a href="engineerCoursePage.html?courseId=${enrolledCourses[i].course_id}"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
-                    <div class="card-body">
-                        <h5 class="card-title">${enrolledCourses[i].course_name}</h5>
-                        <p class="card-text">Duration: <span>${courses[enrolledCourses[i].course_name].start_date} - ${courses[enrolledCourses[i].course_name].end_date}</span></p>
-                        <p class="card-text">Sections progress: <span>5/10</span></p>
-                    </div>
-                </div>
-            </div> 
-            `;
-            enrolledCoursesHtml.innerHTML += changeHTML;
             var changeDropdownItem = `<li><a class="dropdown-item" href="#">${enrolledCourses[i].course_name}</a></li>`;
             enrolledDropdown.innerHTML += changeDropdownItem;
         }
     }
 }
+
 function retrieveAllCompleted(res) {
-    var completedCoursesHtml = document.getElementById("completedCourses");
     var completedDropdown = document.getElementById("completed");
     var numCompletedCourses = res.length;
-    if (completedCourses) {
+    if (res) {
         for (var i=0; i< numCompletedCourses ;i++) {
             completed[res[i].course_name] = {
                 "completed_course_id": res[i].completed_course_id,
@@ -69,19 +94,6 @@ function retrieveAllCompleted(res) {
                 "user_id": res[i].user_id,
                 "user_name": res[i].user_name
             }
-            var changeHTML =    `
-            <div class="col-sm-6 col-md-4">
-                <div class="card" style="width: 20rem;">
-                <a href="engineerCoursePage.html?courseId=${res[i].course_id}"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
-                    <div class="card-body">
-                        <h5 class="card-title">${res[i].course_name}</h5>
-                        <p class="card-text">Duration: <span>${courses[res[i].course_name].start_date} - ${courses[res[i].course_name].end_date}</span></p>
-                        <p class="card-text">Sections progress: <span>5/10</span></p>
-                    </div>
-                </div>
-            </div> 
-            `;
-            completedCoursesHtml.innerHTML += changeHTML;
             var changeDropdownItem = `<a class="dropdown-item" href="#">${res[i].course_name}</a>`;
             completedDropdown.innerHTML += changeDropdownItem;
         }
@@ -102,3 +114,4 @@ function callToDb(url, cFunction) {
 callToDb(url1, retrieveAllCourses);
 callToDb(url2, retrieveAllEnrolled);
 callToDb(url3, retrieveAllCompleted);
+callToDb(enrolledCourseUrl, retrieveCourseName);
