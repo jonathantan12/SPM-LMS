@@ -3,7 +3,11 @@
     $dao = new sectionsDAO();
     // Use this to pass in the course_id variable into the class function currently it is hard coded.
     // $course_id = $_GET["course_id"];
-    $course_id = 1;
+    if(isset($_GET['courseId'])){
+        $course_id = $_GET['courseId'];
+    } else {
+        $course_id = 1;
+    }
 
     $sections= $dao->getSections($course_id);
 

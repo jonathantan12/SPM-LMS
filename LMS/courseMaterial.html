@@ -21,7 +21,7 @@
     width: 200px;
     position: fixed;
     z-index: 1;
-    top: 0;
+    /* top: 0; */
     left: 0;
     background-color: #111;
     overflow-x: hidden;
@@ -108,7 +108,7 @@
 </head>
 
 
-<body onload = "getQuiz('1','1','1',1)">
+<body>
   <!-- Navigation-->
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark flex-shrink-0">
     <div class="container-fluid px-5">
@@ -118,6 +118,9 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarContents">
+        <a href="engineerHome.html" class="btn btn-dark ml-auto">
+          Engineer Home
+        </a>
         <ul class="navbar-nav ml-auto">
           <!-- This is the dropdown for all courses, may not be required for admins and trainers -->
           <li class="nav-item dropdown btn-group">
@@ -150,53 +153,33 @@
       </div>
     </div>
   </nav>
-  <ul class="nav">
-    
-  </ul>
-  <div class="col-sm-6 col-md-4">
-      <div class="card" style="width: 20rem;">
-      <a href="course.html?courseId=${enrolledCourses[i].course_id}"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
-          <div class="card-body">
-              <h5 class="card-title">${enrolledCourses[i].course_name}</h5>
-              <p class="card-text">Duration: <span>${courses[enrolledCourses[i].course_name].start_date} - ${courses[enrolledCourses[i].course_name].end_date}</span></p>
-              <p class="card-text">Sections progress: <span>5/10</span></p>
-          </div>
-      </div>
-  </div> 
-  <div class="sidenav">
-      
-    <button class="dropdown-btn">Chapter 1 
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-container">
-      <a href="#">Lesson 1</a>
-      <a href="engineerQuiz.html">Quiz 1</a>
+  <div class="container-fluid" id="courseOverview">
+    <div class="row bg-dark">
+      <ul class="nav nav-pills flex-column flex-sm-row">
+        <li class="nav-item">
+          <a class="flex-sm-fill text-sm-center nav-link text-white" href="engineerCoursePage.html" id="individualCourseHome">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="flex-sm-fill text-sm-center nav-link text-white disabled">Forum</a>
+        </li>
+        <li class="nav-item">
+          <a class="flex-sm-fill text-sm-center nav-link text-white active" href="courseMaterial.html" id="courseMaterial">Curriculums</a>
+        </li>
+      </ul>
     </div>
-  </div>
-  
-  <div class="main">
-    <p id="quizType"></p>
-    <button type="button" class="btn btn-primary btn-small" style="float: left; margin: 5px;" onclick=" location.href = 'quiz.html'; "> Start Quiz </button>    
-  </div>
-  
-  <script src="js/course.js"></script>
-  <script>
-  /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-  var dropdown = document.getElementsByClassName("dropdown-btn");
-  var i;
-  
-  for (i = 0; i < dropdown.length; i++) {
-    dropdown[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var dropdownContent = this.nextElementSibling;
-    if (dropdownContent.style.display === "block") {
-    dropdownContent.style.display = "none";
-    } else {
-    dropdownContent.style.display = "block";
-    }
-    });
-  }
-  </script>
+
+    <div class="sidenav" id="sideNav">
+
+    </div>
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col my-5" id="material">
+
+      </div>
+    </div>
+
+    
+  </div> 
   
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
@@ -204,6 +187,7 @@
 
   <!-- JS here -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="js/coursePage.js"></script>
   <script src="js/getQuiz.js"></script>
 </body>
 </html>

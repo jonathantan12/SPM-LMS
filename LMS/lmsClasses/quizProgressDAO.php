@@ -2,25 +2,47 @@
 class QuizProgressDAO {
 
     //retrieve all info of a particular user
+    public function getAllCompletionStatus($user_id,$course_id,$course_class_id) {
+        $connMgr = new ConnectionManager();
+        $conn = $connMgr->getConnection();
+
+        $sql = 'SELECT * FROM quiz_progress WHERE user_id = :user_id && course_id = :course_id && course_class_id = :course_class_id'; 
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':course_id',$course_id, PDO::PARAM_INT);
+        $stmt->bindParam(':course_class_id',$course_class_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+        $result = [];
+        while($row = $stmt->fetch() ) {
+            $result[] = new quizProgress($row['user_id'],$row['course_id'],$row['course_class_id'],$row['section_id'],$row['completion_status']);
+        }
+
+        $stmt = null;
+        $conn = null;
+
+        return $result;
+    }
+    //retrieve all info of a particular user
     public function getCompletionStatus($user_id,$course_id,$course_class_id, $section_id) {
         $connMgr = new ConnectionManager();
         $conn = $connMgr->getConnection();
 
-        $sql = 'SELECT completion_status FROM quiz_progress WHERE user_id = :user_id && course_id = :course_id && course_class_id = :course_class_id && section_id = :section_id'; 
+        $sql = 'SELECT * FROM quiz_progress WHERE user_id = :user_id && course_id = :course_id && course_class_id = :course_class_id && section_id = :section_id'; 
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->bindParam(':course_id',$course_id, PDO::PARAM_INT);
         $stmt->bindParam(':course_class_id',$course_class_id, PDO::PARAM_INT);
         $stmt->bindParam(':section_id', $section_id, PDO::PARAM_INT);
-        $stmt->bindParam(':completion_status', $completion_status, PDO::PARAM_STR);
-
-
         $stmt->execute();
+
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
         $result = [];
-        while( $row = $stmt->fetch() ) {
-            $result[] = new quizProgress($row['completion_status']);
+        while($row = $stmt->fetch() ) {
+            $result[] = new quizProgress($row['user_id'],$row['course_id'],$row['course_class_id'],$row['section_id'],$row['completion_status']);
         }
 
         $stmt = null;
