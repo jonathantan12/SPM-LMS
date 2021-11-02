@@ -1,13 +1,17 @@
 sessionStorage.setItem("user_id","1");
-sessionStorage.setItem("user_name","Jonathan");
+sessionStorage.setItem("user_name","Jonathan")
 
 var url1 = "../LMS/backend/getClasses.php";
 var url2 = "../LMS/backend/retrieveEnrolledCourses.php";
 var url3 = "../LMS/backend/getCompletedCourses.php";
+var quizUrl = "";
+
 
 var courses = {};
 var enrolled = {};
 var completed = {};
+var quizzes = {};
+var quizProgress = {};
 function retrieveAllCourses(res) {
     var response = res;
     var numCourses = response.length;
@@ -37,12 +41,11 @@ function retrieveAllEnrolled(res) {
             var changeHTML =    `
             <div class="col-sm-6 col-md-4">
                 <div class="card" style="width: 20rem;">
-                <a href="#"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
+                <a href="course.html?courseId=${enrolledCourses[i].course_id}"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
                     <div class="card-body">
                         <h5 class="card-title">${enrolledCourses[i].course_name}</h5>
                         <p class="card-text">Duration: <span>${courses[enrolledCourses[i].course_name].start_date} - ${courses[enrolledCourses[i].course_name].end_date}</span></p>
-                        <p class="card-text">Materials completion progress: <span>5/10</span></p>
-                        <p class="card-text">Quiz completion progress: <span>5/10</span></p>
+                        <p class="card-text">Sections progress: <span>5/10</span></p>
                     </div>
                 </div>
             </div> 
@@ -69,12 +72,11 @@ function retrieveAllCompleted(res) {
             var changeHTML =    `
             <div class="col-sm-6 col-md-4">
                 <div class="card" style="width: 20rem;">
-                <a href="#"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
+                <a href="course.html?courseId=${res[i].course_id}"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
                     <div class="card-body">
                         <h5 class="card-title">${res[i].course_name}</h5>
                         <p class="card-text">Duration: <span>${courses[res[i].course_name].start_date} - ${courses[res[i].course_name].end_date}</span></p>
-                        <p class="card-text">Materials completion progress: <span>5/10</span></p>
-                        <p class="card-text">Quiz completion progress: <span>5/10</span></p>
+                        <p class="card-text">Sections progress: <span>5/10</span></p>
                     </div>
                 </div>
             </div> 
