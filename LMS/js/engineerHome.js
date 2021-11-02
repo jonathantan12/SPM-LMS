@@ -49,7 +49,7 @@ function retrieveAllEnrolled(res) {
             </div> 
             `;
             enrolledCoursesHtml.innerHTML += changeHTML;
-            var changeDropdownItem = `<li><a class="dropdown-item" href="#">${enrolledCourses[i].course_name}</a></li>`;
+            var changeDropdownItem = `<li><a class="dropdown-item" href="engineerCoursePage.html?courseId=${enrolledCourses[i].course_id}">${enrolledCourses[i].course_name}</a></li>`;
             enrolledDropdown.innerHTML += changeDropdownItem;
         }
     }
@@ -79,7 +79,7 @@ function retrieveAllCompleted(res) {
             </div> 
             `;
             completedCoursesHtml.innerHTML += changeHTML;
-            var changeDropdownItem = `<a class="dropdown-item" href="#">${res[i].course_name}</a>`;
+            var changeDropdownItem = `<a class="dropdown-item" href="engineerCoursePage.html?courseId=${res[i].course_id}">${res[i].course_name}</a>`;
             completedDropdown.innerHTML += changeDropdownItem;
         }
     }

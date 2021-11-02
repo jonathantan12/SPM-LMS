@@ -40,7 +40,7 @@ function retrieveAllEnrolled(res) {
     var numEnrolledCourses = enrolledCourses.length;
     if (enrolledCourses) {
         for (var i=0; i< numEnrolledCourses ;i++) {
-            var changeDropdownItem = `<li><a class="dropdown-item" href="#">${enrolledCourses[i].course_name}</a></li>`;
+            var changeDropdownItem = `<li><a class="dropdown-item" href="engineerCoursePage.html?courseId=${enrolledCourses[i].course_id}">${enrolledCourses[i].course_name}</a></li>`;
             enrolledDropdown.innerHTML += changeDropdownItem;
         }
     }
@@ -59,7 +59,7 @@ function retrieveAllCompleted(res) {
                 "user_id": res[i].user_id,
                 "user_name": res[i].user_name
             }
-            var changeDropdownItem = `<a class="dropdown-item" href="#">${res[i].course_name}</a>`;
+            var changeDropdownItem = `<a class="dropdown-item" href="engineerCoursePage.html?courseId=${res[i].course_id}">${res[i].course_name}</a>`;
             completedDropdown.innerHTML += changeDropdownItem;
         }
     }
@@ -103,7 +103,7 @@ function retrieveEngineerRequiredCourses(res) {
                         var changeHTML =    `
                             <div class="col-sm-6 col-md-4">
                                 <div class="card" style="width: 20rem;">
-                                <a href="#"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
+                                    <img src="assets/placeholder_img.png" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">${response[0].course_name}<br>(Required)</h5>
                                         <p class="card-text">Class size: <span>${courses[response[0].course_name]["slots_available"]}</span></p>

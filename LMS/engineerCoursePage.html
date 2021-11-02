@@ -41,6 +41,9 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarContents">
+        <a href="engineerHome.html" class="btn btn-dark ml-auto">
+          Engineer Home
+        </a>
         <ul class="navbar-nav ml-auto">
           <!-- This is the dropdown for all courses, may not be required for admins and trainers -->
           <li class="nav-item dropdown btn-group">
@@ -75,7 +78,15 @@
   </nav>
 
   <div class="container-fluid" id="courseOverview ">
-    
+    <div class="col-sm-6 col-md-4">
+      <div class="card" style="width: 20rem;">
+      <a href="engineerCoursePage.html?courseId=${enrolledCourses[i].course_id}"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
+          <div class="card-body">
+              <h5 class="card-title">${enrolledCourses[i].course_name}</h5>
+              <p class="card-text">Duration: <span>${courses[enrolledCourses[i].course_name].start_date} - ${courses[enrolledCourses[i].course_name].end_date}</span></p>
+          </div>
+      </div>
+  </div> 
   </div>
   <script src="js/course.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
