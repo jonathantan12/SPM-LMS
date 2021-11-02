@@ -15,6 +15,8 @@ else{
 }
 var courseName = "";
 var courseUrl = "../LMS/backend/getCourses.php";
+var enrolledCourseUrl = "../LMS/backend/retrieveEnrolledCourses.php";
+var completedCoursesUrl = "../LMS/backend/getCompletedCourses.php";
 function retrieveAndPrintCourse(res) {
     var numCourses = res.length;
     var courseNameHtml = document.getElementById("courseName");
@@ -32,6 +34,30 @@ function retrieveAndPrintCourse(res) {
     }
 }
 
+function retrieveAllEnrolled(res) {
+    var enrolledDropdown = document.getElementById("currentlyEnrolled");
+    var enrolledCourses = res;
+    var numEnrolledCourses = enrolledCourses.length;
+    if (enrolledCourses) {
+        for (var i=0; i< numEnrolledCourses ;i++) {
+            var changeDropdownItem = `<li><a class="dropdown-item" href="#">${enrolledCourses[i].course_name}</a></li>`;
+            enrolledDropdown.innerHTML += changeDropdownItem;
+        }
+    }
+}
+
+function retrieveAllCompleted(res) {
+    var completedDropdown = document.getElementById("completed")
+    var completed = res;
+    var numCompletedCourses = res.length;
+    if (completed) {
+        for (var i=0; i< numCompletedCourses ;i++) {
+            var changeDropdownItem = `<a class="dropdown-item" href="#">${res[i].course_name}</a>`;
+            completedDropdown.innerHTML += changeDropdownItem;
+        }
+    }
+}
+
 function callToDb(url, cFunction) {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
@@ -44,6 +70,8 @@ function callToDb(url, cFunction) {
 }
 
 callToDb(courseUrl, retrieveAndPrintCourse);
+callToDb(enrolledCourseUrl, retrieveAllEnrolled);
+callToDb(completedCoursesUrl, retrieveAllCompleted);
 
 var enrolBtn = document.getElementById("enrolToCourse");
 enrolBtn.addEventListener("click", enrolUser);
