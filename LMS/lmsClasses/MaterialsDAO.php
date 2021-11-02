@@ -2,14 +2,13 @@
 require_once 'autoload.php';
 
 class MaterialsDAO {
-    public function retrieveAll($course_id,$course_class_id,$section_id){
+    public function retrieveAll($course_id,$course_class_id){
         $connMgr = new ConnectionManager();
         $pdo = $connMgr->getConnection();
-        $sql = 'select * from materials where course_id=:course_id AND course_class_id=:course_class_id AND section_id=:section_id ;';
+        $sql = 'select * from materials where course_id=:course_id AND course_class_id=:course_class_id ;';
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':course_id',$course_id, PDO::PARAM_INT);
         $stmt->bindParam(':course_class_id',$course_class_id, PDO::PARAM_INT);
-        $stmt->bindParam(':section_id', $section_id, PDO::PARAM_INT);
        
         $stmt->execute();
 

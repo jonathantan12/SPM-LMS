@@ -180,7 +180,13 @@ CREATE TABLE IF NOT EXISTS `sections` (
 INSERT INTO `sections` (`section_id`, `course_id`, `course_name`, `class_name`,`course_section_number`, `section_name`, `course_material_link`) VALUES
 (1, 1, 'Electrical Engineering', 'G1', 1, 'Introduction','url'),
 (2, 1, 'Electrical Engineering', 'G2', 1, 'Introduction','url'),
-(3, 1, 'Electrical Engineering', 'G1', 2, 'The Second Chapter','url');
+(3, 1, 'Electrical Engineering', 'G1', 2, 'The Second Chapter','url'),
+(4, 4, 'Introduction to Mechanical Engineering I', 'G1', 1, 'Introduction','url'),
+(5, 4, 'Introduction to Mechanical Engineering I', 'G2', 1, 'Introduction','url'),
+(6, 4, 'Introduction to Mechanical Engineering I', 'G1', 2, 'The Second Chapter','url'),
+(7, 3, 'Electrical Engineering III', 'G1', 1, 'Introduction','url'),
+(8, 3, 'Electrical Engineering III', 'G2', 1, 'Introduction','url'),
+(9, 3, 'Electrical Engineering III', 'G1', 2, 'The Second Chapter','url');
 COMMIT;
 
 
@@ -408,7 +414,10 @@ ALTER TABLE quiz_progress ADD CONSTRAINT PK_Quiz PRIMARY KEY (user_id,course_id,
 INSERT INTO `quiz_progress` ( `user_id`, `course_id`, `course_class_id`, `section_id`, `completion_status`) VALUES
 (1, 1, 1, 1, 'Not Completed'),
 (1, 1, 2, 2, 'Not Completed'),
-(1, 1, 2, 3, 'Not Completed');
+(1, 1, 2, 3, 'Not Completed'),
+(1, 4, 1, 1, 'Not Completed'),
+(1, 4, 1, 2, 'Not Completed'),
+(1, 4, 2, 3, 'Not Completed');
 COMMIT;
 
 DROP TABLE IF EXISTS `materials`;
