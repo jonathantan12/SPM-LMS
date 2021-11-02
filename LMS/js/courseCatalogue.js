@@ -19,6 +19,7 @@ var preRequisiteCourse = {};
 var completedCoursesUrl = "../LMS/backend/getCompletedCourses.php";
 var engineerRequiredCourseUrl = "../LMS/backend/getEngineersAndRequiredCourses.php";
 var courseUrl = "../LMS/backend/getClasses.php";
+var enrolledCourseUrl = "../LMS/backend/retrieveEnrolledCourses.php";
 
 function retrieveAllCourses(res) {
     var numCourses = res.length;
@@ -33,7 +34,20 @@ function retrieveAllCourses(res) {
     }
 }
 
+function retrieveAllEnrolled(res) {
+    var enrolledDropdown = document.getElementById("currentlyEnrolled");
+    var enrolledCourses = res;
+    var numEnrolledCourses = enrolledCourses.length;
+    if (enrolledCourses) {
+        for (var i=0; i< numEnrolledCourses ;i++) {
+            var changeDropdownItem = `<li><a class="dropdown-item" href="#">${enrolledCourses[i].course_name}</a></li>`;
+            enrolledDropdown.innerHTML += changeDropdownItem;
+        }
+    }
+}
+
 function retrieveAllCompleted(res) {
+    var completedDropdown = document.getElementById("completed")
     var completed = res;
     var numCompletedCourses = res.length;
     if (completed) {
@@ -45,6 +59,8 @@ function retrieveAllCompleted(res) {
                 "user_id": res[i].user_id,
                 "user_name": res[i].user_name
             }
+            var changeDropdownItem = `<a class="dropdown-item" href="#">${res[i].course_name}</a>`;
+            completedDropdown.innerHTML += changeDropdownItem;
         }
     }
 }
@@ -92,7 +108,7 @@ function retrieveEngineerRequiredCourses(res) {
                                         <h5 class="card-title text-center">${response[0].course_name}<br>(Required)</h5>
                                         <p class="card-text">Class size: <span>${courses[response[0].course_name]["slots_available"]}</span></p>
                                         <p class="card-text">Duration: <span>${courses[response[0].course_name].start_date} - ${courses[response[0].course_name].end_date}</span></p>
-                                        <a href="enrol.html?courseId=${response[0].course_id}" class="btn btn-outline-success" id="enrol ${response[0].course_name}">Enrol</a>
+                                        <a href="enrol.html?courseId=${response[0].course_id}" class="stretched-link" id="enrol ${response[0].course_name}"></a>
                                     </div>
                                 </div>
                             </div> `;
@@ -132,3 +148,4 @@ function callToDb(url, cFunction) {
 callToDb(engineerRequiredCourseUrl, retrieveEngineerRequiredCourses);
 callToDb(courseUrl, retrieveAllCourses);
 callToDb(completedCoursesUrl, retrieveAllCompleted);
+callToDb(enrolledCourseUrl, retrieveAllEnrolled)
