@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS `courses`;
 CREATE TABLE IF NOT EXISTS `courses` (
     `course_id` int(64) NOT NULL AUTO_INCREMENT,
     `course_name` varchar(64) NOT NULL,
-    `course_desc` varchar(64) NOT NULL,
+    `course_desc` varchar(1000) NOT NULL,
     `image` varchar(64),
     PRIMARY KEY (`course_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
