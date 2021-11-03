@@ -133,55 +133,55 @@ INSERT INTO `classes` (`course_id`, `course_name`, `class_name`,`start_date`, `e
 COMMIT;
 
 
--- SECTION table (just section)
---
+-- - SECTION table (just section)
+-- --
 
--- DROP TABLE IF EXISTS `section`;
--- CREATE TABLE IF NOT EXISTS `section` (
---     `section_id` int(64) NOT NULL AUTO_INCREMENT, 
---     `course_id` int(64) NOT NULL,
---     `section_title` varchar(64) NOT NULL,
---     `order` int(11) NOT NULL,
---     PRIMARY KEY (`section_id`),
---     FOREIGN KEY (course_id) REFERENCES courses(course_id)
--- ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `section`;
+CREATE TABLE IF NOT EXISTS `section` (
+     `section_id` int(64) NOT NULL, 
+     `course_id` int(64) NOT NULL,
+     `course_class_id` int(64) NOT NULL,
+     `section_title` varchar(64) NOT NULL
+    
+ ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+ALTER TABLE section ADD CONSTRAINT PK_Quiz PRIMARY KEY (section_id,course_id,course_class_id);
 
 -- --
 -- -- Dumping data for table `section`
 -- --
-
--- INSERT INTO `section` (`section_id`, `course_id`, `section_title`, `order`) VALUES
--- (1, 1, 'Electrical Engineering 1',  1 ),
--- (2, 1, 'Electrical Engineering 2',  2 ),
--- (3, 1, 'Electrical Engineering 3',  3 );
--- COMMIT;
+INSERT INTO `section` (`section_id`, `course_id`, `course_class_id`,`section_title`) VALUES
+ (1, 1, 1, 'Electrical Engineering 1'),
+ (2, 1, 1, 'Electrical Engineering 2'),
+ (3, 1, 1, 'Electrical Engineering 3');
+COMMIT;
 
 --
 -- SECTIONS table
 --
 
-DROP TABLE IF EXISTS `sections`;
-CREATE TABLE IF NOT EXISTS `sections` (
-    `section_id` int(64) NOT NULL AUTO_INCREMENT, 
-    `course_id` int(64) NOT NULL,
-    `course_name` varchar(64) NOT NULL,
-    `class_name` varchar(64) NOT NULL,
-    `course_section_number` int(64) NOT NULL,
-    `section_name` varchar(64) NOT NULL,
-    `course_material_link` varchar(64) NOT NULL,
-    PRIMARY KEY (`section_id`),
-    FOREIGN KEY (course_id) REFERENCES courses(course_id)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+-- DROP TABLE IF EXISTS `sections`;
+-- CREATE TABLE IF NOT EXISTS `sections` (
+--     `section_id` int(64) NOT NULL AUTO_INCREMENT, 
+--     `course_id` int(64) NOT NULL,
+--     `course_name` varchar(64) NOT NULL,
+--     `class_name` varchar(64) NOT NULL,
+--     `course_section_number` int(64) NOT NULL,
+--     `section_name` varchar(64) NOT NULL,
+--     `course_material_link` varchar(64) NOT NULL,
+--     PRIMARY KEY (`section_id`),
+--     FOREIGN KEY (course_id) REFERENCES courses(course_id)
+-- ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `sections`
---
+-- --
+-- -- Dumping data for table `sections`
+-- --
 
-INSERT INTO `sections` (`section_id`, `course_id`, `course_name`, `class_name`,`course_section_number`, `section_name`, `course_material_link`) VALUES
-(1, 1, 'Electrical Engineering', 'G1', 1, 'Introduction','url'),
-(2, 1, 'Electrical Engineering', 'G2', 1, 'Introduction','url'),
-(3, 1, 'Electrical Engineering', 'G1', 2, 'The Second Chapter','url');
-COMMIT;
+-- INSERT INTO `sections` (`section_id`, `course_id`, `course_name`, `class_name`,`course_section_number`, `section_name`, `course_material_link`) VALUES
+-- (1, 1, 'Electrical Engineering', 'G1', 1, 'Introduction','url'),
+-- (2, 1, 'Electrical Engineering', 'G2', 1, 'Introduction','url'),
+-- (3, 1, 'Electrical Engineering', 'G1', 2, 'The Second Chapter','url');
+-- COMMIT;
 
 
 --
@@ -317,19 +317,7 @@ COMMIT;
 --
 -- QUIZZES table
 --
-        -- q.course_id = cid;
-        -- q.course_class_id = ccid;
-        -- q.section_id = sid;
-        -- q.quiz_id = qid;
-        -- q.quiz_title = quizTitle;
-        -- q.quiz_type = quizType;
-        -- var question_number = qno[i];
-        -- q.question_no = question_number;
-        -- q.question = que[question_number];
-        -- q.number_of_options = numOp[question_number];
-        -- q.options_content = optionContent[question_number];
-        -- var posAns = answerArray[question_number];
-        -- q.correct_answer = optionContent[question_number][posAns];
+  
 DROP TABLE IF EXISTS `quizzes`;
 CREATE TABLE IF NOT EXISTS `quizzes` (
     `course_id` int(64) NOT NULL ,

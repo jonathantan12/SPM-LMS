@@ -123,7 +123,7 @@ function checkAns(){
             score+=1
         }
     }
-    if (score/Object.keys(answers).length >= 0.8){
+    if (score/Object.keys(answers).length >= 0.85){
         res = "Passed";
         passTest()
 
