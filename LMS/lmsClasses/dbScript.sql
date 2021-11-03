@@ -52,15 +52,15 @@ CREATE TABLE IF NOT EXISTS `courses` (
 --
 
 INSERT INTO `courses` (`course_id`, `course_name`, `course_desc`, `image`) VALUES
-(1, 'Electrical Engineering I','course description', 'image'),
-(2, 'Electrical Engineering II','course description', 'image'),
-(3, 'Electrical Engineering III','course description', 'image'),
-(4, 'Introduction to Mechanical Engineering I','course description', 'image'),
-(5, 'Introduction to Mechanical Engineering II','course description', 'image'),
-(6, 'Introduction to Mechanical Engineering III','course description', 'image'),
-(7, 'Introduction to Scrum Methodology I','course description', 'image'),
-(8, 'Introduction to Scrum Methodology II','course description', 'image'),
-(9, 'Introduction to Scrum Methodology III','course description', 'image');
+(1, 'Electrical Engineering I','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'image'),
+(2, 'Electrical Engineering II','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'image'),
+(3, 'Electrical Engineering III','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'image'),
+(4, 'Introduction to Mechanical Engineering I','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'image'),
+(5, 'Introduction to Mechanical Engineering II','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'image'),
+(6, 'Introduction to Mechanical Engineering III','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'image'),
+(7, 'Introduction to Scrum Methodology I','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'image'),
+(8, 'Introduction to Scrum Methodology II','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'image'),
+(9, 'Introduction to Scrum Methodology III','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'image');
 
 COMMIT;
 
