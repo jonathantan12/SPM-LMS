@@ -21,11 +21,13 @@ function retrieveAndPrintCourse(res) {
     var numCourses = res.length;
     var courseNameHtml = document.getElementById("courseName");
     var courseDesceHtml = document.getElementById("courseDesc");
+    var courseImageHtml = document.getElementById("courseImg");
     for (var i=0; i< numCourses ;i++) {
         if(res[i].course_id == courseId){
             if (res[i].course_desc) {
                 courseDesceHtml.innerText = res[i].course_desc;
                 courseNameHtml.innerText = res[i].course_name;
+                courseImageHtml.getAttributeNode('src').value = res[i].image;
             }
             else {
                 courseDesceHtml.innerText = "There is currently no course description. Please keep a look out for future update on the course details!";

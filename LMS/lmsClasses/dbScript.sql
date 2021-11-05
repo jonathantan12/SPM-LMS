@@ -52,15 +52,15 @@ CREATE TABLE IF NOT EXISTS `courses` (
 --
 
 INSERT INTO `courses` (`course_id`, `course_name`, `course_desc`, `image`) VALUES
-(1, 'Electrical Engineering I','course description', 'image'),
-(2, 'Electrical Engineering II','course description', 'image'),
-(3, 'Electrical Engineering III','course description', 'image'),
-(4, 'Introduction to Mechanical Engineering I','course description', 'image'),
-(5, 'Introduction to Mechanical Engineering II','course description', 'image'),
-(6, 'Introduction to Mechanical Engineering III','course description', 'image'),
-(7, 'Introduction to Scrum Methodology I','course description', 'image'),
-(8, 'Introduction to Scrum Methodology II','course description', 'image'),
-(9, 'Introduction to Scrum Methodology III','course description', 'image');
+(1, 'Electrical Engineering I','course description', 'assets/Electrical1.jpg'),
+(2, 'Electrical Engineering II','course description', 'assets/Electrical2.jpg'),
+(3, 'Electrical Engineering III','course description', 'assets/Electrical3.jpg'),
+(4, 'Introduction to Mechanical Engineering I','course description', 'assets/MechanicalEngineering1.jpg'),
+(5, 'Introduction to Mechanical Engineering II','course description', 'assets/MechanicalEngineering2.jpg'),
+(6, 'Introduction to Mechanical Engineering III','course description', 'assets/MechanicalEngineering3.jpg'),
+(7, 'Introduction to Scrum Methodology I','course description', 'assets/Scrum1.jpg'),
+(8, 'Introduction to Scrum Methodology II','course description', 'assets/Scrum2.jpg'),
+(9, 'Introduction to Scrum Methodology III','course description', 'assets/Scrum3.jpg');
 
 COMMIT;
 
@@ -412,9 +412,9 @@ ALTER TABLE quiz_progress ADD CONSTRAINT PK_Quiz PRIMARY KEY (user_id,course_id,
 
 
 INSERT INTO `quiz_progress` ( `user_id`, `course_id`, `course_class_id`, `section_id`, `completion_status`) VALUES
-(1, 1, 1, 1, 'Not Completed'),
-(1, 1, 2, 2, 'Not Completed'),
-(1, 1, 2, 3, 'Not Completed'),
+(1, 1, 1, 1, 'Completed'),
+(1, 1, 2, 2, 'Completed'),
+(1, 1, 2, 3, 'Completed'),
 (1, 4, 1, 1, 'Not Completed'),
 (1, 4, 1, 2, 'Not Completed'),
 (1, 4, 2, 3, 'Not Completed');
@@ -440,3 +440,6 @@ INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, ma
 INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (4, 1, 1, 1, 'What is Mechanical Engineering?', 'https://www.youtube.com/watch?v=W74y1RxN6BA', 'Not Completed');
 INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (4, 1, 2, 1, 'Fundamentals of Mechanical Engineering','https://www.youtube.com/watch?v=ehi_hkLlutw','Not Completed');
 INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (4, 1, 3, 1, 'How to be a Mechanical Engineer in Nepal?', 'https://www.youtube.com/watch?v=t0W_Qq2-hkM', 'Not Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (1, 1, 1, 1, 'What is Electrical Engineering?', 'https://www.youtube.com/watch?v=QQewdCJTcIU', 'Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (1, 1, 2, 1, 'How ELECTRICITY works - working principle','https://www.youtube.com/watch?v=mc979OhitAg','Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (1, 1, 3, 1, 'How does a Transformer work - Working Principle electrical engineering', 'https://www.youtube.com/watch?v=UchitHGF4n8', 'Completed');
