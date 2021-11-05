@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS `courses`;
 CREATE TABLE IF NOT EXISTS `courses` (
     `course_id` int(64) NOT NULL AUTO_INCREMENT,
     `course_name` varchar(64) NOT NULL,
-    `course_desc` varchar(64) NOT NULL,
+    `course_desc` varchar(1000) NOT NULL,
     `image` varchar(64),
     PRIMARY KEY (`course_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
@@ -52,15 +52,15 @@ CREATE TABLE IF NOT EXISTS `courses` (
 --
 
 INSERT INTO `courses` (`course_id`, `course_name`, `course_desc`, `image`) VALUES
-(1, 'Electrical Engineering I','course description', 'assets/Electrical1.jpg'),
-(2, 'Electrical Engineering II','course description', 'assets/Electrical2.jpg'),
-(3, 'Electrical Engineering III','course description', 'assets/Electrical3.jpg'),
-(4, 'Introduction to Mechanical Engineering I','course description', 'assets/MechanicalEngineering1.jpg'),
-(5, 'Introduction to Mechanical Engineering II','course description', 'assets/MechanicalEngineering2.jpg'),
-(6, 'Introduction to Mechanical Engineering III','course description', 'assets/MechanicalEngineering3.jpg'),
-(7, 'Introduction to Scrum Methodology I','course description', 'assets/Scrum1.jpg'),
-(8, 'Introduction to Scrum Methodology II','course description', 'assets/Scrum2.jpg'),
-(9, 'Introduction to Scrum Methodology III','course description', 'assets/Scrum3.jpg');
+(1, 'Electrical Engineering I','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'assets/Electrical1.jpg'),
+(2, 'Electrical Engineering II','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'assets/Electrical2.jpg'),
+(3, 'Electrical Engineering III','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'assets/Electrical3.jpg'),
+(4, 'Introduction to Mechanical Engineering I','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'assets/MechanicalEngineering1.jpg'),
+(5, 'Introduction to Mechanical Engineering II','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'assets/MechanicalEngineering2.jpg'),
+(6, 'Introduction to Mechanical Engineering III','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'assets/MechanicalEngineering3.jpg'),
+(7, 'Introduction to Scrum Methodology I','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'assets/Scrum1.jpg'),
+(8, 'Introduction to Scrum Methodology II','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'assets/Scrum2.jpg'),
+(9, 'Introduction to Scrum Methodology III','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'assets/Scrum3.jpg');
 
 COMMIT;
 
