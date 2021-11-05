@@ -52,15 +52,15 @@ CREATE TABLE IF NOT EXISTS `courses` (
 --
 
 INSERT INTO `courses` (`course_id`, `course_name`, `course_desc`, `image`) VALUES
-(1, 'Electrical Engineering I','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'image'),
-(2, 'Electrical Engineering II','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'image'),
-(3, 'Electrical Engineering III','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'image'),
-(4, 'Introduction to Mechanical Engineering I','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'image'),
-(5, 'Introduction to Mechanical Engineering II','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'image'),
-(6, 'Introduction to Mechanical Engineering III','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'image'),
-(7, 'Introduction to Scrum Methodology I','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'image'),
-(8, 'Introduction to Scrum Methodology II','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'image'),
-(9, 'Introduction to Scrum Methodology III','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'image');
+(1, 'Electrical Engineering I','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'assets/Electrical1.jpg'),
+(2, 'Electrical Engineering II','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'assets/Electrical2.jpg'),
+(3, 'Electrical Engineering III','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'assets/Electrical3.jpg'),
+(4, 'Introduction to Mechanical Engineering I','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'assets/MechanicalEngineering1.jpg'),
+(5, 'Introduction to Mechanical Engineering II','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'assets/MechanicalEngineering2.jpg'),
+(6, 'Introduction to Mechanical Engineering III','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'assets/MechanicalEngineering3.jpg'),
+(7, 'Introduction to Scrum Methodology I','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'assets/Scrum1.jpg'),
+(8, 'Introduction to Scrum Methodology II','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'assets/Scrum2.jpg'),
+(9, 'Introduction to Scrum Methodology III','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'assets/Scrum3.jpg');
 
 COMMIT;
 
@@ -412,9 +412,9 @@ ALTER TABLE quiz_progress ADD CONSTRAINT PK_Quiz PRIMARY KEY (user_id,course_id,
 
 
 INSERT INTO `quiz_progress` ( `user_id`, `course_id`, `course_class_id`, `section_id`, `completion_status`) VALUES
-(1, 1, 1, 1, 'Not Completed'),
-(1, 1, 2, 2, 'Not Completed'),
-(1, 1, 2, 3, 'Not Completed'),
+(1, 1, 1, 1, 'Completed'),
+(1, 1, 2, 2, 'Completed'),
+(1, 1, 2, 3, 'Completed'),
 (1, 4, 1, 1, 'Not Completed'),
 (1, 4, 1, 2, 'Not Completed'),
 (1, 4, 2, 3, 'Not Completed');
@@ -440,3 +440,6 @@ INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, ma
 INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (4, 1, 1, 1, 'What is Mechanical Engineering?', 'https://www.youtube.com/watch?v=W74y1RxN6BA', 'Not Completed');
 INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (4, 1, 2, 1, 'Fundamentals of Mechanical Engineering','https://www.youtube.com/watch?v=ehi_hkLlutw','Not Completed');
 INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (4, 1, 3, 1, 'How to be a Mechanical Engineer in Nepal?', 'https://www.youtube.com/watch?v=t0W_Qq2-hkM', 'Not Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (1, 1, 1, 1, 'What is Electrical Engineering?', 'https://www.youtube.com/watch?v=QQewdCJTcIU', 'Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (1, 1, 2, 1, 'How ELECTRICITY works - working principle','https://www.youtube.com/watch?v=mc979OhitAg','Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (1, 1, 3, 1, 'How does a Transformer work - Working Principle electrical engineering', 'https://www.youtube.com/watch?v=UchitHGF4n8', 'Completed');

@@ -13,6 +13,7 @@ else{
 
 
 var courses = {};
+var coursesWithImage = {};
 var requiredCourses = {};
 var completedCourses = {};
 var preRequisiteCourse = {};
@@ -20,7 +21,19 @@ var completedCoursesUrl = "../LMS/backend/getCompletedCourses.php";
 var engineerRequiredCourseUrl = "../LMS/backend/getEngineersAndRequiredCourses.php";
 var courseUrl = "../LMS/backend/getClasses.php";
 var enrolledCourseUrl = "../LMS/backend/retrieveEnrolledCourses.php";
-
+var coursesUrl = "../LMS/backend/getCourses.php";
+function retrieveAllcoursesWithImage(res) {
+    var response = res;
+    var numCourses = response.length;
+    for (var i=0; i< numCourses ;i++) {
+        coursesWithImage[response[i].course_name] = {
+            "course_id": response[i].course_id,
+            "course_name": response[i].course_name,
+            "course_desc": response[i].course_desc,
+            "image": response[i].image
+        }
+    }
+}
 function retrieveAllCourses(res) {
     var numCourses = res.length;
     for (var i=0; i< numCourses ;i++) {
@@ -103,7 +116,7 @@ function retrieveEngineerRequiredCourses(res) {
                         var changeHTML =    `
                             <div class="col-sm-6 col-md-4">
                                 <div class="card" style="width: 20rem;">
-                                    <img src="assets/placeholder_img.png" class="card-img-top" alt="...">
+                                    <img src="${coursesWithImage[response[0].course_name].image}" class="card-img-top" alt="${response[0].course_name} Image" style="height: 10rem;" >
                                     <div class="card-body">
                                         <h5 class="card-title text-center">${response[0].course_name}<br>(Required)</h5>
                                         <p class="card-text">Class size: <span>${courses[response[0].course_name]["slots_available"]}</span></p>
@@ -145,6 +158,7 @@ function callToDb(url, cFunction) {
     request.send()
 }
 
+callToDb(coursesUrl, retrieveAllcoursesWithImage)
 callToDb(engineerRequiredCourseUrl, retrieveEngineerRequiredCourses);
 callToDb(courseUrl, retrieveAllCourses);
 callToDb(completedCoursesUrl, retrieveAllCompleted);

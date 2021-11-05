@@ -169,7 +169,36 @@ function callToDb(url, cFunction) {
     request.send()
 }
 
-callToDb(sectionsUrl, retrieveAllSections)
 callToDb(enrolledUrl, retrieveAllEnrolled)
 callToDb(materialUrl, retrieveAllMaterials)
+callToDb(sectionsUrl, retrieveAllSections)
 callToDb(quizzesProgressUrl, retrieveQuizProgress)
+
+var enrolledCourseUrl = "../LMS/backend/retrieveEnrolledCourses.php";
+var completedCoursesUrl = "../LMS/backend/getCompletedCourses.php";
+
+function retrieveAllEnrolledCourses(res) {
+    var enrolledDropdown = document.getElementById("currentlyEnrolled");
+    var enrolledCourses = res;
+    var numEnrolledCourses = enrolledCourses.length;
+    if (enrolledCourses) {
+        for (var i=0; i< numEnrolledCourses ;i++) {
+            var changeDropdownItem = `<li><a class="dropdown-item" href="engineerCoursePage.html?courseId=${enrolledCourses[i].course_id}">${enrolledCourses[i].course_name}</a></li>`;
+            enrolledDropdown.innerHTML += changeDropdownItem;
+        }
+    }
+}
+
+function retrieveAllCompleted(res) {
+    var completedDropdown = document.getElementById("completed")
+    var completed = res;
+    var numCompletedCourses = res.length;
+    if (completed) {
+        for (var i=0; i< numCompletedCourses ;i++) {
+            var changeDropdownItem = `<a class="dropdown-item" href="engineerCoursePage.html?courseId=${res[i].course_id}">${res[i].course_name}</a>`;
+            completedDropdown.innerHTML += changeDropdownItem;
+        }
+    }
+}
+callToDb(enrolledCourseUrl, retrieveAllEnrolledCourses);
+callToDb(completedCoursesUrl, retrieveAllCompleted);
