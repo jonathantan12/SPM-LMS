@@ -177,6 +177,7 @@ CREATE TABLE IF NOT EXISTS `completed_courses` (
     `user_name` varchar(64) NOT NULL,
     `course_id` int(64) NOT NULL,
     `course_name` varchar(64) NOT NULL,
+    `image` varchar(64) NOT NULL,
     PRIMARY KEY (`completed_course_id`),
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
@@ -186,16 +187,15 @@ CREATE TABLE IF NOT EXISTS `completed_courses` (
 -- Dumping data for table `completed_courses`
 --
 
-INSERT INTO `completed_courses` (`completed_course_id`, `user_id`, `user_name`,`course_id`, `course_name`) VALUES
-(1, 1, 'Jonathan', 1, 'Electrical Engineering I'),
-(2, 1, 'Jonathan', 2, 'Electrical Engineering II'),
-(3, 1, 'Jonathan', 7, 'Introduction to Scrum Methodology I'),
-(4, 4, 'Kelly', 1, 'Electrical Engineering I'),
-(5, 4, 'Kelly', 4, 'Introduction to Mechanical Engineering I'),
-(6, 4, 'Kelly', 7, 'Introduction to Scrum Methodology I');
+INSERT INTO `completed_courses` (`completed_course_id`, `user_id`, `user_name`,`course_id`, `course_name`, `image`) VALUES
+(1, 1, 'Jonathan', 1, 'Electrical Engineering I', 'Electrical1.jpg'),
+(2, 1, 'Jonathan', 2, 'Electrical Engineering II', 'Electrical2.jpg'),
+(3, 1, 'Jonathan', 7, 'Introduction to Scrum Methodology I', 'Scrum1.jpg'),
+(4, 4, 'Kelly', 1, 'Electrical Engineering I', 'Electrical1.jpg'),
+(5, 4, 'Kelly', 4, 'Introduction to Mechanical Engineering I', 'MechanicalEngineering1.jpg'),
+(6, 4, 'Kelly', 7, 'Introduction to Scrum Methodology I', 'Scrum1.jpg');
 
 COMMIT;
-
 
 --
 -- REQUIRED_COURSES table
@@ -208,6 +208,7 @@ CREATE TABLE IF NOT EXISTS `required_courses` (
     `user_name` varchar(64) NOT NULL,
     `course_id` int(64) NOT NULL,
     `course_name` varchar(64) NOT NULL,
+    `image` varchar(64) NOT NULL,
     PRIMARY KEY (`required_course_id`),
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
@@ -217,16 +218,16 @@ CREATE TABLE IF NOT EXISTS `required_courses` (
 -- Dumping data for table `required_courses`
 --
 
-INSERT INTO `required_courses` (`required_course_id`, `user_id`, `user_name`,`course_id`, `course_name`) VALUES
-(1, 1, 'Jonathan', 3, 'Electrical Engineering III'),
-(2, 1, 'Jonathan', 5, 'Introduction to Mechanical Engineering II'),
-(3, 1, 'Jonathan', 6, 'Introduction to Mechanical Engineering III'),
-(4, 1, 'Jonathan', 8, 'Introduction to Scrum Methodology II'),
-(5, 1, 'Jonathan', 9, 'Introduction to Scrum Methodology III'),
-(6, 4, 'Kelly', 3, 'Electrical Engineering III'),
-(7, 4, 'Kelly', 6, 'Introduction to Mechanical Engineering III'),
-(8, 4, 'Kelly', 8, 'Introduction to Scrum Methodology II'),
-(9, 4, 'Kelly', 9, 'Introduction to Scrum Methodology III');
+INSERT INTO `required_courses` (`required_course_id`, `user_id`, `user_name`,`course_id`, `course_name`, `image`) VALUES
+(1, 1, 'Jonathan', 3, 'Electrical Engineering III', 'Electrical3.jpg'),
+(2, 1, 'Jonathan', 5, 'Introduction to Mechanical Engineering II', 'MechanicalEngineering2.jpg'),
+(3, 1, 'Jonathan', 6, 'Introduction to Mechanical Engineering III', 'MechanicalEngineering3.jpg'),
+(4, 1, 'Jonathan', 8, 'Introduction to Scrum Methodology II', 'Scrum2.jpg'),
+(5, 1, 'Jonathan', 9, 'Introduction to Scrum Methodology III', 'Scrum3.jpg'),
+(6, 4, 'Kelly', 3, 'Electrical Engineering III',  'Electrical3.jpg'),
+(7, 4, 'Kelly', 6, 'Introduction to Mechanical Engineering III', 'MechanicalEngineering3.jpg'),
+(8, 4, 'Kelly', 8, 'Introduction to Scrum Methodology II', 'Scrum2.jpg'),
+(9, 4, 'Kelly', 9, 'Introduction to Scrum Methodology III', 'Scrum3.jpg');
 
 COMMIT;
 
