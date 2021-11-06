@@ -117,7 +117,7 @@ function retrieveEngineerRequiredCourses(res) {
                             <div class="col-sm-6 col-md-4">
                                 <div class="card" style="width: 20rem;">
                                     <img src="${coursesWithImage[response[0].course_name].image}" class="card-img-top" alt="${response[0].course_name} Image" style="height: 10rem;" >
-                                    <div class="card-body">
+                                    <div class="card-body" style="height: 250px;">
                                         <h5 class="card-title text-center">${response[0].course_name}<br>(Required)</h5>
                                         <p class="card-text">Class size: <span>${courses[response[0].course_name]["slots_available"]}</span></p>
                                         <p class="card-text">Duration: <span>${courses[response[0].course_name].start_date} - ${courses[response[0].course_name].end_date}</span></p>
