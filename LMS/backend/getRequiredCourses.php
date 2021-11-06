@@ -14,6 +14,7 @@
         $item["user_name"] = $requiredCourse->getUserName();
         $item["course_id"] = $requiredCourse->getCourseId();
         $item["course_name"] = $requiredCourse->getCourseName();
+        $item["image"] = $requiredCourse->getImage();
         $items[] = $item;
     }
 
