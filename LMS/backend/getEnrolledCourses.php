@@ -14,6 +14,7 @@
         $item["user_name"] = $aEnrolledCourses->getUserName();
         $item["course_id"] = $aEnrolledCourses->getCourseId();
         $item["course_name"] = $aEnrolledCourses->getCourseName();
+        $item["class_name"] = $aEnrolledCourses->getClassName();
         $items[] = $item;
     }
 

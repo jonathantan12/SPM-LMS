@@ -13,13 +13,27 @@ else{
 
 
 var courses = {};
+var coursesWithImage = {};
 var requiredCourses = {};
 var completedCourses = {};
 var preRequisiteCourse = {};
 var completedCoursesUrl = "../LMS/backend/getCompletedCourses.php";
 var engineerRequiredCourseUrl = "../LMS/backend/getEngineersAndRequiredCourses.php";
 var courseUrl = "../LMS/backend/getClasses.php";
-
+var enrolledCourseUrl = "../LMS/backend/retrieveEnrolledCourses.php";
+var coursesUrl = "../LMS/backend/getCourses.php";
+function retrieveAllcoursesWithImage(res) {
+    var response = res;
+    var numCourses = response.length;
+    for (var i=0; i< numCourses ;i++) {
+        coursesWithImage[response[i].course_name] = {
+            "course_id": response[i].course_id,
+            "course_name": response[i].course_name,
+            "course_desc": response[i].course_desc,
+            "image": response[i].image
+        }
+    }
+}
 function retrieveAllCourses(res) {
     var numCourses = res.length;
     for (var i=0; i< numCourses ;i++) {
@@ -33,7 +47,20 @@ function retrieveAllCourses(res) {
     }
 }
 
+function retrieveAllEnrolled(res) {
+    var enrolledDropdown = document.getElementById("currentlyEnrolled");
+    var enrolledCourses = res;
+    var numEnrolledCourses = enrolledCourses.length;
+    if (enrolledCourses) {
+        for (var i=0; i< numEnrolledCourses ;i++) {
+            var changeDropdownItem = `<li><a class="dropdown-item" href="engineerCoursePage.html?courseId=${enrolledCourses[i].course_id}">${enrolledCourses[i].course_name}</a></li>`;
+            enrolledDropdown.innerHTML += changeDropdownItem;
+        }
+    }
+}
+
 function retrieveAllCompleted(res) {
+    var completedDropdown = document.getElementById("completed")
     var completed = res;
     var numCompletedCourses = res.length;
     if (completed) {
@@ -45,6 +72,8 @@ function retrieveAllCompleted(res) {
                 "user_id": res[i].user_id,
                 "user_name": res[i].user_name
             }
+            var changeDropdownItem = `<a class="dropdown-item" href="engineerCoursePage.html?courseId=${res[i].course_id}">${res[i].course_name}</a>`;
+            completedDropdown.innerHTML += changeDropdownItem;
         }
     }
 }
@@ -87,12 +116,12 @@ function retrieveEngineerRequiredCourses(res) {
                         var changeHTML =    `
                             <div class="col-sm-6 col-md-4">
                                 <div class="card" style="width: 20rem;">
-                                <a href="#"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
+                                    <img src="${coursesWithImage[response[0].course_name].image}" class="card-img-top" alt="${response[0].course_name} Image" style="height: 10rem;" >
                                     <div class="card-body">
                                         <h5 class="card-title text-center">${response[0].course_name}<br>(Required)</h5>
                                         <p class="card-text">Class size: <span>${courses[response[0].course_name]["slots_available"]}</span></p>
                                         <p class="card-text">Duration: <span>${courses[response[0].course_name].start_date} - ${courses[response[0].course_name].end_date}</span></p>
-                                        <a href="enrol.html?courseId=${response[0].course_id}" class="btn btn-outline-success" id="enrol ${response[0].course_name}">Enrol</a>
+                                        <a href="enrol.html?courseId=${response[0].course_id}" class="stretched-link" id="enrol ${response[0].course_name}"></a>
                                     </div>
                                 </div>
                             </div> `;
@@ -129,6 +158,8 @@ function callToDb(url, cFunction) {
     request.send()
 }
 
+callToDb(coursesUrl, retrieveAllcoursesWithImage)
 callToDb(engineerRequiredCourseUrl, retrieveEngineerRequiredCourses);
 callToDb(courseUrl, retrieveAllCourses);
 callToDb(completedCoursesUrl, retrieveAllCompleted);
+callToDb(enrolledCourseUrl, retrieveAllEnrolled)
