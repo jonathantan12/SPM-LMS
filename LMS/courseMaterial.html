@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Engineer - Quiz</title>
+        <title></title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/lms.png" />
         <!-- Bootstrap icons-->
@@ -21,7 +21,7 @@
     width: 200px;
     position: fixed;
     z-index: 1;
-    top: 0;
+    /* top: 0; */
     left: 0;
     background-color: #111;
     overflow-x: hidden;
@@ -108,15 +108,19 @@
 </head>
 
 
-<body onload = "getQuiz('1','1','1',1)">
+<body>
   <!-- Navigation-->
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark flex-shrink-0">
     <div class="container-fluid px-5">
       <a class="navbar-brand" href="index.html">LMS</a>
+      <h4 id="courseName" class="text-white"></h4>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContents" aria-controls="navbarContents" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarContents">
+        <a href="engineerHome.html" class="btn btn-dark ml-auto">
+          Engineer Home
+        </a>
         <ul class="navbar-nav ml-auto">
           <!-- This is the dropdown for all courses, may not be required for admins and trainers -->
           <li class="nav-item dropdown btn-group">
@@ -149,59 +153,41 @@
       </div>
     </div>
   </nav>
-  <div class="sidenav">
-      
-    <button class="dropdown-btn">Chapter 1 
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-container">
-      <a href="#">Lesson 1</a>
-      <a href="engineerQuiz.html">Quiz 1</a>
+  <div class="container-fluid" id="courseOverview">
+    <div class="row bg-dark">
+      <ul class="nav nav-pills flex-column flex-sm-row">
+        <li class="nav-item">
+          <a class="flex-sm-fill text-sm-center nav-link text-white" href="engineerCoursePage.html" id="individualCourseHome">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="flex-sm-fill text-sm-center nav-link text-white disabled">Forum</a>
+        </li>
+        <li class="nav-item">
+          <a class="flex-sm-fill text-sm-center nav-link text-white active" href="courseMaterial.html" id="courseMaterial">Curriculums</a>
+        </li>
+      </ul>
     </div>
-  </div>
+
+    <div class="sidenav" id="sideNav">
+
+    </div>
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col my-5" id="material">
+
+      </div>
+    </div>
+
+    
+  </div> 
   
-  <div class="main">
-    <p id="quizType"></p>
-    <button type="button" class="btn btn-primary btn-small" style="float: left; margin: 5px;" onclick=" location.href = 'quiz.html'; "> Start Quiz </button>    
-  </div>
- 
-  <script>
-  /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-  var dropdown = document.getElementsByClassName("dropdown-btn");
-  var i;
-  
-  for (i = 0; i < dropdown.length; i++) {
-    dropdown[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var dropdownContent = this.nextElementSibling;
-    if (dropdownContent.style.display === "block") {
-    dropdownContent.style.display = "none";
-    } else {
-    dropdownContent.style.display = "block";
-    }
-    });
-  }
-  </script>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 
   <!-- JS here -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="js/coursePage.js"></script>
   <script src="js/getQuiz.js"></script>
 </body>
 </html>

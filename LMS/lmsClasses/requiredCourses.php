@@ -5,13 +5,15 @@
     private $user_name;
     private $course_id;
     private $course_name;
+    private $image;
 
-    public function __construct($required_course_id, $user_id, $user_name, $course_id, $course_name) {
+    public function __construct($required_course_id, $user_id, $user_name, $course_id, $course_name, $image) {
         $this->required_course_id = $required_course_id;
         $this->user_id = $user_id;
         $this->user_name = $user_name;
         $this->course_id = $course_id;
         $this->course_name = $course_name;
+        $this->image = $image;
     }
 
     public function getRequiredCourseId() {
@@ -33,6 +35,11 @@
     public function getCourseName() {
         return $this->course_name;
     }
+
+    public function getImage() {
+      return $this->image;
+  }
+
 
 }
 ?>

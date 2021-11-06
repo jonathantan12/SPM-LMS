@@ -38,8 +38,11 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContents" aria-controls="navbarContents" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarContents">
-        <ul class="navbar-nav ml-auto">
+      <div class="collapse navbar-collapse ml-auto" id="navbarContents">
+        <a href="engineerHome.html" class="btn btn-dark ml-auto">
+          Engineer Home
+        </a>
+        <ul class="navbar-nav">
           <!-- This is the dropdown for all courses, may not be required for admins and trainers -->
           <li class="nav-item dropdown btn-group">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="navbarCourseDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,7 +62,7 @@
           </li>
           <li>
             <!-- nav link to course catalogue, may not be required for admins and trainers -->
-            <a class="nav-link" href="./courseCatalogue.html"><img src="assets/catalogue.png" alt="catalogue icon" class="nav_icon filter"></a>
+            <a class="nav-link btn btn-dark" href="./courseCatalogue.html">Course catalogue</a>
           </li>
           <button class="btn btn-dark dropdown-toggle" type="button" id="navbarDropdownBlog" data-bs-toggle="dropdown" aria-expanded="false">Switch user</button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
@@ -72,10 +75,10 @@
     </div>
   </nav>
   <div class="container-fluid px-5 my-5">
-    <div class="row m-3 border">
-      <img src="assets/placeholder_img.png" class="col-4">
+    <div class="row m-3 border border-dark">
+      <img src="assets/placeholder_img.png" class="col-4 border-right border-dark" id="courseImg">
       <h2 class="col-6" id="courseName"></h2>
-      <div class="col-2 align-middle">
+      <div class="col-2 py-5 pl-4 border-left border-dark align-middle">
         <button id="enrolToCourse" type="button" class="btn btn-outline-success align-middle">Enrol</button>
       </div>
     </div>

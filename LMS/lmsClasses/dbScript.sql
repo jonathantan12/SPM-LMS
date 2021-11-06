@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS `courses`;
 CREATE TABLE IF NOT EXISTS `courses` (
     `course_id` int(64) NOT NULL AUTO_INCREMENT,
     `course_name` varchar(64) NOT NULL,
-    `course_desc` varchar(64) NOT NULL,
+    `course_desc` varchar(1000) NOT NULL,
     `image` varchar(64),
     PRIMARY KEY (`course_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
@@ -52,15 +52,15 @@ CREATE TABLE IF NOT EXISTS `courses` (
 --
 
 INSERT INTO `courses` (`course_id`, `course_name`, `course_desc`, `image`) VALUES
-(1, 'Electrical Engineering I','course description', 'image'),
-(2, 'Electrical Engineering II','course description', 'image'),
-(3, 'Electrical Engineering III','course description', 'image'),
-(4, 'Introduction to Mechanical Engineering I','course description', 'image'),
-(5, 'Introduction to Mechanical Engineering II','course description', 'image'),
-(6, 'Introduction to Mechanical Engineering III','course description', 'image'),
-(7, 'Introduction to Scrum Methodology I','course description', 'image'),
-(8, 'Introduction to Scrum Methodology II','course description', 'image'),
-(9, 'Introduction to Scrum Methodology III','course description', 'image');
+(1, 'Electrical Engineering I','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'assets/Electrical1.jpg'),
+(2, 'Electrical Engineering II','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'assets/Electrical2.jpg'),
+(3, 'Electrical Engineering III','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'assets/Electrical3.jpg'),
+(4, 'Introduction to Mechanical Engineering I','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'assets/MechanicalEngineering1.jpg'),
+(5, 'Introduction to Mechanical Engineering II','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'assets/MechanicalEngineering2.jpg'),
+(6, 'Introduction to Mechanical Engineering III','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'assets/MechanicalEngineering3.jpg'),
+(7, 'Introduction to Scrum Methodology I','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'assets/Scrum1.jpg'),
+(8, 'Introduction to Scrum Methodology II','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'assets/Scrum2.jpg'),
+(9, 'Introduction to Scrum Methodology III','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'assets/Scrum3.jpg');
 
 COMMIT;
 
@@ -133,55 +133,7 @@ INSERT INTO `classes` (`course_id`, `course_name`, `class_name`,`start_date`, `e
 COMMIT;
 
 
--- SECTION table (just section)
---
 
-DROP TABLE IF EXISTS `section`;
-CREATE TABLE IF NOT EXISTS `section` (
-    `section_id` int(64) NOT NULL AUTO_INCREMENT, 
-    `course_id` int(64) NOT NULL,
-    `section_title` varchar(64) NOT NULL,
-    `order` int(11) NOT NULL,
-    PRIMARY KEY (`section_id`),
-    FOREIGN KEY (course_id) REFERENCES courses(course_id)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `section`
---
-
-INSERT INTO `section` (`section_id`, `course_id`, `section_title`, `order`) VALUES
-(1, 1, 'Electrical Engineering 1',  1 ),
-(2, 1, 'Electrical Engineering 2',  2 ),
-(3, 1, 'Electrical Engineering 3',  3 );
-COMMIT;
-
---
--- SECTIONS table
---
-
-DROP TABLE IF EXISTS `sections`;
-CREATE TABLE IF NOT EXISTS `sections` (
-    `section_id` int(64) NOT NULL AUTO_INCREMENT, 
-    `course_id` int(64) NOT NULL,
-    `course_name` varchar(64) NOT NULL,
-    `class_name` varchar(64) NOT NULL,
-    `course_section_number` int(64) NOT NULL,
-    `section_name` varchar(64) NOT NULL,
-    `course_material_link` varchar(64) NOT NULL,
-    PRIMARY KEY (`section_id`),
-    FOREIGN KEY (course_id) REFERENCES courses(course_id)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `sections`
---
-
-INSERT INTO `sections` (`section_id`, `course_id`, `course_name`, `class_name`,`course_section_number`, `section_name`, `course_material_link`) VALUES
-(1, 1, 'Electrical Engineering', 'G1', 1, 'Introduction','url'),
-(2, 1, 'Electrical Engineering', 'G2', 1, 'Introduction','url'),
-(3, 1, 'Electrical Engineering', 'G1', 2, 'The Second Chapter','url');
-COMMIT;
 
 
 --
@@ -232,6 +184,7 @@ CREATE TABLE IF NOT EXISTS `completed_courses` (
     `user_name` varchar(64) NOT NULL,
     `course_id` int(64) NOT NULL,
     `course_name` varchar(64) NOT NULL,
+    `image` varchar(64) NOT NULL,
     PRIMARY KEY (`completed_course_id`),
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
@@ -241,16 +194,15 @@ CREATE TABLE IF NOT EXISTS `completed_courses` (
 -- Dumping data for table `completed_courses`
 --
 
-INSERT INTO `completed_courses` (`completed_course_id`, `user_id`, `user_name`,`course_id`, `course_name`) VALUES
-(1, 1, 'Jonathan', 1, 'Electrical Engineering I'),
-(2, 1, 'Jonathan', 2, 'Electrical Engineering II'),
-(3, 1, 'Jonathan', 7, 'Introduction to Scrum Methodology I'),
-(4, 4, 'Kelly', 1, 'Electrical Engineering I'),
-(5, 4, 'Kelly', 4, 'Introduction to Mechanical Engineering I'),
-(6, 4, 'Kelly', 7, 'Introduction to Scrum Methodology I');
+INSERT INTO `completed_courses` (`completed_course_id`, `user_id`, `user_name`,`course_id`, `course_name`, `image`) VALUES
+(1, 1, 'Jonathan', 1, 'Electrical Engineering I', 'Electrical1.jpg'),
+(2, 1, 'Jonathan', 2, 'Electrical Engineering II', 'Electrical2.jpg'),
+(3, 1, 'Jonathan', 7, 'Introduction to Scrum Methodology I', 'Scrum1.jpg'),
+(4, 4, 'Kelly', 1, 'Electrical Engineering I', 'Electrical1.jpg'),
+(5, 4, 'Kelly', 4, 'Introduction to Mechanical Engineering I', 'MechanicalEngineering1.jpg'),
+(6, 4, 'Kelly', 7, 'Introduction to Scrum Methodology I', 'Scrum1.jpg');
 
 COMMIT;
-
 
 --
 -- REQUIRED_COURSES table
@@ -263,6 +215,7 @@ CREATE TABLE IF NOT EXISTS `required_courses` (
     `user_name` varchar(64) NOT NULL,
     `course_id` int(64) NOT NULL,
     `course_name` varchar(64) NOT NULL,
+    `image` varchar(64) NOT NULL,
     PRIMARY KEY (`required_course_id`),
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
@@ -272,16 +225,16 @@ CREATE TABLE IF NOT EXISTS `required_courses` (
 -- Dumping data for table `required_courses`
 --
 
-INSERT INTO `required_courses` (`required_course_id`, `user_id`, `user_name`,`course_id`, `course_name`) VALUES
-(1, 1, 'Jonathan', 3, 'Electrical Engineering III'),
-(2, 1, 'Jonathan', 5, 'Introduction to Mechanical Engineering II'),
-(3, 1, 'Jonathan', 6, 'Introduction to Mechanical Engineering III'),
-(4, 1, 'Jonathan', 8, 'Introduction to Scrum Methodology II'),
-(5, 1, 'Jonathan', 9, 'Introduction to Scrum Methodology III'),
-(6, 4, 'Kelly', 3, 'Electrical Engineering III'),
-(7, 4, 'Kelly', 6, 'Introduction to Mechanical Engineering III'),
-(8, 4, 'Kelly', 8, 'Introduction to Scrum Methodology II'),
-(9, 4, 'Kelly', 9, 'Introduction to Scrum Methodology III');
+INSERT INTO `required_courses` (`required_course_id`, `user_id`, `user_name`,`course_id`, `course_name`, `image`) VALUES
+(1, 1, 'Jonathan', 3, 'Electrical Engineering III', 'Electrical3.jpg'),
+(2, 1, 'Jonathan', 5, 'Introduction to Mechanical Engineering II', 'MechanicalEngineering2.jpg'),
+(3, 1, 'Jonathan', 6, 'Introduction to Mechanical Engineering III', 'MechanicalEngineering3.jpg'),
+(4, 1, 'Jonathan', 8, 'Introduction to Scrum Methodology II', 'Scrum2.jpg'),
+(5, 1, 'Jonathan', 9, 'Introduction to Scrum Methodology III', 'Scrum3.jpg'),
+(6, 4, 'Kelly', 3, 'Electrical Engineering III',  'Electrical3.jpg'),
+(7, 4, 'Kelly', 6, 'Introduction to Mechanical Engineering III', 'MechanicalEngineering3.jpg'),
+(8, 4, 'Kelly', 8, 'Introduction to Scrum Methodology II', 'Scrum2.jpg'),
+(9, 4, 'Kelly', 9, 'Introduction to Scrum Methodology III', 'Scrum3.jpg');
 
 COMMIT;
 
@@ -317,19 +270,7 @@ COMMIT;
 --
 -- QUIZZES table
 --
-        -- q.course_id = cid;
-        -- q.course_class_id = ccid;
-        -- q.section_id = sid;
-        -- q.quiz_id = qid;
-        -- q.quiz_title = quizTitle;
-        -- q.quiz_type = quizType;
-        -- var question_number = qno[i];
-        -- q.question_no = question_number;
-        -- q.question = que[question_number];
-        -- q.number_of_options = numOp[question_number];
-        -- q.options_content = optionContent[question_number];
-        -- var posAns = answerArray[question_number];
-        -- q.correct_answer = optionContent[question_number][posAns];
+  
 DROP TABLE IF EXISTS `quizzes`;
 CREATE TABLE IF NOT EXISTS `quizzes` (
     `course_id` int(64) NOT NULL ,
@@ -351,11 +292,11 @@ ALTER TABLE quizzes ADD CONSTRAINT PK_Quiz PRIMARY KEY (course_id,course_class_i
 -- Dumping data for table `quiz_answers`
 --
 
-INSERT INTO `quizzes` (`course_id`,`course_class_id`,`section_id`,`quiz_id`,`quiz_title`,`quiz_type`, `question_no`, `question`, `number_of_options`, `options_content` ,`correct_answer`) VALUES
-(2, 1, 1, 1,'quiz title 1','graded',1,'Is it true that it is like this?', 2, "['true','false']",'true'),
-(2, 1, 1, 1,'guiz title 2','ungraded',2,'Is it true that it is like this?', 2, "['true','false']",'false'),
-(2, 1, 1, 1,'quiz title 3','graded',3,'Is it true that it is like this?', 2, "['true','false']",'false');
-COMMIT;
+-- INSERT INTO `quizzes` (`course_id`,`course_class_id`,`section_id`,`quiz_id`,`quiz_title`,`quiz_type`, `question_no`, `question`, `number_of_options`, `options_content` ,`correct_answer`) VALUES
+-- (2, 1, 1, 1,'quiz title 1','graded',1,'Is it true that it is like this?', 2, "['true','false']",'true'),
+-- (2, 1, 1, 1,'guiz title 2','ungraded',2,'Is it true that it is like this?', 2, "["true","false"]",'false'),
+-- (2, 1, 1, 1,'quiz title 3','graded',3,'Is it true that it is like this?', 2, "['true','false']",'false');
+-- COMMIT;
 
 --
 --
@@ -406,7 +347,34 @@ ALTER TABLE quiz_progress ADD CONSTRAINT PK_Quiz PRIMARY KEY (user_id,course_id,
 
 
 INSERT INTO `quiz_progress` ( `user_id`, `course_id`, `course_class_id`, `section_id`, `completion_status`) VALUES
-(1, 1, 1, 1, 'Not Completed'),
-(1, 1, 2, 2, 'Not Completed'),
-(1, 1, 2, 3, 'Not Completed');
+(1, 1, 1, 1, 'Completed'),
+(1, 1, 2, 2, 'Completed'),
+(1, 1, 2, 3, 'Completed'),
+(1, 4, 1, 1, 'Not Completed'),
+(1, 4, 1, 2, 'Not Completed'),
+(1, 4, 2, 3, 'Not Completed');
 COMMIT;
+
+DROP TABLE IF EXISTS `materials`;
+CREATE TABLE IF NOT EXISTS `materials` (
+    `course_id` int(64) NOT NULL ,
+    `course_class_id` int(64) NOT NULL,
+    `section_id` int(64) NOT NULL,
+    `material_id` int(64) NOT NULL,
+    `material_name` varchar(100) NOT NULL,
+    `material_url` varchar(80) NOT NULL,
+    `completion_status` varchar(80) NOT NULL
+    -- FOREIGN KEY (section_id) REFERENCES sections(section_id)
+);
+
+ALTER TABLE materials ADD CONSTRAINT PK_Material PRIMARY KEY (course_id,course_class_id,section_id,material_id);
+
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (8, 1, 1, 1, 'What is Scrum?', 'https://www.youtube.com/watch?v=oTZd2vo3FQU', 'Not Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (8, 1, 2, 1, 'Scrum in under 5 Minutes', 'https://www.youtube.com/watch?v=2Vt7Ik8Ublw', 'Not Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (8, 1, 3, 1, 'Scrum Methodology', 'https://www.youtube.com/watch?v=8dGdIcyDk1w', 'Not Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (4, 1, 1, 1, 'What is Mechanical Engineering?', 'https://www.youtube.com/watch?v=W74y1RxN6BA', 'Not Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (4, 1, 2, 1, 'Fundamentals of Mechanical Engineering','https://www.youtube.com/watch?v=ehi_hkLlutw','Not Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (4, 1, 3, 1, 'How to be a Mechanical Engineer in Nepal?', 'https://www.youtube.com/watch?v=t0W_Qq2-hkM', 'Not Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (1, 1, 1, 1, 'What is Electrical Engineering?', 'https://www.youtube.com/watch?v=QQewdCJTcIU', 'Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (1, 1, 2, 1, 'How ELECTRICITY works - working principle','https://www.youtube.com/watch?v=mc979OhitAg','Completed');
+INSERT INTO `materials` (course_id, course_class_id, section_id, material_id, material_name, material_url, completion_status) values (1, 1, 3, 1, 'How does a Transformer work - Working Principle electrical engineering', 'https://www.youtube.com/watch?v=UchitHGF4n8', 'Completed');
