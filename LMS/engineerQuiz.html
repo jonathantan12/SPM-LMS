@@ -9,109 +9,176 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/lms.png" />
         <!-- Bootstrap icons-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/lms.png" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/lms.png" />
+        <!-- Bootstrap icons-->
         <link href="css/styles.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <style>
-    .sidenav {
-    height: 100%;
-    width: 200px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 20px;
-    margin-top: 55px;
-    }
-
-    /* Style the sidenav links and the dropdown button */
-    .sidenav a, .dropdown-btn {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #818181;
-    display: block;
-    border: none;
-    background: none;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-    outline: none;
-    }
-
-    /* On mouse-over */
-    .sidenav a:hover, .dropdown-btn:hover {
-    color: #f1f1f1;
-    }
-
-    /* Main content */
-    .main {
-    margin-left: 200px; /* Same as the width of the sidenav */
-    font-size: 20px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
-    }
-
-    /* Add an active class to the active dropdown button */
-    .active {
-    background-color: green;
-    color: white;
-    }
-
-    /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-    .dropdown-container {
-    display: none;
-    background-color: #262626;
-    padding-left: 8px;
-    }
-
-    /* Optional: Style the caret down icon */
-    .fa-caret-down {
-    float: right;
-    padding-right: 8px;
-    }
-
-    /* Some media queries for responsiveness */
-    @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-    }
+        <script src="https://kit.fontawesome.com/25a40ecb83.js" crossorigin="anonymous"></script>
         
-    </style>
+       
+        
+        <style>
+          .sidenav {
+          height: 100%;
+          width: 200px;
+          position: fixed;
+          z-index: 1;
+          /* top: 0; */
+          left: 0;
+          background-color: #111;
+          overflow-x: hidden;
+          }
+      
+          /* Style the sidenav links and the dropdown button */
+          .sidenav a, .dropdown-btn {
+          padding: 6px 8px 6px 16px;
+          text-decoration: none;
+          font-size: 20px;
+          color: #818181;
+          display: block;
+          border: none;
+          background: none;
+          width: 100%;
+          text-align: left;
+          cursor: pointer;
+          outline: none;
+          }
+      
+          /* On mouse-over */
+          .sidenav a:hover, .dropdown-btn:hover {
+          color: #f1f1f1;
+          }
+      
+          /* Main content */
+          .main {
+          margin-left: 200px; /* Same as the width of the sidenav */
+          font-size: 20px; /* Increased text to enable scrolling */
+          padding: 0px 10px;
+          }
+      
+          /* Add an active class to the active dropdown button */
+          .active {
+          background-color: green;
+          color: white;
+          }
+      
+          /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+          .dropdown-container {
+          display: none;
+          background-color: #262626;
+          padding-left: 8px;
+          }
+      
+          /* Optional: Style the caret down icon */
+          .fa-caret-down {
+          float: right;
+          padding-right: 8px;
+          }
+      
+          /* Some media queries for responsiveness */
+          @media screen and (max-height: 450px) {
+          .sidenav {padding-top: 15px;}
+          .sidenav a {font-size: 18px;}
+          }
+      
+          .nav_icon {
+            width: 40px;
+            height: 40px;
+            border-color: black;
+          }
+          .scrolling-wrapper{
+            overflow-y: auto;
+          }
+          .course_cards {
+            margin:10px;
+          }
+          .filter {
+            -webkit-filter: brightness(0) invert(1);
+            filter: brightness(0) invert(1);
+          }
+        </style>
 </head>
 
 
 <body onload = "getQuiz('1','1','1',1)">
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container px-5">
-          <a class="navbar-brand">LMS</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                  <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Switch user</a>
-                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                          <li><a class="dropdown-item" href="blog-home.html">Learner</a></li>
-                          <li><a class="dropdown-item" href="trainerHome.html">Trainer</a></li>
-                          <li><a class="dropdown-item" href="administratorHome.html">Administrator</a></li>
-                      </ul>
-                  </li>
-              </ul>
-          </div>
+   
+   <!-- Navigation-->
+   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark flex-shrink-0">
+    <div class="container-fluid px-5">
+      <a class="navbar-brand" href="index.html">LMS</a>
+      <h4 id="courseName" class="text-white"></h4>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContents" aria-controls="navbarContents" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContents">
+        <a href="engineerHome.html" class="btn btn-dark ml-auto">
+          Engineer Home
+        </a>
+        <ul class="navbar-nav ml-auto">
+          <!-- This is the dropdown for all courses, may not be required for admins and trainers -->
+          <li class="nav-item dropdown btn-group">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="navbarCourseDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              All Courses
+            </button>
+            <ul id="allCourses" class="dropdown-menu" aria-labelledby="navbarCourseDropdown">
+              <h6 class="dropdown-header">Current Courses</h6>
+              <div id="currentlyEnrolled">
+                <!-- dropdown items -->
+              </div>
+              
+              <h6 class="dropdown-header">Completed Courses</h6>
+              <div id="completed">
+                <!-- dropdown items -->
+              </div>
+            </ul>
+          </li>
+          <li>
+            <!-- nav link to course catalogue, may not be required for admins and trainers -->
+            <a class="nav-link" href="./courseCatalogue.html"><img src="assets/catalogue.png" alt="catalogue icon" class="nav_icon filter"></a>
+          </li>
+          <button class="btn btn-dark dropdown-toggle" type="button" id="navbarDropdownBlog" data-bs-toggle="dropdown" aria-expanded="false">Switch user</button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+              <li><a class="dropdown-item" href="engineerHome.html">Learner</a></li>
+              <li><a class="dropdown-item" href="trainerHome.html">Trainer</a></li>
+              <li><a class="dropdown-item" href="administratorHome.html">Administrator</a></li>
+          </ul>
+        </ul>
       </div>
+    </div>
   </nav>
-  <div class="sidenav">
+  <div class="container-fluid" id="courseOverview">
+    <div class="row bg-dark">
+      <ul class="nav nav-pills flex-column flex-sm-row">
+        <li class="nav-item">
+          <a class="flex-sm-fill text-sm-center nav-link text-white" href="engineerCoursePage.html" id="individualCourseHome">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="flex-sm-fill text-sm-center nav-link text-white disabled">Forum</a>
+        </li>
+        <li class="nav-item">
+          <a class="flex-sm-fill text-sm-center nav-link text-white active" href="courseMaterial.html" id="courseMaterial">Curriculums</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sidenav" id="sideNav">
+
       
     <button class="dropdown-btn">Chapter 1 
         <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-container">
-      <a href="#">Lesson 1</a>
+      <a href="courseMaterial.html">Lesson 1</a>
       <a href="engineerQuiz.html">Quiz 1</a>
     </div>
   </div>
