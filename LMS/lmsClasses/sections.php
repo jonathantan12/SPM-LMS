@@ -18,6 +18,7 @@
         $this->course_material_link = $course_material_link;
       
     }
+    
 
     public function getSectionId() {
         return $this->section_id;
