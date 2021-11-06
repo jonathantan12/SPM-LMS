@@ -132,30 +132,6 @@ INSERT INTO `classes` (`course_id`, `course_name`, `class_name`,`start_date`, `e
 
 COMMIT;
 
-
--- SECTION table (just section)
---
-
-DROP TABLE IF EXISTS `section`;
-CREATE TABLE IF NOT EXISTS `section` (
-    `section_id` int(64) NOT NULL AUTO_INCREMENT, 
-    `course_id` int(64) NOT NULL,
-    `section_title` varchar(64) NOT NULL,
-    `order` int(11) NOT NULL,
-    PRIMARY KEY (`section_id`),
-    FOREIGN KEY (course_id) REFERENCES courses(course_id)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `section`
---
-
-INSERT INTO `section` (`section_id`, `course_id`, `section_title`, `order`) VALUES
-(1, 1, 'Electrical Engineering 1',  1 ),
-(2, 1, 'Electrical Engineering 2',  2 ),
-(3, 1, 'Electrical Engineering 3',  3 );
-COMMIT;
-
 --
 -- SECTIONS table
 --
@@ -189,43 +165,6 @@ INSERT INTO `sections` (`section_id`, `course_id`, `course_name`, `class_name`,`
 (9, 3, 'Electrical Engineering III', 'G1', 2, 'The Second Chapter','url');
 COMMIT;
 
-
---
--- TRAINER_QUALIFICATION table
---
-
-DROP TABLE IF EXISTS `trainer_qualifications`;
-CREATE TABLE IF NOT EXISTS `trainer_qualifications` (
-    `trainer_qualification_id` int(64) NOT NULL AUTO_INCREMENT, 
-    `user_id` int(64) NOT NULL,
-    `user_name` varchar(64) NOT NULL,
-    `course_id` int(64) NOT NULL,
-    `course_name` varchar(64) NOT NULL,
-    PRIMARY KEY (`trainer_qualification_id`),
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (course_id) REFERENCES courses(course_id)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `trainer_qualifications`
---
-
-INSERT INTO `trainer_qualifications` (`trainer_qualification_id`, `user_id`, `user_name`,`course_id`, `course_name`) VALUES
-(1, 2, 'Roger', 1, 'Electrical Engineering I'),
-(2, 2, 'Roger', 3, 'Electrical Engineering III'),
-(3, 2, 'Roger', 4, 'Introduction to Mechanical Engineering I'),
-(4, 2, 'Roger', 5, 'Introduction to Mechanical Engineering II'),
-(5, 2, 'Roger', 7, 'Introduction to Scrum Methodology I'),
-(6, 5, 'Ben', 2, 'Electrical Engineering II'),
-(7, 5, 'Ben', 3, 'Electrical Engineering III'),
-(8, 6, 'Aaron', 4, 'Introduction to Mechanical Engineering I'),
-(9, 6, 'Aaron', 5, 'Introduction to Mechanical Engineering II'),
-(10, 6, 'Aaron', 6, 'Introduction to Mechanical Engineering III'),
-(11, 6, 'Aaron', 7, 'Introduction to Scrum Methodology I'),
-(12, 6, 'Aaron', 8, 'Introduction to Scrum Methodology II'),
-(13, 6, 'Aaron', 9, 'Introduction to Scrum Methodology III');
-
-COMMIT;
 
 --
 -- COMPLETED_COURSES table
@@ -323,19 +262,7 @@ COMMIT;
 --
 -- QUIZZES table
 --
-        -- q.course_id = cid;
-        -- q.course_class_id = ccid;
-        -- q.section_id = sid;
-        -- q.quiz_id = qid;
-        -- q.quiz_title = quizTitle;
-        -- q.quiz_type = quizType;
-        -- var question_number = qno[i];
-        -- q.question_no = question_number;
-        -- q.question = que[question_number];
-        -- q.number_of_options = numOp[question_number];
-        -- q.options_content = optionContent[question_number];
-        -- var posAns = answerArray[question_number];
-        -- q.correct_answer = optionContent[question_number][posAns];
+
 DROP TABLE IF EXISTS `quizzes`;
 CREATE TABLE IF NOT EXISTS `quizzes` (
     `course_id` int(64) NOT NULL ,
@@ -362,35 +289,6 @@ INSERT INTO `quizzes` (`course_id`,`course_class_id`,`section_id`,`quiz_id`,`qui
 (2, 1, 1, 1,'guiz title 2','ungraded',2,'Is it true that it is like this?', 2, "['true','false']",'false'),
 (2, 1, 1, 1,'quiz title 3','graded',3,'Is it true that it is like this?', 2, "['true','false']",'false');
 COMMIT;
-
---
---
--- COURSE_TRAINERS table
---
-
--- DROP TABLE IF EXISTS `course_trainers`;
--- CREATE TABLE IF NOT EXISTS `course_trainers` (
---     `course_trainer_id` int(64) NOT NULL AUTO_INCREMENT,  
---     `course_id` int(64) NOT NULL,
---     `course_name` varchar(64) NOT NULL,
---     `user_id` int(64) NOT NULL,
---     `user_name` varchar(64) NOT NULL,
---     PRIMARY KEY (`course_trainer_id`),
---     FOREIGN KEY (user_id) REFERENCES users(user_id),
---     FOREIGN KEY (course_id) REFERENCES courses(course_id)
--- ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `course_trainers`
---
-
--- INSERT INTO `course_trainers` (`course_trainer_id`, `course_id`, `course_name`, `user_id`, `user_name`) VALUES
--- (1, 1, 'Electrical Engineering', 2, 'Roger'),
--- (2, 2, 'Introduction to Mechanical Engineering', 2, 'Roger'),
--- (3, 3, 'Introduction to Scrum Methodology', 2, 'Roger');
--- COMMIT;
-
-
 
 -- QUIZ_PROGRESS table
 
