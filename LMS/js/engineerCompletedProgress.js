@@ -21,10 +21,12 @@ function getEngineerCourseProgress(obj) {
         // console.log(obj[i]);
         var course_name = obj[i]['course_name'];
         var completedDropdown = document.getElementById("completed")
+        var image = obj[i]['image'];
+
         completedCoursesHtml += `
                         <div class="col-sm-6 col-md-4">
                             <div class="card" style="width: 20rem;">
-                                <a href="#"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
+                                <a href="#"><img src="assets/${image}" class="card-img-top" alt="..."></a>
                                     <div class="card-body">
                                         <h5 class="card-title">${course_name}</h5>
                                         <p class="card-text">Duration Completed: <span>2021-01-01 00:00:00 - 2021-02-01 00:00:00</span></p>
@@ -63,11 +65,11 @@ function getEngineerRequiredCourses(obj) {
     for (i=0; i < obj.length; i++){
         // console.log(obj[i]);
         var course_name = obj[i]['course_name'];
-        
+        var image = obj[i]['image'];
         requiredCoursesHtml += `
                         <div class="col-sm-6 col-md-4">
                             <div class="card" style="width: 20rem;">
-                                <a href="#"><img src="assets/placeholder_img.png" class="card-img-top" alt="..."></a>
+                                <a href="#"><img src="assets/${image}" class="card-img-top"></a>
                                     <div class="card-body">
                                         <h5 class="card-title">${course_name}</h5>
                                     </div>

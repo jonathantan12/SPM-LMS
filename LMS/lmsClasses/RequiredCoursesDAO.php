@@ -14,7 +14,7 @@ class RequiredCoursesDAO {
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
         while($row = $stmt->fetch()) {
-            $result[] = new requiredCourses($row['required_course_id'], $row['user_id'], $row['user_name'], $row['course_id'], $row['course_name']);
+            $result[] = new requiredCourses($row['required_course_id'], $row['user_id'], $row['user_name'], $row['course_id'], $row['course_name'], $row['image']);
         }
         $stmt = null;
         $pdo = null;
@@ -34,7 +34,7 @@ class RequiredCoursesDAO {
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
         while($row = $stmt->fetch()) {
-            $result[] = new requiredCourses($row['required_course_id'], $row['user_id'], $row['user_name'], $row['course_id'], $row['course_name']);
+            $result[] = new requiredCourses($row['required_course_id'], $row['user_id'], $row['user_name'], $row['course_id'], $row['course_name'], $row['image']);
         }
         $stmt = null;
         $pdo = null;
