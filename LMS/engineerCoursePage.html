@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Engineer - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
     <style>
       .nav_icon {
         width: 40px;
@@ -30,20 +30,21 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/25a40ecb83.js" crossorigin="anonymous"></script>
-    
+
 </head>
-<body class="d-flex flex-column h-100">
+<body>
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark flex-shrink-0">
     <div class="container-fluid px-5">
       <a class="navbar-brand" href="index.html">LMS</a>
+      <h4 id="courseName" class="text-white"></h4>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContents" aria-controls="navbarContents" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse ml-auto" id="navbarContents">
+      <div class="collapse navbar-collapse" id="navbarContents">
         <a href="engineerHome.html" class="btn btn-dark ml-auto">
           Engineer Home
         </a>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto">
           <!-- This is the dropdown for all courses, may not be required for admins and trainers -->
           <li class="nav-item dropdown btn-group">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="navbarCourseDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,7 +64,7 @@
           </li>
           <li>
             <!-- nav link to course catalogue, may not be required for admins and trainers -->
-            <a class="nav-link btn btn-dark" href="./courseCatalogue.html">Course catalogue</a>
+            <a class="nav-link" href="./courseCatalogue.html"><img src="assets/catalogue.png" alt="catalogue icon" class="nav_icon filter"></a>
           </li>
           <button class="btn btn-dark dropdown-toggle" type="button" id="navbarDropdownBlog" data-bs-toggle="dropdown" aria-expanded="false">Switch user</button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
@@ -76,28 +77,39 @@
     </div>
   </nav>
 
-  <div class="container-fluid px-5 m-3">
-    <a class="btn btn-primary" href="engineerCourseProgress.html" role="button">
-      Course Progress
-    </a>
-    <div class="row">
-      <h4 >Current Courses</h4>
-      <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
-        <div class="card-deck" id="coursesEnrolled">
-          <!-- New courses here -->
+  <div class="container-fluid" id="courseOverview">
+    <div class="row bg-dark">
+      <ul class="nav nav-pills flex-column flex-sm-row">
+        <li class="nav-item">
+          <a class="flex-sm-fill text-sm-center nav-link text-white active" href="engineerCoursePage.html" id="individualCourseHome">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="flex-sm-fill text-sm-center nav-link text-white disabled">Forum</a>
+        </li>
+        <li class="nav-item">
+          <a class="flex-sm-fill text-sm-center nav-link text-white" href="courseMaterial.html" id="courseMaterial">Curriculums</a>
+        </li>
+      </ul>
+    </div>
+    <div class="row mt-5">
+      <div class="col col-lg-6 col-md-6 col-sm-12">
+        <div class="card" style="width: 30rem;">
+            <img src="assets/placeholder_img.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title" id="course_name"></h5>
+                <p class="card-text" id="course_duration"></span></p>
+            </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <h4 >Completed Courses</h4>
-      <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
-        <div class="card-deck" id="completedCourses">
-          <!-- Completed courses here -->
-        </div>
+      <div class="col col-lg-6 col-md-6 col-sm-12">
+        <h1>Announcements</h1>
+        <hr>
+        <p>There are currently no announcements.</p>
       </div>
     </div>
+
   </div>
-  <script src="js/engineerHome.js"></script>
+  <script src="js/course.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

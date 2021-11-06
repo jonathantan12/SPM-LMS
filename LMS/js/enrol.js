@@ -1,6 +1,6 @@
 const queryString = location.search.substring(1);
 const urlParams = new URLSearchParams(queryString);
-const courseId = urlParams.get('courseId')
+const courseId = urlParams.get('courseId');
 if(sessionStorage.getItem("user_id")){
     var userId = sessionStorage.getItem("user_id");
 }
@@ -13,36 +13,141 @@ if(sessionStorage.getItem("user_name")){
 else{
     sessionStorage.setItem("user_name","Jonathan");
 }
-console.log(userId,userName,courseId)
-
-var request = new XMLHttpRequest()
-
-var url = "../LMS/backend/getCourses.php"
-
-request.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-        var courses = JSON.parse(this.responseText);
-        var numCourses = courses.length;
-        if (courses) {
-            for (var i =0; i<numCourses;i++){
-                if(courses[i].course_id == courseId){
-                    var course = courses[i]
-                }
+var courseName = "";
+var courseUrl = "../LMS/backend/getCourses.php";
+var enrolledCourseUrl = "../LMS/backend/retrieveEnrolledCourses.php";
+var completedCoursesUrl = "../LMS/backend/getCompletedCourses.php";
+function retrieveAndPrintCourse(res) {
+    var numCourses = res.length;
+    var courseNameHtml = document.getElementById("courseName");
+    var courseDesceHtml = document.getElementById("courseDesc");
+    var courseImageHtml = document.getElementById("courseImg");
+    for (var i=0; i< numCourses ;i++) {
+        if(res[i].course_id == courseId){
+            if (res[i].course_desc) {
+                courseDesceHtml.innerText = res[i].course_desc;
+                courseNameHtml.innerText = res[i].course_name;
+                courseImageHtml.getAttributeNode('src').value = res[i].image;
+            }
+            else {
+                courseDesceHtml.innerText = "There is currently no course description. Please keep a look out for future update on the course details!";
             }
         }
-        var courseNameHtml = document.getElementById("courseName");
-        var courseDesceHtml = document.getElementById("courseDesc");
-        courseNameHtml.innerText = course.course_name;
-        if (course.course_desc) {
-            courseDesceHtml.innerText = course.course_desc;
-        }
-        else {
-            courseDesceHtml.innerText = "There is currently no course description. Please keep a look out for future update on the course details!";
-        }
-        
     }
-    
 }
 
-request.open("GET", url, true)
-request.send()
+function retrieveAllEnrolled(res) {
+    var enrolledDropdown = document.getElementById("currentlyEnrolled");
+    var enrolledCourses = res;
+    var numEnrolledCourses = enrolledCourses.length;
+    if (enrolledCourses) {
+        for (var i=0; i< numEnrolledCourses ;i++) {
+            var changeDropdownItem = `<li><a class="dropdown-item" href="engineerCoursePage.html?courseId=${enrolledCourses[i].course_id}">${enrolledCourses[i].course_name}</a></li>`;
+            enrolledDropdown.innerHTML += changeDropdownItem;
+        }
+    }
+}
+
+function retrieveAllCompleted(res) {
+    var completedDropdown = document.getElementById("completed")
+    var completed = res;
+    var numCompletedCourses = res.length;
+    if (completed) {
+        for (var i=0; i< numCompletedCourses ;i++) {
+            var changeDropdownItem = `<a class="dropdown-item" href="engineerCoursePage.html?courseId=${res[i].course_id}">${res[i].course_name}</a>`;
+            completedDropdown.innerHTML += changeDropdownItem;
+        }
+    }
+}
+
+function callToDb(url, cFunction) {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            cFunction(JSON.parse(this.responseText));
+        }
+    }
+    request.open("GET", url, true)
+    request.send()
+}
+
+callToDb(courseUrl, retrieveAndPrintCourse);
+callToDb(enrolledCourseUrl, retrieveAllEnrolled);
+callToDb(completedCoursesUrl, retrieveAllCompleted);
+
+var enrolBtn = document.getElementById("enrolToCourse");
+enrolBtn.addEventListener("click", enrolUser);
+
+function enrolUser(){
+    var courseNameHtml = document.getElementById("courseName");
+    var courseName = courseNameHtml.innerText;
+    var userId = sessionStorage.getItem("user_id");
+    var userName = sessionStorage.getItem("user_name");
+    deleteCourse(userId, courseId)
+    addCourse(userId, userName, courseId, courseName)
+    alert("Enrollment successful")
+}
+
+
+function deleteCourse(user_id, course_id) {
+    var request = new XMLHttpRequest()
+
+    var details = "userId=" + user_id + "&courseId=" + course_id
+    var url = "backend/deleteRequiredCourses.php?" + details
+
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var result = this.responseText
+            return result
+        }
+    }
+
+    request.open("GET", url, true)
+    request.send()
+}
+
+function addCourse(user_id, user_name, course_id, course_name) {
+    var request = new XMLHttpRequest()
+
+    var details = "courseId=" + course_id
+    var url = "backend/getClassWithVacancy.php?" + details
+
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            class_name = this.responseText
+            var request2 = new XMLHttpRequest()
+
+            var details2 = "userId=" + user_id + "&userName=" + user_name + "&courseId=" + course_id + "&courseName=" + course_name + "&className=" + class_name 
+            var url2 = "backend/addEnrolledCourses.php?" + details2
+
+            request2.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var result = this.responseText
+                    return result
+                }
+            }
+
+            request2.open("GET", url2, true)
+            request2.send()
+
+            var request3 = new XMLHttpRequest()
+
+            var details3 = "courseId=" + course_id + "&className=" + class_name 
+            var url3 = "backend/updateClassVacancy.php?" + details3
+
+            request3.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var result = this.responseText
+                    return result
+                }
+            }
+
+            request3.open("GET", url3, true)
+            request3.send()
+        }
+    }
+
+    request.open("GET", url, true)
+    request.send()
+
+}

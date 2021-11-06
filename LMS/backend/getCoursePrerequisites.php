@@ -2,7 +2,7 @@
     require_once('common.php');
 
     $dao = new coursePrerequisitesDAO();
-    $coursePrerequisites = $dao->getCoursePrerequisites();
+    $coursePrerequisites = $dao->getCoursePrerequisites((int)$_GET["course_id"]);
 
     $items = [];
     foreach ($coursePrerequisites as $aCoursePrerequisites) {

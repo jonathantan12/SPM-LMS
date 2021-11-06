@@ -2,8 +2,6 @@
 
 # junlong.toh.2019
 
-# require '../../LMS/lmsClasses/ClassesDAO.php';
-
 class classesTest extends \PHPUnit\Framework\TestCase 
 {
     public function testClassesAreReturned() 
@@ -11,7 +9,6 @@ class classesTest extends \PHPUnit\Framework\TestCase
         $mockRepo = $this->createMock(ClassesDAO::class);
 
         $mockClassesObject = [
-
             new classes(1, 'Electrical Engineering I', 'G2','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 5, 'Ben'),
             new classes(5, 'Introduction to Mechanical Engineering II', 'G1', '2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 2, 'Roger'),
             new classes(8, 'Introduction to Scrum Methodology II', 'G1','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 6, 'Aaron')
@@ -19,7 +16,8 @@ class classesTest extends \PHPUnit\Framework\TestCase
 
         $mockRepo->method('getClassesWithVacancy')->willReturn($mockClassesObject);
 
-        $classes = $mockRepo->getClassesWithVacancy(); #Getting back the database object
+        
+        $classes = $mockRepo->getClassesWithVacancy(1); #Getting back the database object
 
         $courseId = $classes[0]->getCourseId();
         $courseName = $classes[0]->getCourseName();
