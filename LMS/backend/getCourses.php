@@ -1,5 +1,5 @@
 <?php
-    require_once('common.php');
+    require_once('CoursesDAO.php');
 
     $dao = new coursesDAO();
     $courses = $dao->getCourses();
