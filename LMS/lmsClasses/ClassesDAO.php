@@ -1,6 +1,5 @@
 <?php
-require_once('classes.php');
-require_once('connectionManager.php');
+require_once 'autoload.php';
 
 class ClassesDAO {
     public function getClasses() {
