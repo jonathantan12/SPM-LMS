@@ -1,6 +1,6 @@
 <?php
 
-# require '../../lmsClasses/Cart.php';
+# jjtan.2019
 
 class coursesTest extends \PHPUnit\Framework\TestCase 
 {
@@ -9,17 +9,17 @@ class coursesTest extends \PHPUnit\Framework\TestCase
         $mockRepo = $this->createMock(CoursesDAO::class);
 
         $mockCoursesObject = [
-            # $course_id, $course_name, $course_desc, $class_name, $start_date, $end_date, $slots_available, $trainer_id, $trainer_name,$image
-            // new courses(1, 'Electrical Engineering','course description', 'G1','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 2, 'Roger','image'),
-            // new courses(2, 'Introduction to Mechanical Engineering','course description', 'G1', '2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 2, 'Roger', 'image'),
-            // new courses(3, 'Introduction to Scrum Methodology','course description', 'G1','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 2, 'Roger','image'),
-            // new courses(3, 'Introduction to Scrum Methodology','course description', 'G2','2021-01-01 00:00:00', '2021-02-01 00:00:00', 100, 1, 'Ben','image')
-            new courses(1, 'Electrical Engineering','course description', 'image'),
-            new courses(2, 'Introduction to Mechanical Engineering','course description', 'image'),
-            new courses(3, 'Introduction to Scrum Methodology','course description', 'image'),
-            new courses(3, 'Introduction to Scrum Methodology','course description','image')
+            new courses(1, 'Electrical Engineering I','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'assets/Electrical1.jpg'),
+            new courses(2, 'Electrical Engineering II','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'assets/Electrical2.jpg'),
+            new courses(3, 'Electrical Engineering III','Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', 'assets/Electrical3.jpg'),
+            new courses(4, 'Introduction to Mechanical Engineering I','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'assets/MechanicalEngineering1.jpg'),
+            new courses(5, 'Introduction to Mechanical Engineering II','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'assets/MechanicalEngineering2.jpg'),
+            new courses(6, 'Introduction to Mechanical Engineering III','Mechanical engineering is an engineering branch that combines engineering physics and mathematics principles with materials science to design, analyze, manufacture, and maintain mechanical systems.', 'assets/MechanicalEngineering3.jpg'),
+            new courses(7, 'Introduction to Scrum Methodology I','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'assets/Scrum1.jpg'),
+            new courses(8, 'Introduction to Scrum Methodology II','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'assets/Scrum2.jpg'),
+            new courses(9, 'Introduction to Scrum Methodology III','Scrum is a framework for developing, delivering, and sustaining products in a complex environment, with an initial emphasis on software development, although it has been used in other fields including research, sales, marketing and advanced technologies.', 'assets/Scrum3.jpg')
         ];
-
+        
         $mockRepo->method('getCourses')->willReturn($mockCoursesObject);
 
         $courses = $mockRepo->getCourses(); #Getting back the database object
@@ -27,24 +27,12 @@ class coursesTest extends \PHPUnit\Framework\TestCase
         $courseId = $courses[0]->getCourseId();
         $courseName = $courses[0]->getCourseName();
         $courseDesc = $courses[0]->getCourseDesc();
-        # $className = $courses[0]->getClassName();
-        # $startDate = $courses[0]->getStartDate();
-        # $endDate = $courses[0]->getEndDate();
-        # $slotsAvailable = $courses[0]->getSlotsAvailable();
-        # $trainerId = $courses[0]->getTrainerId();
-        # $trainerName = $courses[0]->getTrainerName();
         $image = $courses[0]->getImage();
 
         $this->assertEquals(1, $courseId);
-        $this->assertEquals('Electrical Engineering', $courseName);
-        $this->assertEquals('course description', $courseDesc); #Why is this null
-        # $this->assertEquals('G1', $className);
-        # $this->assertEquals('2021-01-01 00:00:00', $startDate);
-        # $this->assertEquals('2021-02-01 00:00:00', $endDate);
-        # $this->assertEquals(100, $slotsAvailable);
-        # $this->assertEquals(2, $trainerId);
-        # $this->assertEquals('Roger', $trainerName);
-        $this->assertEquals('image', $image);
+        $this->assertEquals('Electrical Engineering I', $courseName);
+        $this->assertEquals('Electrical engineering deals with the study and application of physics and mathematics combined with elements of electricity, electronics, and electromagnetism to both large and small scale systems to process information and transmit energy.', $courseDesc); #Why is this null
+        $this->assertEquals('assets/Electrical1.jpg', $image);
     }
 }
 ?>
