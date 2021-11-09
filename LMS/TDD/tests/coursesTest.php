@@ -1,6 +1,7 @@
 <?php
 
-# jjtan.2019
+# Name: Tan Jun Jie Jonathan
+# jjtan.2019 
 
 class coursesTest extends \PHPUnit\Framework\TestCase 
 {
